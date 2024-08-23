@@ -1,22 +1,17 @@
 import { defineConfig } from 'astro/config'
-import tailwind from '@astrojs/tailwind'
+// import tailwind from '@astrojs/tailwind'
 import sitemap from '@astrojs/sitemap'
-import expressiveCode from 'astro-expressive-code'
-import { expressiveCodeOptions } from './src/site.config'
 import icon from 'astro-icon'
+
+import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://melchiorhering.github.io', // 'https://stijnhering.nl' for now using Github Pages
+	site: 'https://melchiorhering.github.io',
+	base: 'stijnhering-astro/',
+	// 'https://stijnhering.nl' for now using Github Pages
 
-	integrations: [
-		expressiveCode(expressiveCodeOptions),
-		tailwind({
-			applyBaseStyles: false
-		}),
-		sitemap(),
-		icon()
-	],
+	integrations: [sitemap(), icon(), tailwind()],
 	prefetch: true,
 	output: 'static'
 })
