@@ -18,6 +18,17 @@ const config = {
 			}
 		},
 		extend: {
+			keyframes: {
+				'download-bounce': {
+					'0%, 100%': {
+						transform: 'translateY(-15%)'
+					},
+					'50%': {
+						transform: 'translateY(0)'
+					}
+				}
+			},
+			animation: { 'download-bounce': 'download-bounce 2s infinite' },
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',

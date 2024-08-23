@@ -23,7 +23,7 @@ if (!isOnlineImage && !images[imagePath])
 	class={cn(
 		className,
 		'flex flex-col gap-y-3 rounded-2xl border border-border bg-primary-foreground ',
-		href && 'transition-all hover:border-foreground/25 hover:shadow-sm'
+		href && 'transition-all hover:border-foreground/25 hover:shadow-lg'
 	)}
 	href={href}
 >
@@ -32,14 +32,14 @@ if (!isOnlineImage && !images[imagePath])
 			<img
 				src={imagePath}
 				alt={altText}
-				class='h-48 w-full rounded-2xl rounded-bl-none rounded-br-none object-cover'
+				class='object-cover w-full h-48 p-4 rounded-bl-none rounded-br-none rounded-2xl'
 				loading='eager'
 			/>
 		) : (
 			<Image
 				src={images[imagePath]()}
 				alt={altText}
-				class='h-48 w-full rounded-2xl rounded-bl-none rounded-br-none object-cover'
+				class='object-cover w-full h-48 p-4 rounded-bl-none rounded-br-none rounded-2xl'
 				loading='eager'
 			/>
 		)

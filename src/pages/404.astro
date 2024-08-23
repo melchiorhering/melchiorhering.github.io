@@ -2,6 +2,10 @@
 import PageLayout from '@/layouts/BaseLayout.astro'
 import Button from '@/components/Button.astro'
 
+// import the Image component and the image
+import { Image } from 'astro:assets'
+import thisIsFine from '../assets/this-is-fine.gif' // Image is 1600x900
+
 const meta = {
 	description: 'Not found',
 	title: '404'
@@ -9,37 +13,51 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<a
-		href='https://github.com/srleom/astro-theme-resume.git'
-		class='flex flex-row items-center gap-x-3 rounded-3xl border border-input px-4 py-2 text-sm shadow-sm transition-all hover:shadow-md'
-	>
-		<span class='relative flex items-center justify-center'>
-			<span
-				class='absolute inline-flex h-2 w-2 animate-ping rounded-full border border-green-400 bg-green-400 opacity-75'
-			></span>
-			<span class='relative inline-flex h-2 w-2 rounded-full bg-green-400'></span>
-		</span>
-
-		<p class='font-medium'>Get free template</p>
-	</a>
 	<div class='px-4 py-10 text-center sm:px-6 lg:px-8'>
 		<h1 class='block text-7xl font-bold sm:text-9xl'>404</h1>
+		<Image
+			src={thisIsFine}
+			alt='This is fine..'
+			class='m-4 flex h-12 w-auto justify-center rounded-md md:h-56'
+		/>
 		<p class='mt-3 text-muted-foreground'>Oops, something went wrong.</p>
 		<p class=''>Sorry, we couldn't find your page.</p>
-		<Button title='Back to home' href='/' style='button' class='mt-5'>
+		<Button
+			title='Back to home'
+			href='/'
+			style='button'
+			class='mt-5 flex items-center justify-center'
+		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
-				width='14'
-				height='14'
+				width='16'
+				height='16'
 				viewBox='0 0 24 24'
+				fill='none'
 				slot='icon-after'
-				class='-scale-x-100'
 			>
 				<path
 					fill='currentColor'
-					d='m6.921 12.5l5.792 5.792L12 19l-7-7l7-7l.713.708L6.921 11.5H19v1z'
-				>
-				</path>
+					d='M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z'
+					stroke='#292D32'
+					stroke-width='1.5'
+					stroke-linecap='round'
+					stroke-linejoin='round'></path>
+				<path
+					fill='currentColor'
+					d='M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002'
+					stroke='#292D32'
+					stroke-width='1.5'
+					stroke-miterlimit='10'
+					stroke-linecap='round'
+					stroke-linejoin='round'></path>
+				<path
+					fill='currentColor'
+					d='M8.57 10.7701L7 9.19012L8.57 7.62012'
+					stroke='#292D32'
+					stroke-width='1.5'
+					stroke-linecap='round'
+					stroke-linejoin='round'></path>
 			</svg>
 		</Button>
 	</div>
