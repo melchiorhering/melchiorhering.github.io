@@ -8,7 +8,6 @@ import tailwind from '@astrojs/tailwind'
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://melchiorhering.github.io',
-	base: 'stijnhering-astro/',
 	// 'https://stijnhering.nl' for now using Github Pages
 
 	integrations: [sitemap(), icon(), tailwind()],
