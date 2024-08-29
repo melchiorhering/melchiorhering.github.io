@@ -7,8 +7,8 @@ const { class: className, as: Tag = 'div', title, href, ...props } = Astro.props
 <Tag
 	class={cn(
 		className,
-		'flex flex-row items-center justify-center gap-x-2',
-		href && 'hover:opacity-75 transition-all '
+		'flex flex-row items-center justify-center gap-x-2 relative', // Set relative positioning for the Tag component
+		href && 'hover:opacity-75 transition group duration-300' // Apply hover and group classes only if href is present
 	)}
 	href={href}
 	{...props}
@@ -16,4 +16,10 @@ const { class: className, as: Tag = 'div', title, href, ...props } = Astro.props
 	<slot name='icon' />
 	<p>{title}</p>
 	<slot name='logo' />
+	{/* Conditionally render the underline span only if href is present */}
+	{
+		href && (
+			<span class='absolute -bottom-2 left-0 h-0.5 w-full max-w-0 rounded-full bg-gradient-to-r from-sky-600 to-black  transition-all duration-500 group-hover:max-w-full dark:bg-gradient-to-r dark:from-sky-600 dark:to-white' />
+		)
+	}
 </Tag>

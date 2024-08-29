@@ -16,6 +16,21 @@
 	font-display: swap;
 }
 
+.hero-background {
+	background-image: url('../assets/svg/choass-background.svg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	position: relative;
+	overflow: hidden;
+	clip-path: inset(0); /* Clips the content within the boundaries of the div */
+}
+
+.hero-background img {
+	position: relative;
+	z-index: 10; /* Ensures the image is displayed above the background */
+}
+
 .hidden {
 	display: none;
 }

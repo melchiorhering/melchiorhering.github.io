@@ -1,30 +1,26 @@
 ---
 import { Image } from 'astro:assets'
-import mainLogo from '../../assets/svg/main-logo.svg'
-
+import mainLogo from '@/assets/svg/main-logo.svg'
 import { menuLinks } from '@/site-config'
-
 const resume = '/resume-stijn-hering.pdf'
 ---
 
-<header class='mb-12 flex w-full flex-wrap pb-3 text-sm sm:flex-nowrap sm:justify-start'>
+<header class='flex flex-wrap w-full mb-8 text-sm md:md-4 sm:flex-nowrap sm:justify-start'>
 	<nav
-		class='relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center'
+		class='relative flex items-center justify-between w-full mx-auto sm:flex sm:items-center'
 		aria-label='global'
 	>
 		<a
-			class='flex items-center justify-center gap-x-2 text-lg font-semibold md:gap-x-4 md:text-2xl md:text-xl'
+			class='flex items-center justify-center text-lg font-semibold gap-x-2 md:gap-x-4 md:text-2xl md:text-xl'
 			href='/'
 			aria-label='Brand'
 		>
 			<Image
 				src={mainLogo}
 				alt='Logo'
-				class='items-align flex h-14 w-auto justify-center md:h-32'
+				class='flex justify-center w-auto items-align h-14 md:h-32'
 				loading='eager'
-			>
-				<h1>Resume</h1></Image
-			>
+			/>
 
 			<div id='menu-links' class='flex flex-row items-center justify-center gap-x-4 sm:gap-x-4'>
 				{
@@ -41,11 +37,11 @@ const resume = '/resume-stijn-hering.pdf'
 
 				<div class='flex flex-row items-center justify-center gap-x-1'>
 					<a
-						class='relative rounded-md border border-border p-1.5 transition-all hover:bg-border hover:bg-sky-300 hover:text-foreground/75 dark:hover:bg-sky-800'
+						class='relative rounded-md border border-border p-1.5 transition-all hover:bg-border hover:bg-sky-400 hover:text-foreground/75 dark:hover:bg-sky-600'
 						href={resume}
 						download
 					>
-						<div class='animate-download-bounce duration-300 ease-in-out'>
+						<div class='duration-300 ease-in-out animate-download-bounce'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								width='32'
