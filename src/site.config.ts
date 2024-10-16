@@ -5,10 +5,10 @@ export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: 'Stijn Hering',
 	// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
-	title: 'Stijn Hering',
+	title: 'Information Stijn Hering',
 	// Meta property used as the default description meta property
 	description:
-		'Personal webpage Stijn Hering, includes some information about me, my projects and my blog posts',
+		'Personal webpage Stijn Hering, includes some information about me, my work, projects I did and my blog posts',
 	// HTML lang property, found in src/layouts/Base.astro L:18
 	lang: 'en-GB',
 	// Meta property, found in src/components/BaseHead.astro L:42

@@ -5,20 +5,20 @@ import { menuLinks } from '@/site-config'
 const resume = '/resume-stijn-hering.pdf'
 ---
 
-<header class='flex flex-wrap w-full mb-8 text-sm md:md-4 sm:flex-nowrap sm:justify-start'>
+<header class='md:md-4 mb-8 flex w-full flex-wrap text-sm sm:flex-nowrap sm:justify-start'>
 	<nav
-		class='relative flex items-center justify-between w-full mx-auto sm:flex sm:items-center'
+		class='relative mx-auto flex w-full items-center justify-between sm:flex sm:items-center'
 		aria-label='global'
 	>
 		<a
-			class='flex items-center justify-center text-lg font-semibold gap-x-2 md:gap-x-4 md:text-2xl md:text-xl'
+			class='flex items-center justify-center gap-x-2 text-lg font-semibold md:gap-x-4 md:text-2xl md:text-xl'
 			href='/'
 			aria-label='Brand'
 		>
 			<Image
 				src={mainLogo}
 				alt='Logo'
-				class='flex justify-center w-auto items-align h-14 md:h-32'
+				class='items-align flex h-14 w-auto justify-center md:h-32'
 				loading='eager'
 			/>
 
@@ -41,7 +41,7 @@ const resume = '/resume-stijn-hering.pdf'
 						href={resume}
 						download
 					>
-						<div class='duration-300 ease-in-out animate-download-bounce'>
+						<div class='animate-download-bounce duration-300 ease-in-out'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								width='32'
