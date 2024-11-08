@@ -1,8 +1,7 @@
 ---
-import { Image } from 'astro:assets'
-import mainLogo from '@/assets/svg/icon.svg'
 import { menuLinks } from '@/site-config'
 const resume = '/resume-stijn-hering.pdf'
+const webpageLogo = '/favicon/icon.svg'
 ---
 
 <header class='md:md-4 mb-8 flex w-full flex-wrap text-sm sm:flex-nowrap sm:justify-start'>
@@ -15,11 +14,10 @@ const resume = '/resume-stijn-hering.pdf'
 			href='/'
 			aria-label='Brand'
 		>
-			<Image
-				src={mainLogo}
-				alt='Logo'
+			<img
+				src={webpageLogo}
+				alt='Webpage logo'
 				class='items-align flex h-14 w-auto justify-center md:h-32'
-				loading='eager'
 			/>
 
 			<div id='menu-links' class='flex flex-row items-center justify-center gap-x-4 sm:gap-x-4'>
