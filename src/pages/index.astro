@@ -17,18 +17,18 @@ const blogPosts = await allBlogPosts
 const meta = {
 	description:
 		"Welcome to Stijn Hering's personal website, showcasing expertise in data science, data engineering, and software development. IT Recruiters and other interested visitors can find detailed personal information, work experience, and access to my resume.",
-	title: 'Hi!'
+	title: 'Info'
 }
 ---
 
 <PageLayout meta={meta}>
-	<div class='flex flex-col w-full'>
-		<section class='relative flex flex-col items-center h-screen gap-y-10'>
+	<div class='flex w-full flex-col'>
+		<section class='relative flex h-screen flex-col items-center gap-y-10'>
 			<h1 class='text-6xl font-bold'>Hi!</h1>
 			<Image
 				src={profilePicture}
 				alt='Cartoon of Stijn Hering'
-				class='relative z-10 p-1 rounded-xl bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600'
+				class='relative z-10 rounded-xl bg-gradient-to-r from-black to-sky-600 p-1 dark:from-white dark:to-sky-600'
 				loading='eager'
 				quality='100'
 				width={380}
@@ -57,7 +57,7 @@ const meta = {
 				<h1 class='text-4xl font-bold'>Have a look...</h1>
 			</div>
 			<div
-				class='flex flex-wrap justify-center pt-4 text-lg gap-x-12 gap-y-6 md:gap-x-24 md:text-xl'
+				class='flex flex-wrap justify-center gap-x-12 gap-y-6 pt-4 text-lg md:gap-x-24 md:text-xl'
 			>
 				{
 					labels.map((label) => (
@@ -71,7 +71,7 @@ const meta = {
 								<Image
 									src={label.icon}
 									alt={`${label.title} icon`}
-									class='w-5 h-5 dark:text-white md:h-8 md:w-8'
+									class='h-5 w-5 dark:text-white md:h-8 md:w-8'
 									loading='eager'
 									slot='icon'
 								/>
@@ -80,7 +80,7 @@ const meta = {
 								<Image
 									src={label.logo}
 									alt={`${label.title} logo`}
-									class='w-5 h-5 fill-white md:h-8 md:w-8'
+									class='h-5 w-5 fill-white md:h-8 md:w-8'
 									loading='eager'
 									slot='logo'
 								/>
@@ -91,7 +91,7 @@ const meta = {
 			</div>
 		</section>
 
-		<div class='flex flex-col w-full gap-y-8'>
+		<div class='flex w-full flex-col gap-y-8'>
 			<Section title='About'>
 				<p class='text-base text-muted-foreground'>
 					{about}
