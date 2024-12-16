@@ -22,20 +22,19 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<div class='flex w-full flex-col'>
-		<section class='relative flex h-screen flex-col items-center gap-y-10'>
-			<h1 class='text-6xl font-bold'>Hi!</h1>
-			<Image
-				src={profilePicture}
-				alt='Cartoon of Stijn Hering'
-				class='relative z-10 rounded-xl bg-gradient-to-r from-black to-sky-600 p-1 dark:from-white dark:to-sky-600'
-				loading='eager'
-				quality='100'
-				width={380}
-			/>
+	<section class='relative flex flex-col items-center gap-y-10'>
+		<h1 class='text-6xl font-bold'>Hi!</h1>
+		<Image
+			src={profilePicture}
+			alt='Cartoon of Stijn Hering'
+			class='relative z-10 rounded-xl bg-gradient-to-r from-black to-sky-600 p-1 dark:from-white dark:to-sky-600'
+			loading='eager'
+			quality='100'
+			width={380}
+		/>
 
-			<!-- Background Image Wrapper -->
-			<!-- <div class='relative w-full rouned-full'>
+		<!-- Background Image Wrapper -->
+		<!-- <div class='relative w-full rouned-full'>
 				<div
 					class="absolute inset-0 w-full bg-[url('../assets/svg/sky-600-black.svg')] bg-contain bg-center bg-no-repeat dark:bg-[url('../assets/svg/sky-600-white.svg')]"
 				>
@@ -52,151 +51,144 @@ const meta = {
 				/>
 			</div> -->
 
-			<!-- Links -->
-			<div class='flex flex-col items-center'>
-				<h1 class='text-4xl font-bold'>Have a look...</h1>
-			</div>
+		<!-- Links -->
+		<div class='flex flex-col items-center'>
+			<h1 class='text-4xl font-bold'>Have a look...</h1>
+		</div>
+		<div class='flex flex-wrap justify-center gap-x-12 gap-y-6 pt-4 text-lg md:gap-x-24 md:text-xl'>
+			{
+				labels.map((label) => (
+					<Label
+						title={label.title}
+						href={label.website}
+						as={label.website ? 'a' : 'div'}
+						target={label.website ? '_blank' : undefined}
+					>
+						{label.icon && (
+							<Image
+								src={label.icon}
+								alt={`${label.title} icon`}
+								class='h-5 w-5 dark:text-white md:h-8 md:w-8'
+								loading='eager'
+								slot='icon'
+							/>
+						)}
+						{label.logo && (
+							<Image
+								src={label.logo}
+								alt={`${label.title} logo`}
+								class='h-5 w-5 fill-white md:h-8 md:w-8'
+								loading='eager'
+								slot='logo'
+							/>
+						)}
+					</Label>
+				))
+			}
+		</div>
+	</section>
+	<div class='mt-36 flex w-full flex-col gap-y-8'>
+		<Section title='About'>
+			<p class='text-base text-muted-foreground'>
+				{about}
+			</p>
+		</Section>
+
+		<Section title='Blog Posts'>
 			<div
-				class='flex flex-wrap justify-center gap-x-12 gap-y-6 pt-4 text-lg md:gap-x-24 md:text-xl'
+				class={blogPosts.length > 3
+					? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'
+					: 'flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'}
 			>
 				{
-					labels.map((label) => (
-						<Label
-							title={label.title}
-							href={label.website}
-							as={label.website ? 'a' : 'div'}
-							target={label.website ? '_blank' : undefined}
-						>
-							{label.icon && (
-								<Image
-									src={label.icon}
-									alt={`${label.title} icon`}
-									class='h-5 w-5 dark:text-white md:h-8 md:w-8'
-									loading='eager'
-									slot='icon'
-								/>
-							)}
-							{label.logo && (
-								<Image
-									src={label.logo}
-									alt={`${label.title} logo`}
-									class='h-5 w-5 fill-white md:h-8 md:w-8'
-									loading='eager'
-									slot='logo'
-								/>
-							)}
-						</Label>
+					blogPosts.map((article) => (
+						<ProjectCard
+							href={article.url}
+							heading={article.title}
+							imagePath={article.imagePath}
+							subheading={article.pubDate}
+							altText='Blog post image'
+							isOnlineImage={true}
+						/>
 					))
 				}
 			</div>
-		</section>
+		</Section>
 
-		<div class='flex w-full flex-col gap-y-8'>
-			<Section title='About'>
-				<p class='text-base text-muted-foreground'>
-					{about}
-				</p>
-			</Section>
-
-			<Section title='Blog Posts'>
-				<div
-					class={blogPosts.length > 3
-						? 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'
-						: 'flex flex-col gap-y-3 sm:flex-row sm:gap-x-3 sm:gap-y-0'}
+		<Section title='Experience'>
+			<div class='flex flex-col gap-y-6'>
+				<Card
+					heading='PostNL'
+					subheading='Data Scientist | Software Engineer'
+					date='2024 – Today'
+					imagePath='/src/assets/postnl-logo.png'
+					altText='PostNL logo'
+					imageClass='h-12 w-auto right-5'
 				>
-					{
-						blogPosts.map((article) => (
-							<ProjectCard
-								href={article.url}
-								heading={article.title}
-								imagePath={article.imagePath}
-								subheading={article.pubDate}
-								altText='The Rust programming language'
-								isOnlineImage={true}
-							/>
-						))
-					}
-				</div>
-			</Section>
-
-			<Section title='Experience'>
-				<div class='flex flex-col gap-y-6'>
-					<Card
-						heading='PostNL'
-						subheading='Data Scientist | Software Engineer'
-						date='2024 – Today'
-						imagePath='/src/assets/postnl-logo.png'
-						altText='PostNL logo'
-						imageClass='h-12 w-auto right-5'
-					>
-						<ul class='ml-4 list-disc text-muted-foreground'>
-							<li>
-								Led the development of the PostNL Data Science Platform, establishing the main
-								infrastructure and implementing CI/CD pipelines for efficient deployment. Leveraged <a
-									href='https://streamlit.io/'
-									class='font-bold text-blue-600 hover:text-blue-800'>Streamlit</a
-								>
-								as the web app framework, enabling PostNL Data Scientists to swiftly develop, integrate,
-								and test proof of concepts (PoCs) for business stakeholders.
-							</li>
-							<li>
-								Created the initial PostLit package, an internal Python package that seamlessly
-								integrates with Streamlit, automating PostNL styling and managing in-app Identity
-								and Access Management (IAM) within AWS.
-							</li>
-							<li>
-								Initiated and developed the pipeline for a GenAI project aimed at reducing manual
-								administrative workload for the call department by transcribing phone calls,
-								generating concise summaries, and retrieving relevant information for integration
-								into the CRM system.
-							</li>
-						</ul>
-					</Card>
-					<Card
-						heading='PostNL'
-						subheading='Data Scientist | Data Engineer'
-						date='2022 – 2024'
-						imagePath='/src/assets/postnl-logo.png'
-						altText='PostNL logo'
-						imageClass='h-12 w-auto right-5'
-					>
-						<ul class='ml-4 list-disc text-muted-foreground'>
-							<li>
-								Specialize in delivering valuable insights to business stakeholders through
-								dashboards and reports, utilizing predictive modeling for informed decision-making.
-							</li>
-							<li>
-								Advise on data matters, providing guidance to ensure effective data strategies.
-							</li>
-							<li>
-								Integrate new data sources into our data lake and manage ETL processes in AWS,
-								ensuring data accuracy and completeness.
-							</li>
-							<li>
-								Focus on leveraging data to enhance operational efficiency and improve process
-								reliability at PostNL.
-							</li>
-						</ul>
-					</Card>
-					<Card
-						heading='Aurai'
-						subheading='Junior Data Engineer'
-						date='Dec 2022 - Nov 2022'
-						imagePath='/src/assets/aurai-logo.png'
-						altText='Aurai Logo'
-						imageClass='h-12 w-auto right-5'
-					>
-						<ul class='ml-4 list-disc text-muted-foreground'>
-							<li>
-								Upon completion of the traineeship, I transitioned into a consultant role,
-								undertaking assignments that apply my data engineering expertise to solve client
-								challenges.
-							</li>
-						</ul>
-					</Card>
-				</div>
-			</Section>
-		</div>
+					<ul class='ml-4 list-disc text-muted-foreground'>
+						<li>
+							Led the development of the PostNL Data Science Platform, establishing the main
+							infrastructure and implementing CI/CD pipelines for efficient deployment. Leveraged <a
+								href='https://streamlit.io/'
+								class='font-bold text-blue-600 hover:text-blue-800'>Streamlit</a
+							>
+							as the web app framework, enabling PostNL Data Scientists to swiftly develop, integrate,
+							and test proof of concepts (PoCs) for business stakeholders.
+						</li>
+						<li>
+							Created the initial PostLit package, an internal Python package that seamlessly
+							integrates with Streamlit, automating PostNL styling and managing in-app Identity and
+							Access Management (IAM) within AWS.
+						</li>
+						<li>
+							Initiated and developed the pipeline for a GenAI project aimed at reducing manual
+							administrative workload for the call department by transcribing phone calls,
+							generating concise summaries, and retrieving relevant information for integration into
+							the CRM system.
+						</li>
+					</ul>
+				</Card>
+				<Card
+					heading='PostNL'
+					subheading='Data Scientist | Data Engineer'
+					date='2022 – 2024'
+					imagePath='/src/assets/postnl-logo.png'
+					altText='PostNL logo'
+					imageClass='h-12 w-auto right-5'
+				>
+					<ul class='ml-4 list-disc text-muted-foreground'>
+						<li>
+							Specialize in delivering valuable insights to business stakeholders through dashboards
+							and reports, utilizing predictive modeling for informed decision-making.
+						</li>
+						<li>Advise on data matters, providing guidance to ensure effective data strategies.</li>
+						<li>
+							Integrate new data sources into our data lake and manage ETL processes in AWS,
+							ensuring data accuracy and completeness.
+						</li>
+						<li>
+							Focus on leveraging data to enhance operational efficiency and improve process
+							reliability at PostNL.
+						</li>
+					</ul>
+				</Card>
+				<Card
+					heading='Aurai'
+					subheading='Junior Data Engineer'
+					date='Dec 2022 - Nov 2022'
+					imagePath='/src/assets/aurai-logo.png'
+					altText='Aurai Logo'
+					imageClass='h-12 w-auto right-5'
+				>
+					<ul class='ml-4 list-disc text-muted-foreground'>
+						<li>
+							Upon completion of the traineeship, I transitioned into a consultant role, undertaking
+							assignments that apply my data engineering expertise to solve client challenges.
+						</li>
+					</ul>
+				</Card>
+			</div>
+		</Section>
 	</div>
 </PageLayout>
 

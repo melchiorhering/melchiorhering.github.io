@@ -32,14 +32,14 @@ if (!isOnlineImage && !images[imagePath])
 			<img
 				src={imagePath}
 				alt={altText}
-				class='object-cover w-full h-48 p-4 rounded-bl-none rounded-br-none rounded-2xl'
+				class='h-48 w-full rounded-2xl rounded-bl-none rounded-br-none bg-slate-100 object-cover p-4'
 				loading='eager'
 			/>
 		) : (
 			<Image
 				src={images[imagePath]()}
 				alt={altText}
-				class='object-cover w-full h-48 p-4 rounded-bl-none rounded-br-none rounded-2xl'
+				class='h-48 w-full rounded-2xl rounded-bl-none rounded-br-none object-cover p-4'
 				loading='eager'
 			/>
 		)
