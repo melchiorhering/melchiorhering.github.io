@@ -23,7 +23,11 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<section class='relative flex flex-col items-center gap-y-8 md:py-4'>
-		<h1 class='text-6xl font-bold'>Hi!</h1>
+		<!-- Centered Gradient Background -->
+		<div class='gradient'></div>
+
+		<!-- Content Above Gradient -->
+		<h1 class='z-10 text-6xl font-bold'>Hi!</h1>
 		<Image
 			src={profilePicture}
 			alt='Cartoon of Stijn Hering'
@@ -33,11 +37,11 @@ const meta = {
 			width={360}
 		/>
 
-		<!-- Links -->
-		<div class='flex flex-col items-center'>
+		<!-- Links Section -->
+		<div class='z-10 flex flex-col items-center'>
 			<h1 class='text-4xl font-bold'>Have a look...</h1>
 		</div>
-		<div class='flex flex-wrap justify-center gap-x-12 gap-y-6 pt-4 text-xl md:gap-x-24'>
+		<div class='z-10 flex flex-wrap justify-center gap-x-12 gap-y-6 pt-4 text-xl md:gap-x-24'>
 			{
 				labels.map((label) => (
 					<Label
@@ -59,7 +63,7 @@ const meta = {
 							<Image
 								src={label.logo}
 								alt={`${label.title} logo`}
-								class='h-5 w-5 fill-white md:h-8 md:w-8'
+								class='h-5 w-5 rounded fill-white md:h-8 md:w-8'
 								loading='eager'
 								slot='logo'
 							/>

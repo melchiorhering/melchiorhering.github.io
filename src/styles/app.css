@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Font Face Definitions */
 @font-face {
 	font-family: 'Satoshi';
 	src: url('/fonts/Satoshi-Variable.ttf');
@@ -16,27 +17,81 @@
 	font-display: swap;
 }
 
-.hero-background {
-	background-image: url('../assets/svg/choass-background.svg');
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-	position: relative;
-	overflow: hidden;
-	clip-path: inset(0); /* Clips the content within the boundaries of the div */
-}
-
-.hero-background img {
-	position: relative;
-	z-index: 10; /* Ensures the image is displayed above the background */
-}
-
+/* Hidden Utility */
 .hidden {
 	display: none;
 }
 
+/* Gradient Background Animation */
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes wobble {
+	0%,
+	100% {
+		transform: translate(-50%, -50%) rotate(0deg) scale(1);
+	}
+	50% {
+		transform: translate(-48%, -52%) rotate(180deg) scale(1.1);
+	}
+}
+
+.gradient {
+	--size: 800px;
+	--speed: 25s;
+	--easing: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: var(--size);
+	height: var(--size);
+	filter: blur(calc(var(--size) / 5));
+
+	/* Updated to include a third color */
+	background-image: linear-gradient(
+		to bottom right,
+		var(--gradient-start),
+		var(--gradient-mid),
+		var(--gradient-end)
+	);
+
+	animation: wobble var(--speed) var(--easing) infinite alternate;
+	border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+	z-index: -10;
+}
+
+@media (min-width: 720px) {
+	.gradient {
+		--size: 500px; /* Smaller gradient size for larger screens */
+	}
+}
+
+@media (min-width: 720px) {
+	.gradient {
+		--size: 500px; /* Smaller gradient size for larger screens */
+	}
+}
+
+/* Viewport Transition Effect */
+* {
+	transition: all 0.5s ease-out;
+}
+
+/* Tailwind Base Layer - Color Variables */
 @layer base {
 	:root {
+		--gradient-start: rgb(2 132 199); /* Light theme start color */
+		--gradient-mid: #bebebe; /* New light theme middle color */
+		--gradient-end: rgb(2 132 199); /* Light theme end color */
+
 		--background: 210 33% 99%;
 		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
@@ -58,7 +113,12 @@
 		--ring: 240 5.9% 10%;
 		--radius: 0.5rem;
 	}
+
 	.dark {
+		--gradient-start: #bebebe; /* Light theme start color */
+		--gradient-mid: rgb(2 132 199); /* New light theme middle color */
+		--gradient-end: #bebebe; /* Light theme end color */
+
 		--background: 240 10% 3.9%;
 		--foreground: 0 0% 98%;
 		--card: 240 10% 3.9%;
