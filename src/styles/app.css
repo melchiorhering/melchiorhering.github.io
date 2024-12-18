@@ -48,7 +48,7 @@
 	--easing: cubic-bezier(0.6, -0.28, 0.735, 0.045);
 
 	position: absolute;
-	top: 50%;
+	top: 45%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: var(--size);
@@ -74,9 +74,10 @@
 	}
 }
 
-@media (min-width: 720px) {
+/* Extra small screens */
+@media (max-width: 480px) {
 	.gradient {
-		--size: 500px; /* Smaller gradient size for larger screens */
+		--size: 350px; /* Even smaller gradient size */
 	}
 }
 
@@ -91,7 +92,6 @@
 		--gradient-start: rgb(2 132 199); /* Light theme start color */
 		--gradient-mid: #bebebe; /* New light theme middle color */
 		--gradient-end: rgb(2 132 199); /* Light theme end color */
-
 		--background: 210 33% 99%;
 		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
@@ -118,7 +118,6 @@
 		--gradient-start: #bebebe; /* Light theme start color */
 		--gradient-mid: rgb(2 132 199); /* New light theme middle color */
 		--gradient-end: #bebebe; /* Light theme end color */
-
 		--background: 240 10% 3.9%;
 		--foreground: 0 0% 98%;
 		--card: 240 10% 3.9%;

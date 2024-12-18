@@ -25,9 +25,10 @@ const {
 	<body class='flex justify-center bg-background'>
 		<ThemeProvider />
 		<main
-			class='flex min-h-screen w-screen max-w-[80rem] flex-col items-center px-6 pb-10 pt-8 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
+			class='flex min-h-screen w-screen max-w-[80rem] flex-col items-center overflow-x-hidden px-6 pb-10 pt-8 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
 		>
 			<Header />
+
 			<slot />
 			<Footer />
 		</main>
