@@ -2,38 +2,31 @@ import type { Labels, BlogPost } from '@/types'
 import { fetchMediumPosts } from './blog'
 
 // Icons
-import workIcon from '../assets/svg/work.svg' // Import SVG path data as strings
-import locationIcon from '../assets/svg/location.svg'
 import linkedinIcon from '../assets/svg/linkedin.svg'
 import githubIcon from '../assets/svg/github.svg'
 
 // Logos
 import postnlLogo from '../assets/postnl-logo.png'
 import amsterdamLogo from '../assets/amsterdam-logo.png'
-import linkLogo from '../assets/svg/link.svg'
 
 export const labels: Labels[] = [
 	{
 		title: 'PostNL',
-		icon: workIcon, // Ensure this is a string containing SVG path data
-		logo: postnlLogo,
+		icon: postnlLogo, // Ensure this is a string containing SVG path data
 		website: 'https://www.postnl.nl/'
 	},
 	{
 		title: 'Amsterdam',
-		icon: locationIcon,
-		logo: amsterdamLogo
+		icon: amsterdamLogo
 	},
 	{
 		title: 'LinkedIn',
 		icon: linkedinIcon,
-		logo: linkLogo,
 		website: 'https://www.linkedin.com/in/stijn-hering-contact/'
 	},
 	{
 		title: 'GitHub',
 		icon: githubIcon,
-		logo: linkLogo,
 		website: 'https://github.com/melchiorhering'
 	}
 ]
