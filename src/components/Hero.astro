@@ -24,7 +24,7 @@ import { Icon } from 'astro-icon/components'
 					{
 						heroData.buttons.map((button, index) => (
 							<a href={button.href} class={button.class}>
-								{button.iconName && <Icon name={button.iconName} class='w-5 h-5 mr-2' />}
+								{button.iconName && <Icon name={button.iconName} class='w-5 h-5' />}
 								{button.text}
 							</a>
 						))
