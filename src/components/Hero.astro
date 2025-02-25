@@ -1,54 +1,114 @@
 ---
 import { Image } from 'astro:assets'
-import Label from '@/components/Label.astro'
-import { labels } from '@/data/data'
-import profilePicture from '@/assets/cartoon-profile.webp'
-import profilePictureTransparent from '@/assets/cartoon-profile-transparent.webp'
+import profilePictureTransparent from '@/assets/cartoon-profile-cutout.webp'
+import travelPicture from '@/assets/travel-jordan.jpg'
+import TypeWriteComponent from '@/components/react/TypeWriteComponent'
+import Polaroid from '@/components/Polaroid.astro'
+import { heroData } from '@/data/data'
+import { Icon } from 'astro-icon/components'
 ---
 
-<section class='relative flex flex-col items-center justify-center gap-y-8'>
-	<div class='gradient'></div>
-	<div
-		class='relative inline-block skew-x-[-20deg] bg-gradient-to-r from-black to-sky-600 px-6 py-3 text-lg font-bold text-white'
-	>
-		<span class='inline-block skew-x-[20deg]'>Hi!</span>
+<div class='container min-h-screen py-8 mx-auto'>
+	<div class='items-center lg:flex'>
+		<div class='w-full lg:w-1/2'>
+			<div class='space-y-2 lg:max-w-lg'>
+				<h1 class={heroData.heading.class}>
+					<TypeWriteComponent client:only='react' texts={heroData.texts} />
+				</h1>
+
+				<p class={heroData.description.class}>
+					{heroData.description.text}
+				</p>
+
+				<div class='flex flex-wrap space-x-2'>
+					{
+						heroData.buttons.map((button, index) => (
+							<a href={button.href} class={button.class}>
+								{button.iconName && <Icon name={button.iconName} class='w-5 h-5 mr-2' />}
+								{button.text}
+							</a>
+						))
+					}
+				</div>
+			</div>
+		</div>
+
+		<div class='relative flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2'>
+			<!-- Decorative background elements -->
+			<div
+				class='absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-sky-100/30 to-transparent blur-3xl dark:from-sky-900/20'
+			>
+			</div>
+
+			<!-- Image group container -->
+			<div
+				class='relative h-[400px] w-full md:h-[500px] lg:h-[600px] lg:w-[600px]'
+				id='image-gallery'
+			>
+				<Polaroid
+					position='right'
+					image={travelPicture}
+					alt='Travel; Camel in Jordan'
+					width={220}
+					iconName='airplane'
+					class='!-right-4 md:!-right-8 lg:!-right-14'
+				/>
+
+				<Polaroid
+					position='center'
+					image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
+					alt='Amsterdam Westerkerk'
+					width={280}
+					height={280}
+					iconName='house'
+					class='scale-75 md:scale-90 lg:scale-100'
+				/>
+
+				<Polaroid
+					position='left'
+					image={profilePictureTransparent}
+					alt='Disney Like Profile'
+					width={280}
+					iconName='person'
+					imageClass='bg-[url(/images/binary-background.webp)]'
+					class='!-left-4 md:!-left-8 lg:!-left-14'
+				/>
+			</div>
+			<!-- Decorative elements -->
+			<div
+				class='absolute top-0 hidden w-20 h-20 border-4 border-dashed rounded-full -right-20 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+			>
+			</div>
+			<div
+				class='absolute hidden border-4 rounded-lg -left-16 bottom-12 h-14 w-14 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+			>
+			</div>
+			<div
+				class='absolute bottom-0 hidden w-16 h-16 border-4 rounded-full right-20 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+			>
+			</div>
+		</div>
 	</div>
-	<div class='flex px-4'>
-		<!-- USE A CUTOUT IMAGE (TRANSPARENT BACKGROUND) -->
-		<Image
-			src={profilePicture}
-			alt='Cartoon of Stijn Hering'
-			class='relative z-10 rounded-xl bg-gradient-to-r from-black to-sky-600 p-1 dark:from-white dark:to-sky-600'
-			loading='eager'
-			quality='100'
-			width={360}
-		/>
-	</div>
-	<div class='z-10 flex flex-col items-center'>
-		<h1 class='text-4xl font-bold'>Have a look...</h1>
-	</div>
-	<div
-		class='z-10 grid grid-cols-2 gap-x-6 gap-y-6 pt-2 text-xl md:flex md:flex-wrap md:justify-center md:gap-x-12 md:gap-y-6 lg:gap-x-24'
-	>
-		{
-			labels.map((label) => (
-				<Label
-					title={label.title}
-					href={label.website}
-					as={label.website ? 'a' : 'div'}
-					target={label.website ? '_blank' : undefined}
-				>
-					{label.icon && (
-						<Image
-							src={label.icon}
-							alt={`${label.title} icon`}
-							class='h-5 w-5 dark:text-white md:h-8 md:w-8'
-							loading='eager'
-							slot='icon'
-						/>
-					)}
-				</Label>
-			))
+</div>
+
+<script>
+	const gallery = document.getElementById('image-gallery')
+	const polaroids = gallery?.querySelectorAll('.polaroid')
+
+	polaroids?.forEach((polaroid) => {
+		if (polaroid instanceof HTMLElement) {
+			// Type guard for HTMLElement
+			polaroid.addEventListener('mouseenter', () => {
+				// Reset all polaroids to initial z-index
+				polaroids.forEach((p) => {
+					if (p instanceof HTMLElement) {
+						// Type guard for each element
+						p.style.zIndex = '10'
+					}
+				})
+				// Set hovered polaroid to highest z-index
+				polaroid.style.zIndex = '30'
+			})
 		}
-	</div>
-</section>
+	})
+</script>

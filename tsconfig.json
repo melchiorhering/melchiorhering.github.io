@@ -6,6 +6,7 @@
 		"baseUrl": ".",
 		"lib": ["es2022", "dom", "dom.iterable"],
 		"paths": {
+			"@/icons/*": ["src/icons/*"],
 			"@/assets/*": ["src/assets/*"],
 			"@/components/*": ["src/components/*"],
 			"@/layouts/*": ["src/layouts/*"],
@@ -14,7 +15,9 @@
 			"@/site-config": ["src/site.config.ts"],
 			"@/data/*": ["src/data/*"],
 			"@/sections/*": ["src/sections/*"]
-		}
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
 	},
 	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }

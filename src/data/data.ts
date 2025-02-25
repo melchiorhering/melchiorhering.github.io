@@ -2,12 +2,12 @@ import type { Labels, BlogPost } from '@/types'
 import { fetchMediumPosts } from '../utils/blog'
 
 // Icons
-import linkedinIcon from '../assets/svg/linkedin.svg'
-import githubIcon from '../assets/svg/github.svg'
+import linkedinIcon from '@/icons/linkedin.svg'
+import githubIcon from '@/icons/github.svg'
 
 // Logos
-import postnlLogo from '../assets/postnl-logo.png'
-import amsterdamLogo from '../assets/amsterdam-logo.png'
+import postnlLogo from '@/assets/postnl-logo.png'
+import amsterdamLogo from '@/assets/amsterdam-flag.png'
 
 export const labels: Labels[] = [
 	{
@@ -75,3 +75,63 @@ export const allBlogPosts: Promise<BlogPost[]> = (async () => {
 	const mediumPosts = await fetchMediumPosts(username)
 	return [...mediumPosts] // Merge with static posts
 })()
+
+export const heroData = {
+	description: {
+		text: 'I’m a versatile Data/ML Engineer skilled in Python, TypeScript, Databases, Cloud, Docker, and DevOps. With a background in ML, AI, Data Engineering, Web Development, and Cloud, I swiftly adopt new technologies to build scalable, user-friendly solutions that solve real problems.',
+		class: 'text-gray-600 dark:text-gray-400'
+	},
+	buttons: [
+		{
+			text: 'Resume',
+			href: '/resume-stijn-hering.pdf',
+			iconName: 'download',
+			class:
+				'flex justify-center items-center space-x-2 w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto font-mono'
+		},
+		{
+			text: 'Contact',
+			href: '#contact',
+			iconName: 'e-mail',
+			class:
+				'flex justify-center items-center space-x-2 w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-slate-700 rounded-lg hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto font-mono'
+		}
+	],
+	heading: {
+		class: 'font-mono text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl'
+	},
+	texts: [
+		{
+			text: 'Hi. Welcome!',
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+			delay: 70
+		},
+		{
+			text: 'Data Scientist',
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+			delay: 70
+		},
+		{
+			text: 'Data Engineer',
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+			delay: 70
+		},
+		{
+			text: 'Software Engineer',
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+			delay: 70,
+			pauseFor: 1500
+		},
+		{
+			text: "Hi, I'm Stijn Hering",
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 font-bold dark:from-white dark:to-sky-600',
+			delay: 100,
+			final: true
+		}
+	]
+}

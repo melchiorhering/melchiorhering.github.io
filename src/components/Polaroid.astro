@@ -1,0 +1,65 @@
+---
+import { Icon } from 'astro-icon/components'
+import type { ImageMetadata } from 'astro'
+
+interface Props {
+	position: 'center' | 'right' | 'left'
+	image: ImageMetadata | string
+	alt: string
+	width: number
+	height?: number
+	iconName: string
+	class?: string
+	imageClass?: string // New prop for image-specific classes
+}
+
+const {
+	position,
+	image,
+	alt,
+	width,
+	height,
+	iconName,
+	class: className,
+	imageClass = '' // Default to empty string
+} = Astro.props
+
+const positions = {
+	center: 'left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2',
+	right: 'top-0 -right-8 -rotate-3 md:-rotate-6',
+	left: 'bottom-0 -left-8 rotate-3 md:rotate-6'
+}
+---
+
+<div
+	class:list={[
+		'polaroid absolute z-10 transition-all duration-500 ease-out',
+		positions[position],
+		className
+	]}
+	style='z-index: 10;'
+	data-position={position}
+>
+	<div class='relative overflow-visible group'>
+		<div
+			class='p-2 pb-6 transition-all duration-500 ease-out transform bg-white rounded shadow-lg hover:-translate-y-1 hover:rotate-0 hover:scale-105 hover:shadow-xl group-hover:shadow-sky-500/20 dark:bg-gray-100 md:p-3 md:pb-8'
+		>
+			<img
+				src={typeof image === 'string' ? image : image.src}
+				alt={alt}
+				width={width}
+				height={height}
+				class:list={['rounded-sm', imageClass]}
+				loading='lazy'
+			/>
+			<div
+				class='absolute -bottom-3 -right-3 z-10 transform rounded-full bg-white p-2.5 shadow-lg transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110 dark:bg-gray-800'
+			>
+				<Icon
+					name={iconName}
+					class='w-5 h-5 transition-colors duration-300 text-sky-600 group-hover:text-sky-400 dark:text-sky-300'
+				/>
+			</div>
+		</div>
+	</div>
+</div>
