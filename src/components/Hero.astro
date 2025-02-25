@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets'
+import Label from '@/components/Label.astro'
+import { labels } from '@/data/data'
+import profilePicture from '@/assets/cartoon-profile.webp'
+import profilePictureTransparent from '@/assets/cartoon-profile-transparent.webp'
+---
+
+<section class='relative flex flex-col items-center justify-center gap-y-8'>
+	<div class='gradient'></div>
+	<div
+		class='relative inline-block skew-x-[-20deg] bg-gradient-to-r from-black to-sky-600 px-6 py-3 text-lg font-bold text-white'
+	>
+		<span class='inline-block skew-x-[20deg]'>Hi!</span>
+	</div>
+	<div class='flex px-4'>
+		<!-- USE A CUTOUT IMAGE (TRANSPARENT BACKGROUND) -->
+		<Image
+			src={profilePicture}
+			alt='Cartoon of Stijn Hering'
+			class='relative z-10 rounded-xl bg-gradient-to-r from-black to-sky-600 p-1 dark:from-white dark:to-sky-600'
+			loading='eager'
+			quality='100'
+			width={360}
+		/>
+	</div>
+	<div class='z-10 flex flex-col items-center'>
+		<h1 class='text-4xl font-bold'>Have a look...</h1>
+	</div>
+	<div
+		class='z-10 grid grid-cols-2 gap-x-6 gap-y-6 pt-2 text-xl md:flex md:flex-wrap md:justify-center md:gap-x-12 md:gap-y-6 lg:gap-x-24'
+	>
+		{
+			labels.map((label) => (
+				<Label
+					title={label.title}
+					href={label.website}
+					as={label.website ? 'a' : 'div'}
+					target={label.website ? '_blank' : undefined}
+				>
+					{label.icon && (
+						<Image
+							src={label.icon}
+							alt={`${label.title} icon`}
+							class='h-5 w-5 dark:text-white md:h-8 md:w-8'
+							loading='eager'
+							slot='icon'
+						/>
+					)}
+				</Label>
+			))
+		}
+	</div>
+</section>

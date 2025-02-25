@@ -4,4 +4,4 @@ export { getFormattedDate } from './date'
 export { elementHasClass, toggleClass, rootInDarkMode } from './domElement'
 
 // Importing Data
-export { labels, about, allBlogPosts } from './data'
+export { labels, about, allBlogPosts } from '../data/data'

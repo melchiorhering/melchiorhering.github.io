@@ -1,0 +1,28 @@
+---
+import Section from '@/components/Section.astro'
+import Card from '@/components/Card.astro'
+import { experience } from '@/data/data'
+---
+
+<Section title='Experience'>
+	<div class='flex flex-col gap-y-6'>
+		{
+			experience.map((job) => (
+				<Card
+					heading={job.company}
+					subheading={job.role}
+					date={job.period}
+					imagePath={job.logo}
+					altText={`${job.company} logo`}
+					imageClass='h-12 w-auto right-5'
+				>
+					<ul class='ml-4 list-disc text-muted-foreground'>
+						{job.achievements.map((achievement) => (
+							<li set:html={achievement} />
+						))}
+					</ul>
+				</Card>
+			))
+		}
+	</div>
+</Section>
