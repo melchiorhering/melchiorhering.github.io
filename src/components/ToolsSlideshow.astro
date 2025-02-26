@@ -48,7 +48,7 @@ const slideItems = [...tools, ...tools]
 				slideItems.map((tool) => (
 					<div class='group flex min-w-fit items-center space-x-4 px-12 py-10 transition-colors hover:bg-sky-50/50 dark:hover:bg-sky-950/10'>
 						<div class='relative'>
-							<div class='absolute -inset-2 rounded-full bg-sky-100/50 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-sky-900/50' />
+							<div class='absolute -inset-2 opacity-0 transition-opacity' />
 							<Icon
 								name={tool.iconName}
 								class='relative h-12 w-12 text-gray-600 transition-all group-hover:scale-110 group-hover:text-sky-600 dark:text-gray-400 dark:group-hover:text-sky-400'

@@ -208,7 +208,18 @@ export const toolsData = [
 		name: 'HuggingFace',
 		iconName: 'logos:hugging-face-icon'
 	},
-
+	{
+		name: 'Linux',
+		iconName: 'logos:linux-tux'
+	},
+	{
+		name: 'Zsh',
+		iconName: 'logos:zsh'
+	},
+	{
+		name: 'Bash',
+		iconName: 'logos:bash-icon'
+	},
 	{
 		name: 'SurrealDB',
 		iconName: 'logos:surrealdb-icon'
