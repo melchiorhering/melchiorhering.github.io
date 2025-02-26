@@ -17,7 +17,7 @@ const slideItems = [...tools, ...tools, ...tools]
 	>
 		<div class='flex' style={`animation: marquee ${speed}s linear infinite`}>
 			{
-				slideItems.map((tool, index) => (
+				slideItems.map((tool) => (
 					<div class='flex min-w-fit items-center space-x-3 px-8 py-4'>
 						<Icon
 							name={tool.iconName}
