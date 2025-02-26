@@ -98,7 +98,7 @@ export const heroData = {
 		}
 	],
 	heading: {
-		class: 'font-mono text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl'
+		class: 'font-mono text-5xl font-semibold text-gray-800 dark:text-white lg:text-4xl'
 	},
 	texts: [
 		{
