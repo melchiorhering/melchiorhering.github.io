@@ -64,6 +64,7 @@ const {
 		const infoPanel = document.getElementById(infoId)
 		if (!infoPanel) return
 
+		// Handle mouse enter
 		trigger.addEventListener('mouseenter', () => {
 			// Hide all info panels first
 			document.querySelectorAll('[id^="info-"]').forEach((panel) => {
@@ -71,6 +72,12 @@ const {
 			})
 			// Show this info panel
 			infoPanel.classList.remove('opacity-0', 'pointer-events-none')
+		})
+
+		// Handle mouse leave
+		trigger.addEventListener('mouseleave', () => {
+			// Hide the info panel
+			infoPanel.classList.add('opacity-0', 'pointer-events-none')
 		})
 	})
 </script>

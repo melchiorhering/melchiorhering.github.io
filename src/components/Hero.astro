@@ -2,10 +2,12 @@
 import profilePictureTransparent from '@/assets/cartoon-profile-cutout.webp'
 import travelPicture from '@/assets/travel-jordan.jpg'
 import TypeWriteComponent from '@/components/react/TypeWriteComponent'
+import { Image } from 'astro:assets'
 import Polaroid from '@/components/Polaroid.astro'
 import { heroData } from '@/data/data'
 import { Icon } from 'astro-icon/components'
 import Container from '@/components/Container.astro'
+import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 ---
 
 {/* Hero Split into Two Sections */}
@@ -43,34 +45,36 @@ import Container from '@/components/Container.astro'
 				class='pointer-events-none absolute -left-1/4 -top-9 w-64 opacity-0 transition-opacity duration-300'
 			>
 				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
-					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Amsterdam</h3>
-					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
-						Born and raised in this beautiful city. Love its canals, architecture, and vibrant
-						culture.
-					</p>
+					<div class='flex w-full items-center justify-between'>
+						<h3 class='font-bold text-sky-600 dark:text-sky-400'>Amsterdam</h3>
+						<Image src={AmsterdamFlag} alt='Flag of Amsterdam' class='w-6 object-contain' />
+					</div>
+
+					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>Born and raised!</p>
 				</div>
 			</div>
 
 			<div
 				id='info-travel'
-				class='pointer-events-none absolute right-0 top-1/4 w-64 opacity-0 transition-opacity duration-300'
+				class='pointer-events-none absolute -right-36 bottom-36 w-64 opacity-0 transition-opacity duration-300'
 			>
 				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
 					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Travel Enthusiast</h3>
 					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
-						Exploring new places, capturing moments, and experiencing different cultures.
+						Exploring new places and experiencing different cultures.
 					</p>
 				</div>
 			</div>
 
 			<div
 				id='info-dev'
-				class='duration-30 pointer-events-none absolute bottom-0 left-1/2 z-50 w-64 opacity-0 transition-opacity'
+				class='duration-30 w-82 pointer-events-none absolute -bottom-10 left-1/2 z-50 opacity-0 transition-opacity'
 			>
 				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
-					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Full Stack Developer</h3>
+					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Tech Enthusiast</h3>
 					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
-						Passionate about creating intuitive and efficient web applications.
+						Passionate about creating intuitive and efficient Data/AI/Web applications, using all
+						kinds of technologies.
 					</p>
 				</div>
 			</div>
@@ -90,7 +94,7 @@ import Container from '@/components/Container.astro'
 				alt='Travel; Camel in Jordan'
 				width={220}
 				iconName='airplane'
-				class='absolute -right-16 top-0 -rotate-3 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6'
+				class='absolute -right-20 top-0 -rotate-3 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6'
 				infoId='info-travel'
 			/>
 			<Polaroid
