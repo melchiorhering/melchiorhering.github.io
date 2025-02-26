@@ -8,34 +8,53 @@ interface Props {
 }
 
 const { tools, speed = 45 } = Astro.props
-const slideItems = [...tools, ...tools, ...tools]
+// Only duplicate once for two sets of items
+const slideItems = [...tools, ...tools]
 ---
 
-<div class='py-24'>
-	<div class='mb-12 flex flex-col items-center gap-2'>
+<div class='relative py-24'>
+	{/* Background decorative elements */}
+	<div class='absolute left-0 top-0 -z-10 h-full w-full'>
+		<div
+			class='absolute -left-4 top-1/4 h-12 w-12 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80'
+		>
+		</div>
+		<div
+			class='absolute right-10 top-3/4 h-16 w-16 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80'
+		>
+		</div>
+	</div>
+
+	<div class='mb-16 flex flex-col items-center gap-3'>
 		<h1
-			class='bg-gradient-to-r from-sky-600 to-sky-400 bg-clip-text text-3xl font-bold text-transparent dark:from-sky-400 dark:to-sky-200'
+			class='bg-gradient-to-r from-sky-600 to-sky-400 bg-clip-text text-4xl font-bold text-transparent dark:from-sky-400 dark:to-sky-200'
 		>
 			Tools & Technologies
 		</h1>
+		<div
+			class='h-1 w-20 rounded-full bg-gradient-to-r from-sky-600 to-sky-400 dark:from-sky-400 dark:to-sky-200'
+		>
+		</div>
 		<p class='max-w-2xl text-center text-sm text-gray-600 dark:text-gray-400'>
 			A collection of frameworks, tools, and technologies I work with
 		</p>
 	</div>
-	<!-- LEFT OUT DARK THEME: dark:from-gray-900/50 dark:via-gray-800/50 dark:to-gray-900/50 -->
+
 	<div
-		class='w-full overflow-hidden bg-gradient-to-r from-gray-50/80 via-white to-gray-50/80 backdrop-blur-sm dark:from-gray-50/30 dark:via-white/30 dark:to-gray-50/30'
+		class='relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-gray-50/80 via-white to-gray-50/80 shadow-lg backdrop-blur-sm dark:from-gray-50/10 dark:via-white/10 dark:to-gray-50/10'
 	>
-		<div class='flex' style={`animation: marquee ${speed}s linear infinite`}>
+		<div class='animate-marquee flex w-fit items-center' style={`animation-duration: ${speed}s;`}>
 			{
 				slideItems.map((tool) => (
-					<div class='flex min-w-fit items-center space-x-3 px-10 py-8'>
-						<Icon
-							name={tool.iconName}
-							class='h-10 w-10 opacity-80 transition-opacity hover:opacity-100'
-						/>
-						{/* dark:text-gray-300 */}
-						<span class='whitespace-nowrap font-mono text-lg font-bold text-gray-600 dark:text-gray-300 '>
+					<div class='group flex min-w-fit items-center space-x-4 px-12 py-10 transition-colors hover:bg-sky-50/50 dark:hover:bg-sky-950/10'>
+						<div class='relative'>
+							<div class='absolute -inset-2 rounded-full bg-sky-100/50 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-sky-900/50' />
+							<Icon
+								name={tool.iconName}
+								class='relative h-12 w-12 text-gray-600 transition-all group-hover:scale-110 group-hover:text-sky-600 dark:text-gray-400 dark:group-hover:text-sky-400'
+							/>
+						</div>
+						<span class='whitespace-nowrap font-mono text-lg font-bold text-gray-600 transition-colors group-hover:text-sky-600 dark:text-gray-400 dark:group-hover:text-sky-400'>
 							{tool.name}
 						</span>
 					</div>
@@ -44,19 +63,3 @@ const slideItems = [...tools, ...tools, ...tools]
 		</div>
 	</div>
 </div>
-
-<style>
-	@keyframes marquee {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-33.33%);
-		}
-	}
-
-	/* Note: Removed .animate-marquee class since we're using inline style */
-	div:hover {
-		animation-play-state: paused;
-	}
-</style>
