@@ -79,7 +79,7 @@ export const allBlogPosts: Promise<BlogPost[]> = (async () => {
 export const heroData = {
 	description: {
 		text: 'I’m a versatile Data/ML Engineer skilled in Python, TypeScript, Databases, Cloud, Docker, and DevOps. With a background in ML, AI, Data Engineering, Web Development, and Cloud, I swiftly adopt new technologies to build scalable, user-friendly solutions that solve real problems.',
-		class: 'text-gray-600 dark:text-gray-400'
+		class: 'text-gray-600 dark:text-white'
 	},
 	buttons: [
 		{
