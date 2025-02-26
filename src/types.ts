@@ -38,3 +38,8 @@ export type BlogPost = {
 	pubDate: string
 	imagePath: string
 }
+
+export interface Tool {
+	name: string
+	iconName: string // Changed from logoUrl to iconName
+}

@@ -5,6 +5,7 @@ import BaseHead from '@/components/BaseHead.astro'
 import Footer from '@/components/layout/Footer.astro'
 import Header from '@/components/layout/Header.astro'
 import ThemeProvider from '@/components/ThemeProvider.astro'
+import Container from '@/components/Container.astro'
 
 import { siteConfig } from '@/site-config'
 
@@ -24,13 +25,24 @@ const {
 
 	<body class='flex justify-center bg-background'>
 		<ThemeProvider />
-		<main
-			class='flex min-h-screen w-screen max-w-[80rem] flex-col items-center px-6 pb-4 pt-8 font-satoshi text-[0.92rem] leading-relaxed sm:px-10 lg:px-10'
-		>
-			<Header />
+		<div class='w-screen'>
+			<main
+				class='flex min-h-screen flex-col items-center font-satoshi text-[0.92rem] leading-relaxed'
+			>
+				<Container>
+					<Header />
+				</Container>
+				<slot />
+				<!-- <div class='w-full max-w-[80rem] px-6 pb-4 pt-8 sm:px-10 lg:px-10'>
+					{/* Main content slot (includes Hero) */}
+				</div> -->
 
-			<slot />
-			<Footer />
-		</main>
+				{/* Full-width content after main content */}
+
+				<Container>
+					<Footer />
+				</Container>
+			</main>
+		</div>
 	</body>
 </html>

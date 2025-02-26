@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets'
 import profilePictureTransparent from '@/assets/cartoon-profile-cutout.webp'
 import travelPicture from '@/assets/travel-jordan.jpg'
 import TypeWriteComponent from '@/components/react/TypeWriteComponent'
@@ -8,10 +7,10 @@ import { heroData } from '@/data/data'
 import { Icon } from 'astro-icon/components'
 ---
 
-<div class='container min-h-screen py-8 mx-auto'>
+<div class='container mx-auto min-h-screen py-8'>
 	<div class='items-center lg:flex'>
 		<div class='w-full lg:w-1/2'>
-			<div class='space-y-2 lg:max-w-lg'>
+			<div class='space-y-4 lg:max-w-lg'>
 				<h1 class={heroData.heading.class}>
 					<TypeWriteComponent client:only='react' texts={heroData.texts} />
 				</h1>
@@ -20,11 +19,11 @@ import { Icon } from 'astro-icon/components'
 					{heroData.description.text}
 				</p>
 
-				<div class='flex flex-wrap space-x-2'>
+				<div class='flex flex-wrap md:space-x-2'>
 					{
-						heroData.buttons.map((button, index) => (
+						heroData.buttons.map((button, _) => (
 							<a href={button.href} class={button.class}>
-								{button.iconName && <Icon name={button.iconName} class='w-5 h-5' />}
+								{button.iconName && <Icon name={button.iconName} class='h-5 w-5' />}
 								{button.text}
 							</a>
 						))
@@ -33,7 +32,7 @@ import { Icon } from 'astro-icon/components'
 			</div>
 		</div>
 
-		<div class='relative flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2'>
+		<div class='relative mt-6 flex w-full items-center justify-center lg:mt-0 lg:w-1/2'>
 			<!-- Decorative background elements -->
 			<div
 				class='absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-sky-100/30 to-transparent blur-3xl dark:from-sky-900/20'
@@ -76,15 +75,15 @@ import { Icon } from 'astro-icon/components'
 			</div>
 			<!-- Decorative elements -->
 			<div
-				class='absolute top-0 hidden w-20 h-20 border-4 border-dashed rounded-full -right-20 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute -right-20 top-0 hidden h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80 lg:block'
 			>
 			</div>
 			<div
-				class='absolute hidden border-4 rounded-lg -left-16 bottom-12 h-14 w-14 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute -left-16 bottom-12 hidden h-14 w-14 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80 lg:block'
 			>
 			</div>
 			<div
-				class='absolute bottom-0 hidden w-16 h-16 border-4 rounded-full right-20 animate-pulse border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute bottom-0 right-20 hidden h-16 w-16 animate-pulse rounded-full border-4 border-sky-200/80 dark:border-sky-800/80 lg:block'
 			>
 			</div>
 		</div>

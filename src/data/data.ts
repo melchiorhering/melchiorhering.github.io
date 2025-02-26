@@ -135,3 +135,30 @@ export const heroData = {
 		}
 	]
 }
+
+export const toolsData = [
+	{
+		name: 'Python',
+		iconName: 'logos:python'
+	},
+	{
+		name: 'TypeScript',
+		iconName: 'logos:typescript-icon'
+	},
+	{
+		name: 'React',
+		iconName: 'logos:react'
+	},
+	{
+		name: 'Docker',
+		iconName: 'logos:docker-icon'
+	},
+	{
+		name: 'AWS',
+		iconName: 'logos:aws'
+	},
+	{
+		name: 'PostgreSQL',
+		iconName: 'logos:postgresql'
+	}
+]

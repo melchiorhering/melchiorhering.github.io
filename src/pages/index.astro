@@ -4,7 +4,9 @@ import Hero from '@/components/Hero.astro'
 import AboutSection from '@/sections/AboutSection.astro'
 import BlogSection from '@/sections/BlogSection.astro'
 import ExperienceSection from '@/sections/ExperienceSection.astro'
-import { allBlogPosts } from '@/data/data'
+import { allBlogPosts, toolsData } from '@/data/data'
+import ToolsSlideshow from '@/components/ToolsSlideshow.astro'
+import Container from '@/components/Container.astro'
 
 const blogPosts = await allBlogPosts
 const meta = {
@@ -15,10 +17,15 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<Hero />
-	<div class='flex w-full flex-col gap-y-8'>
+	<Container>
+		<Hero />
+	</Container>
+
+	<ToolsSlideshow tools={toolsData} />
+
+	<Container class='flex flex-col gap-y-8'>
 		<AboutSection />
 		<BlogSection posts={blogPosts} />
 		<ExperienceSection />
-	</div>
+	</Container>
 </PageLayout>

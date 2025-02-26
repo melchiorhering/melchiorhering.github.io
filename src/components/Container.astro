@@ -1,0 +1,14 @@
+---
+interface Props {
+	class?: string
+	fullWidth?: boolean
+}
+
+const { class: className, fullWidth = false } = Astro.props
+---
+
+<div
+	class:list={['w-full', !fullWidth && '\xDFsm:px-10 max-w-[80rem] px-6 py-4 lg:px-10', className]}
+>
+	<slot />
+</div>
