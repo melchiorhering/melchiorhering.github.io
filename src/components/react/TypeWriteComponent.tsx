@@ -43,10 +43,9 @@ export default function TypeWriteComponent({
 						.start()
 				}}
 				options={{
-					// If you don’t want autoStart, that’s fine since we manually call start() at the end
 					autoStart: false,
-					// Tailwind classes for cursor, etc.
-					cursorClassName: 'text-black dark:text-white animate-pulse'
+					cursorClassName: 'text-black dark:text-white terminal-cursor',
+					cursor: '_'
 				}}
 			/>
 		</span>
