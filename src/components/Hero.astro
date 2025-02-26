@@ -14,11 +14,14 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 <div class='flex flex-col'>
 	{/* Text Section - Full height on mobile */}
 	<Container class='flex items-center justify-center lg:min-h-fit'>
-		<div class='my-36 flex w-full items-center justify-center md:pt-0 lg:w-1/2 lg:justify-start'>
-			<div class='flex w-full max-w-lg flex-col gap-2 px-4 lg:gap-4 lg:px-0 lg:text-left'>
-				<h1 class={heroData.heading.class}>
-					<TypeWriteComponent client:only='react' texts={heroData.texts} />
-				</h1>
+		<div class='flex items-center justify-center w-full my-36 md:pt-0 lg:w-1/2 lg:justify-start'>
+			<div class='flex flex-col w-full max-w-lg gap-2 px-2 lg:gap-4 lg:px-0 lg:text-left'>
+				{/* Add fixed height container for typewriter */}
+				<div class='h-[90px] min-h-[90px]'>
+					<h1 class={heroData.heading.class}>
+						<TypeWriteComponent client:only='react' texts={heroData.texts} />
+					</h1>
+				</div>
 
 				<p class={heroData.description.class}>
 					{heroData.description.text}
@@ -28,7 +31,7 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 					{
 						heroData.buttons.map((button) => (
 							<a href={button.href} class={button.class}>
-								{button.iconName && <Icon name={button.iconName} class='h-5 w-5' />}
+								{button.iconName && <Icon name={button.iconName} class='w-5 h-5' />}
 								{button.text}
 							</a>
 						))
@@ -42,12 +45,12 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 			{/* Info Panels - Fixed positions */}
 			<div
 				id='info-amsterdam'
-				class='pointer-events-none absolute -left-1/4 -top-9 w-64 opacity-0 transition-opacity duration-300'
+				class='absolute w-64 transition-opacity duration-300 opacity-0 pointer-events-none -left-1/4 -top-9'
 			>
-				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
-					<div class='flex w-full items-center justify-between'>
+				<div class='p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
+					<div class='flex items-center justify-between w-full'>
 						<h3 class='font-bold text-sky-600 dark:text-sky-400'>Amsterdam</h3>
-						<Image src={AmsterdamFlag} alt='Flag of Amsterdam' class='w-6 object-contain' />
+						<Image src={AmsterdamFlag} alt='Flag of Amsterdam' class='object-contain w-6' />
 					</div>
 
 					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>Born and raised!</p>
@@ -56,9 +59,9 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 
 			<div
 				id='info-travel'
-				class='pointer-events-none absolute -right-36 bottom-36 w-64 opacity-0 transition-opacity duration-300'
+				class='absolute w-64 transition-opacity duration-300 opacity-0 pointer-events-none -right-36 bottom-36'
 			>
-				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
+				<div class='p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
 					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Travel Enthusiast</h3>
 					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
 						Exploring new places and experiencing different cultures.
@@ -68,9 +71,9 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 
 			<div
 				id='info-dev'
-				class='duration-30 w-82 pointer-events-none absolute -bottom-10 left-1/2 z-50 opacity-0 transition-opacity'
+				class='absolute z-50 transition-opacity opacity-0 pointer-events-none duration-30 w-82 -bottom-10 left-1/2'
 			>
-				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
+				<div class='p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
 					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Tech Enthusiast</h3>
 					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
 						Passionate about creating intuitive and efficient Data/AI/Web applications, using all
@@ -85,7 +88,7 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 				width={280}
 				height={280}
 				iconName='house'
-				class='absolute right-32 top-0 rotate-3 md:rotate-3 hover:md:rotate-0'
+				class='absolute top-0 right-32 rotate-3 md:rotate-3 hover:md:rotate-0'
 				infoId='info-amsterdam'
 			/>
 
@@ -94,7 +97,7 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 				alt='Travel; Camel in Jordan'
 				width={220}
 				iconName='airplane'
-				class='absolute -right-20 top-0 -rotate-3 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6'
+				class='absolute top-0 -right-20 -rotate-3 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6'
 				infoId='info-travel'
 			/>
 			<Polaroid
@@ -103,21 +106,21 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 				width={240}
 				iconName='person'
 				imageClass='bg-[url(/images/binary-background.webp)]'
-				class='absolute -left-8 bottom-0 rotate-3 hover:-bottom-2 hover:rotate-0 md:rotate-6'
+				class='absolute -bottom-12 -left-6 rotate-3 hover:-bottom-10 hover:rotate-0 md:rotate-6'
 				infoId='info-dev'
 			/>
 
 			{/* Decorative elements */}
 			<div
-				class='absolute -right-40 top-0 h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80'
+				class='absolute top-0 w-20 h-20 border-4 border-dashed rounded-full -right-40 animate-pulse border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 			<div
-				class='absolute -left-16 bottom-12 h-14 w-14 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80'
+				class='absolute border-4 rounded-lg -left-16 bottom-12 h-14 w-14 animate-pulse border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 			<div
-				class='absolute bottom-0 right-20 h-16 w-16 animate-pulse rounded-full border-4 border-sky-200/80 dark:border-sky-800/80'
+				class='absolute bottom-0 w-16 h-16 border-4 rounded-full right-20 animate-pulse border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 		</div>
