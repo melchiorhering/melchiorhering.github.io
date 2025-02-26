@@ -37,38 +37,75 @@ import Container from '@/components/Container.astro'
 
 		{/* Desktop-only image section */}
 		<div class='relative hidden h-[600px] w-[600px] lg:block'>
-			<Polaroid
-				position='right'
-				image={travelPicture}
-				alt='Travel; Camel in Jordan'
-				width={220}
-				iconName='airplane'
-				class='absolute -right-14 top-0 -rotate-6'
-			/>
+			{/* Info Panels - Fixed positions */}
+			<div
+				id='info-amsterdam'
+				class='pointer-events-none absolute -left-1/4 -top-9 w-64 opacity-0 transition-opacity duration-300'
+			>
+				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
+					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Amsterdam</h3>
+					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
+						Born and raised in this beautiful city. Love its canals, architecture, and vibrant
+						culture.
+					</p>
+				</div>
+			</div>
+
+			<div
+				id='info-travel'
+				class='pointer-events-none absolute right-0 top-1/4 w-64 opacity-0 transition-opacity duration-300'
+			>
+				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
+					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Travel Enthusiast</h3>
+					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
+						Exploring new places, capturing moments, and experiencing different cultures.
+					</p>
+				</div>
+			</div>
+
+			<div
+				id='info-dev'
+				class='duration-30 pointer-events-none absolute bottom-0 left-1/2 z-50 w-64 opacity-0 transition-opacity'
+			>
+				<div class='rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800'>
+					<h3 class='font-bold text-sky-600 dark:text-sky-400'>Full Stack Developer</h3>
+					<p class='mt-2 text-sm text-gray-600 dark:text-gray-300'>
+						Passionate about creating intuitive and efficient web applications.
+					</p>
+				</div>
+			</div>
 
 			<Polaroid
-				position='center'
 				image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
 				alt='Amsterdam Westerkerk'
 				width={280}
 				height={280}
 				iconName='house'
-				class='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
+				class='absolute right-32 top-0 rotate-3 md:rotate-3 hover:md:rotate-0'
+				infoId='info-amsterdam'
 			/>
 
 			<Polaroid
-				position='left'
+				image={travelPicture}
+				alt='Travel; Camel in Jordan'
+				width={220}
+				iconName='airplane'
+				class='absolute -right-16 top-0 -rotate-3 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6'
+				infoId='info-travel'
+			/>
+			<Polaroid
 				image={profilePictureTransparent}
 				alt='Disney Like Profile'
 				width={240}
 				iconName='person'
 				imageClass='bg-[url(/images/binary-background.webp)]'
-				class='absolute -left-8 bottom-0 rotate-6'
+				class='absolute -left-8 bottom-0 rotate-3 hover:rotate-0 md:rotate-6'
+				infoId='info-dev'
 			/>
 
 			{/* Decorative elements */}
 			<div
-				class='absolute -right-20 top-0 h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80'
+				class='absolute -right-40 top-0 h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 			<div
@@ -88,31 +125,31 @@ import Container from '@/components/Container.astro'
 			<div class='flex flex-col items-center gap-16 py-16'>
 				<div class='w-[280px]'>
 					<Polaroid
-						position='center'
 						image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
 						alt='Amsterdam Westerkerk'
 						width={280}
 						height={280}
 						iconName='house'
+						class='rotate-3 hover:rotate-0'
 					/>
 				</div>
 				<div class='w-[280px]'>
 					<Polaroid
-						position='right'
 						image={travelPicture}
 						alt='Travel; Camel in Jordan'
 						width={280}
 						iconName='airplane'
+						class='rotate-3 hover:rotate-0'
 					/>
 				</div>
 				<div class='w-[280px]'>
 					<Polaroid
-						position='left'
 						image={profilePictureTransparent}
 						alt='Disney Like Profile'
 						width={280}
 						iconName='person'
 						imageClass='bg-[url(/images/binary-background.webp)]'
+						class='rotate-3 hover:rotate-0'
 					/>
 				</div>
 			</div>

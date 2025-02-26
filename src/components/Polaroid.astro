@@ -3,47 +3,35 @@ import { Icon } from 'astro-icon/components'
 import type { ImageMetadata } from 'astro'
 
 interface Props {
-	position: 'center' | 'right' | 'left'
 	image: ImageMetadata | string
 	alt: string
 	width: number
 	height?: number
 	iconName: string
 	class?: string
-	imageClass?: string // New prop for image-specific classes
+	imageClass?: string
+	infoId?: string // Add this to link hover state with info panel
 }
 
 const {
-	position,
 	image,
 	alt,
 	width,
 	height,
 	iconName,
 	class: className,
-	imageClass = '' // Default to empty string
+	imageClass = '',
+	infoId
 } = Astro.props
-
-const positions = {
-	center: 'rotate-3 md:rotate-0',
-	right: 'top-0 -right-8 -rotate-3 md:-rotate-6',
-	left: 'bottom-0 -left-8 rotate-3 md:rotate-6'
-}
 ---
 
 <div
-	class:list={[
-		'mx-auto transition-all duration-500 ease-out', // Added mx-auto for mobile centering
-		'lg:polaroid lg:absolute lg:z-10 lg:mx-0', // Remove auto margin on desktop
-		positions[position],
-		className
-	]}
-	style='z-index: 10;'
-	data-position={position}
+	class:list={['mx-auto transition-all duration-500 ease-out', 'lg:polaroid', className]}
+	data-info-trigger={infoId}
 >
 	<div class='group relative overflow-visible'>
 		<div
-			class='transform rounded bg-white p-2 pb-6 shadow-lg transition-all duration-500 ease-out hover:-translate-y-1 hover:rotate-0 hover:scale-105 hover:shadow-xl group-hover:shadow-sky-500/20 dark:bg-gray-100 md:p-3 md:pb-8'
+			class='transform rounded bg-white p-2 pb-6 shadow-lg transition-all duration-500 ease-out hover:-translate-y-6 hover:rotate-0 hover:scale-105 hover:shadow-xl group-hover:shadow-sky-500/20 dark:bg-gray-100 md:p-3 md:pb-8'
 		>
 			<img
 				src={typeof image === 'string' ? image : image.src}
@@ -54,7 +42,7 @@ const positions = {
 				loading='lazy'
 			/>
 			<div
-				class='absolute -bottom-3 -right-3 z-10 transform rounded-full bg-white p-2.5 shadow-lg transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110 dark:bg-gray-800'
+				class='absolute -bottom-3 -right-3 transform rounded-full bg-white p-2.5 shadow-lg transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110 dark:bg-gray-800'
 			>
 				<Icon
 					name={iconName}
@@ -64,3 +52,25 @@ const positions = {
 		</div>
 	</div>
 </div>
+
+<script>
+	// Add hover handler to show/hide info panels
+	const triggers = document.querySelectorAll('[data-info-trigger]')
+
+	triggers.forEach((trigger) => {
+		const infoId = trigger.getAttribute('data-info-trigger')
+		if (!infoId) return
+
+		const infoPanel = document.getElementById(infoId)
+		if (!infoPanel) return
+
+		trigger.addEventListener('mouseenter', () => {
+			// Hide all info panels first
+			document.querySelectorAll('[id^="info-"]').forEach((panel) => {
+				panel.classList.add('opacity-0', 'pointer-events-none')
+			})
+			// Show this info panel
+			infoPanel.classList.remove('opacity-0', 'pointer-events-none')
+		})
+	})
+</script>
