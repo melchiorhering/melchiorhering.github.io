@@ -104,32 +104,39 @@ export const heroData = {
 		{
 			text: 'Hi. Welcome!',
 			class:
-				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-400 dark:from-white dark:to-sky-400',
 			delay: 70
 		},
 		{
-			text: 'Data Scientist',
+			text: 'I do some Data Science',
 			class:
-				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+				'text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-sky-400 dark:from-sky-400 dark:to-sky-600',
 			delay: 70
 		},
 		{
-			text: 'Data Engineer',
+			text: 'Some Data Engineering',
 			class:
-				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
+				'text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-sky-700 dark:from-sky-300 dark:to-sky-500',
 			delay: 70
 		},
 		{
-			text: 'Software Engineer',
+			text: 'Lots of Software Engineering',
+			class:
+				'text-transparent bg-clip-text bg-gradient-to-r from-sky-700 to-sky-500 dark:from-sky-500 dark:to-sky-300',
+			delay: 70,
+			pauseFor: 1500
+		},
+		{
+			text: 'I build things!',
 			class:
 				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 dark:from-white dark:to-sky-600',
 			delay: 70,
 			pauseFor: 1500
 		},
 		{
-			text: "Hi, I'm Stijn Hering",
+			text: "Hi, I'm Stijn.",
 			class:
-				'text-transparent bg-clip-text bg-gradient-to-r from-black to-sky-600 font-bold dark:from-white dark:to-sky-600',
+				'text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-sky-500 to-black dark:from-sky-400 dark:via-sky-500 dark:to-white font-bold',
 			delay: 100,
 			final: true
 		}
@@ -146,8 +153,24 @@ export const toolsData = [
 		iconName: 'logos:typescript-icon'
 	},
 	{
+		name: 'Rust',
+		iconName: 'logos:rust'
+	},
+	{
+		name: 'Streamlit',
+		iconName: 'logos:streamlit'
+	},
+	{
+		name: 'Astro',
+		iconName: 'logos:astro-icon'
+	},
+	{
 		name: 'React',
 		iconName: 'logos:react'
+	},
+	{
+		name: 'TailwindCSS',
+		iconName: 'logos:tailwindcss-icon'
 	},
 	{
 		name: 'Docker',
@@ -156,6 +179,43 @@ export const toolsData = [
 	{
 		name: 'AWS',
 		iconName: 'logos:aws'
+	},
+	{
+		name: 'Azure',
+		iconName: 'logos:azure-icon'
+	},
+	{
+		name: 'Hono',
+		iconName: 'logos:hono'
+	},
+	{
+		name: 'Deno',
+		iconName: 'logos:deno'
+	},
+	{
+		name: 'Bun',
+		iconName: 'logos:bun'
+	},
+	{
+		name: 'Github Actions',
+		iconName: 'logos:github-actions'
+	},
+	{
+		name: 'Figma',
+		iconName: 'logos:figma'
+	},
+	{
+		name: 'HuggingFace',
+		iconName: 'logos:hugging-face-icon'
+	},
+
+	{
+		name: 'SurrealDB',
+		iconName: 'logos:surrealdb-icon'
+	},
+	{
+		name: 'Milvus',
+		iconName: 'logos:milvus-icon'
 	},
 	{
 		name: 'PostgreSQL',

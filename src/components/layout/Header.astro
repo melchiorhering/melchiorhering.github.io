@@ -4,7 +4,7 @@ const resume = '/resume-stijn-hering.pdf'
 const webpageLogo = '/favicon/favicon.svg'
 ---
 
-<header class='md:md-4 flex w-full flex-wrap text-sm sm:flex-nowrap sm:justify-start'>
+<header class='flex w-full max-w-[90rem] flex-wrap py-4 text-sm sm:flex-nowrap sm:justify-start'>
 	<nav
 		class='relative mx-auto my-auto flex w-full items-center justify-between sm:flex sm:items-center'
 		aria-label='global'
@@ -17,8 +17,9 @@ const webpageLogo = '/favicon/favicon.svg'
 			<img
 				src={webpageLogo}
 				alt='Webpage logo'
-				class='items-align flex h-14 w-auto justify-center md:h-32'
+				class='items-align flex h-14 w-auto justify-center md:h-28'
 			/>
+			<span class='flex font-satoshi text-xl md:text-3xl'> Information </span>
 
 			<div id='menu-links' class='flex flex-row items-center justify-center gap-x-4 sm:gap-x-4'>
 				{

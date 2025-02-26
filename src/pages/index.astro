@@ -17,15 +17,13 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<Container>
-		<Hero />
-	</Container>
-
+	<Hero />
 	<ToolsSlideshow tools={toolsData} />
-
-	<Container class='flex flex-col gap-y-8'>
-		<AboutSection />
-		<BlogSection posts={blogPosts} />
-		<ExperienceSection />
+	<Container class='py-12'>
+		<div class='flex flex-col gap-y-12'>
+			<AboutSection />
+			<BlogSection posts={blogPosts} />
+			<ExperienceSection />
+		</div>
 	</Container>
 </PageLayout>

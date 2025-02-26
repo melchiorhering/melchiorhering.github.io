@@ -5,12 +5,15 @@ import TypeWriteComponent from '@/components/react/TypeWriteComponent'
 import Polaroid from '@/components/Polaroid.astro'
 import { heroData } from '@/data/data'
 import { Icon } from 'astro-icon/components'
+import Container from '@/components/Container.astro'
 ---
 
-<div class='container mx-auto min-h-screen py-8'>
-	<div class='items-center lg:flex'>
-		<div class='w-full lg:w-1/2'>
-			<div class='space-y-4 lg:max-w-lg'>
+{/* Hero Split into Two Sections */}
+<div class='flex flex-col'>
+	{/* Text Section - Full height on mobile */}
+	<Container class='flex items-center justify-center lg:min-h-fit'>
+		<div class='my-36 flex w-full items-center justify-center md:pt-0 lg:w-1/2 lg:justify-start'>
+			<div class='flex w-full max-w-lg flex-col gap-2 px-4 lg:gap-4 lg:px-0 lg:text-left'>
 				<h1 class={heroData.heading.class}>
 					<TypeWriteComponent client:only='react' texts={heroData.texts} />
 				</h1>
@@ -19,9 +22,9 @@ import { Icon } from 'astro-icon/components'
 					{heroData.description.text}
 				</p>
 
-				<div class='flex flex-wrap md:space-x-2'>
+				<div class='flex flex-col gap-x-2 sm:flex-row sm:justify-center lg:justify-start'>
 					{
-						heroData.buttons.map((button, _) => (
+						heroData.buttons.map((button) => (
 							<a href={button.href} class={button.class}>
 								{button.iconName && <Icon name={button.iconName} class='h-5 w-5' />}
 								{button.text}
@@ -32,61 +35,88 @@ import { Icon } from 'astro-icon/components'
 			</div>
 		</div>
 
-		<div class='relative mt-6 flex w-full items-center justify-center lg:mt-0 lg:w-1/2'>
-			<!-- Decorative background elements -->
-			<div
-				class='absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-sky-100/30 to-transparent blur-3xl dark:from-sky-900/20'
-			>
-			</div>
+		{/* Desktop-only image section */}
+		<div class='relative hidden h-[600px] w-[600px] lg:block'>
+			<Polaroid
+				position='right'
+				image={travelPicture}
+				alt='Travel; Camel in Jordan'
+				width={220}
+				iconName='airplane'
+				class='absolute -right-14 top-0 -rotate-6'
+			/>
 
-			<!-- Image group container -->
-			<div
-				class='relative h-[400px] w-full md:h-[500px] lg:h-[600px] lg:w-[600px]'
-				id='image-gallery'
-			>
-				<Polaroid
-					position='right'
-					image={travelPicture}
-					alt='Travel; Camel in Jordan'
-					width={220}
-					iconName='airplane'
-					class='!-right-4 md:!-right-8 lg:!-right-14'
-				/>
+			<Polaroid
+				position='center'
+				image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
+				alt='Amsterdam Westerkerk'
+				width={280}
+				height={280}
+				iconName='house'
+				class='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
+			/>
 
-				<Polaroid
-					position='center'
-					image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
-					alt='Amsterdam Westerkerk'
-					width={280}
-					height={280}
-					iconName='house'
-					class='scale-75 md:scale-90 lg:scale-100'
-				/>
+			<Polaroid
+				position='left'
+				image={profilePictureTransparent}
+				alt='Disney Like Profile'
+				width={240}
+				iconName='person'
+				imageClass='bg-[url(/images/binary-background.webp)]'
+				class='absolute -left-8 bottom-0 rotate-6'
+			/>
 
-				<Polaroid
-					position='left'
-					image={profilePictureTransparent}
-					alt='Disney Like Profile'
-					width={280}
-					iconName='person'
-					imageClass='bg-[url(/images/binary-background.webp)]'
-					class='!-left-4 md:!-left-8 lg:!-left-14'
-				/>
-			</div>
-			<!-- Decorative elements -->
+			{/* Decorative elements */}
 			<div
-				class='absolute -right-20 top-0 hidden h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute -right-20 top-0 h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 			<div
-				class='absolute -left-16 bottom-12 hidden h-14 w-14 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute -left-16 bottom-12 h-14 w-14 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 			<div
-				class='absolute bottom-0 right-20 hidden h-16 w-16 animate-pulse rounded-full border-4 border-sky-200/80 dark:border-sky-800/80 lg:block'
+				class='absolute bottom-0 right-20 h-16 w-16 animate-pulse rounded-full border-4 border-sky-200/80 dark:border-sky-800/80'
 			>
 			</div>
 		</div>
+	</Container>
+
+	{/* Mobile-only Polaroid Section */}
+	<div class='lg:hidden'>
+		<Container>
+			<div class='flex flex-col items-center gap-16 py-16'>
+				<div class='w-[280px]'>
+					<Polaroid
+						position='center'
+						image='https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg'
+						alt='Amsterdam Westerkerk'
+						width={280}
+						height={280}
+						iconName='house'
+					/>
+				</div>
+				<div class='w-[280px]'>
+					<Polaroid
+						position='right'
+						image={travelPicture}
+						alt='Travel; Camel in Jordan'
+						width={280}
+						iconName='airplane'
+					/>
+				</div>
+				<div class='w-[280px]'>
+					<Polaroid
+						position='left'
+						image={profilePictureTransparent}
+						alt='Disney Like Profile'
+						width={280}
+						iconName='person'
+						imageClass='bg-[url(/images/binary-background.webp)]'
+					/>
+				</div>
+			</div>
+		</Container>
 	</div>
 </div>
 

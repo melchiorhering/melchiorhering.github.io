@@ -8,7 +8,11 @@ const { class: className, fullWidth = false } = Astro.props
 ---
 
 <div
-	class:list={['w-full', !fullWidth && '\xDFsm:px-10 max-w-[80rem] px-6 py-4 lg:px-10', className]}
+	class:list={[
+		'w-full',
+		!fullWidth && 'container mx-auto max-w-6xl px-6 py-4 sm:px-8 lg:px-10',
+		className
+	]}
 >
 	<slot />
 </div>

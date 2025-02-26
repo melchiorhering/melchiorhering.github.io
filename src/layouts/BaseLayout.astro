@@ -25,20 +25,12 @@ const {
 
 	<body class='flex justify-center bg-background'>
 		<ThemeProvider />
-		<div class='w-screen'>
-			<main
-				class='flex min-h-screen flex-col items-center font-satoshi text-[0.92rem] leading-relaxed'
-			>
+		<div class='w-full'>
+			<main class='flex min-h-screen flex-col font-satoshi text-[0.92rem] leading-relaxed'>
 				<Container>
 					<Header />
 				</Container>
 				<slot />
-				<!-- <div class='w-full max-w-[80rem] px-6 pb-4 pt-8 sm:px-10 lg:px-10'>
-					{/* Main content slot (includes Hero) */}
-				</div> -->
-
-				{/* Full-width content after main content */}
-
 				<Container>
 					<Footer />
 				</Container>

@@ -4,27 +4,32 @@ import type { Tool } from '@/types'
 
 interface Props {
 	tools: Tool[]
+	speed?: number // Duration in seconds, default will be 45
 }
 
-const { tools } = Astro.props
-// Double the array for seamless loop
-const slideItems = [...tools, ...tools]
+const { tools, speed = 45 } = Astro.props
+const slideItems = [...tools, ...tools, ...tools]
 ---
 
-<div
-	class='mt-8 w-full overflow-hidden border-y border-gray-200 bg-gradient-to-r from-gray-50/50 via-white/50 to-gray-50/50 backdrop-blur-sm dark:border-gray-700 dark:from-gray-900/50 dark:via-gray-800/50 dark:to-gray-900/50'
->
-	<div class='animate-marquee flex'>
-		{
-			slideItems.map((tool) => (
-				<div class='flex min-w-fit items-center space-x-3 px-8 py-4'>
-					<Icon name={tool.iconName} class='h-6 w-6' />
-					<span class='whitespace-nowrap font-mono text-sm text-gray-600 dark:text-gray-300'>
-						{tool.name}
-					</span>
-				</div>
-			))
-		}
+<div class='py-20'>
+	<div
+		class='w-full overflow-hidden bg-gradient-to-r from-gray-50/50 via-white/50 to-gray-50/50 backdrop-blur-sm dark:from-gray-900/50 dark:via-gray-800/50 dark:to-gray-900/50'
+	>
+		<div class='flex' style={`animation: marquee ${speed}s linear infinite`}>
+			{
+				slideItems.map((tool, index) => (
+					<div class='flex min-w-fit items-center space-x-3 px-8 py-4'>
+						<Icon
+							name={tool.iconName}
+							class='h-8 w-8 opacity-80 transition-opacity hover:opacity-100'
+						/>
+						<span class='whitespace-nowrap font-mono text-sm text-gray-600 dark:text-gray-300'>
+							{tool.name}
+						</span>
+					</div>
+				))
+			}
+		</div>
 	</div>
 </div>
 
@@ -34,11 +39,12 @@ const slideItems = [...tools, ...tools]
 			transform: translateX(0);
 		}
 		100% {
-			transform: translateX(-50%);
+			transform: translateX(-33.33%);
 		}
 	}
 
-	.animate-marquee {
-		animation: marquee 30s linear infinite;
+	/* Note: Removed .animate-marquee class since we're using inline style */
+	div:hover {
+		animation-play-state: paused;
 	}
 </style>
