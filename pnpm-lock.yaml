@@ -23,6 +23,9 @@ importers:
       '@iconify-json/logos':
         specifier: ^1.2.4
         version: 1.2.4
+      '@iconify/icons-devicon':
+        specifier: ^1.2.17
+        version: 1.2.17
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
@@ -634,6 +637,9 @@ packages:
 
   '@iconify-json/logos@1.2.4':
     resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
+
+  '@iconify/icons-devicon@1.2.17':
+    resolution: {integrity: sha512-F1f8y8PEBGgDKyisCDuJ++8yeNkvQ5mUKxH0Ts1GJDY5Htv39wQXEgXvwIEltkBH/tb0G0oqGNwAz0WrKG3o/A==}
 
   '@iconify/tools@4.1.1':
     resolution: {integrity: sha512-Hybu/HGhv6T8nLQhiG9rKx+ekF7NNpPOEQAy7JRSKht3s3dcFSsPccYzk24Znc9MTxrR6Gak3cg6CPP5dyvS2Q==}
@@ -4104,6 +4110,10 @@ snapshots:
   '@humanwhocodes/retry@0.4.2': {}
 
   '@iconify-json/logos@1.2.4':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify/icons-devicon@1.2.17':
     dependencies:
       '@iconify/types': 2.0.0
 

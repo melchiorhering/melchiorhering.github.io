@@ -197,6 +197,18 @@ export const toolsData = [
 		iconName: 'logos:bun'
 	},
 	{
+		name: 'VSCode',
+		iconName: 'devicon:vscode'
+	},
+	{
+		name: 'Git',
+		iconName: 'logos:git-icon'
+	},
+	{
+		name: 'GitHub Copilot',
+		iconName: 'logos:github-copilot'
+	},
+	{
 		name: 'Github Actions',
 		iconName: 'logos:github-actions'
 	},
