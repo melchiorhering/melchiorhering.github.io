@@ -26,11 +26,15 @@ const {
 	<body class='flex justify-center bg-background'>
 		<ThemeProvider />
 		<div class='w-full'>
-			<main class='flex min-h-screen flex-col font-satoshi text-[0.92rem] leading-relaxed'>
+			<main
+				class='flex min-h-screen flex-col justify-between font-satoshi text-[0.92rem] leading-relaxed'
+			>
 				<Container>
 					<Header />
 				</Container>
+
 				<slot />
+
 				<Container>
 					<Footer />
 				</Container>

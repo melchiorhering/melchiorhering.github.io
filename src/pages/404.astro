@@ -13,13 +13,9 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<div class='px-4 py-10 text-center sm:px-6 lg:px-8'>
-		<h1 class='block text-7xl font-bold sm:text-9xl'>404</h1>
-		<Image
-			src={thisIsFine}
-			alt='This is fine..'
-			class='m-4 flex h-12 w-auto justify-center rounded-md md:h-56'
-		/>
+	<div class='flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-6 lg:px-8'>
+		<h1 class='block font-mono text-7xl font-bold sm:text-9xl'>404</h1>
+		<Image src={thisIsFine} alt='This is fine..' class='m-4 w-auto rounded-md md:h-56' />
 		<p class='mt-3 text-muted-foreground'>Oops, something went wrong.</p>
 		<p class=''>Sorry, we couldn't find your page.</p>
 		<Button
