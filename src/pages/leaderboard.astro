@@ -3,6 +3,7 @@ import PersonLeaderboardLayout from '@/layouts/PersonLeaderboardLayout.astro'
 import HeroPodium from '@/components/leaderboard/HeroPodium.astro'
 import LeaderboardTable from '@/components/leaderboard/LeaderboardTable.astro'
 import GamesGrid from '@/components/leaderboard/GamesGrid.astro'
+import TeamRoster from '@/components/leaderboard/TeamRoster.astro'
 
 const meta = {
 	title: '🏅 Individual Leaderboard',
@@ -14,5 +15,6 @@ const meta = {
 <PersonLeaderboardLayout {meta}>
 	<HeroPodium />
 	<LeaderboardTable />
+	<TeamRoster />
 	<GamesGrid />
 </PersonLeaderboardLayout>
