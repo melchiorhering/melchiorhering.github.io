@@ -12,7 +12,7 @@
 	<script type='module'>
 		const container = document.getElementById('podium')
 		const res = await fetch(
-			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/src/leaderboard/teams.json'
+			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/teams.json'
 		)
 		const teams = await res.json()
 		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
