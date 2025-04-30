@@ -1,0 +1,30 @@
+---
+// src/pages/leaderboard.astro
+import Hero from '../leaderboard/components/Hero.astro'
+import LeaderboardComponent from '../leaderboard/components/Leaderboard'
+---
+
+<html lang='en'>
+	<head>
+		<title>Static Leaderboard</title>
+		<link rel='stylesheet' href='/styles.css' />
+
+		<!-- ✅ Metadata for social previews -->
+		<meta
+			name='description'
+			content='Track scores and celebrate top teams on our real-time leaderboard.'
+		/>
+		<meta property='og:title' content='Leaderboard Showdown' />
+		<meta property='og:description' content='Live team scores and rankings.' />
+		<meta property='og:image' content='https://yourdomain.com/hero-image.jpg' />
+		<meta property='og:url' content='https://yourdomain.com/leaderboard' />
+		<meta name='twitter:card' content='summary_large_image' />
+		<meta name='twitter:title' content='Leaderboard Showdown' />
+		<meta name='twitter:description' content='Live team scores and rankings.' />
+		<meta name='twitter:image' content='https://yourdomain.com/hero-image.jpg' />
+	</head>
+	<body class='text-gray-800 bg-gray-100'>
+		<Hero />
+		<LeaderboardComponent />
+	</body>
+</html>
