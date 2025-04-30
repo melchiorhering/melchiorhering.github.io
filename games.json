@@ -1,0 +1,17 @@
+[
+	{
+		"name": "Flip Cup",
+		"description": "Teams compete to drink and flip their cups in sequence.",
+		"image": "/images/flipcup.png"
+	},
+	{
+		"name": "Beer Pong",
+		"description": "Throw ping pong balls into cups of beer to eliminate them.",
+		"image": "/images/beerpong.png"
+	},
+	{
+		"name": "Drunk Jenga",
+		"description": "Each Jenga block has a rule. Pull one, follow it.",
+		"image": "/images/jenga.png"
+	}
+]

@@ -2,20 +2,22 @@
 // src/leaderboard/components/HeroPodium.astro
 ---
 
-<section class='flex flex-col py-16 text-center text-white bg-gray-800 gap-y-4'>
-	<h1 class='font-mono text-5xl font-bold'>Beer Olympics</h1>
+<section
+	class='flex flex-col items-center justify-center h-screen pt-4 text-center text-white bg-gray-800 gap-y-4'
+>
+	<h1 class='text-5xl font-bold'>Beer Olympics</h1>
 	<img
 		src='https://dnvi9ybfxfxsa.cloudfront.net/daybanner/images/mastertemplates/1587/227_32148863_1.jpg'
 		alt='Hero Image'
 		class='mx-auto mb-4 shadow-xl w-96 rounded-xl'
 	/>
 
-	<h1 class='text-4xl font-bold'>Leaderboard</h1>
-	<p class='mt-2 text-lg'>Track the scores. Rule the board.</p>
+	<h1 class='text-4xl font-bold'>Top 3</h1>
+	<p class='mt-2 text-lg'>Track your team here!</p>
 
-	<div id='podium' class='mt-16'></div>
+	<div id='podium'></div>
 
-	<script type='module'>
+	<script is:inline type='module'>
 		const container = document.getElementById('podium')
 		const res = await fetch(
 			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/teams.json'

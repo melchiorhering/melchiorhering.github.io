@@ -1,0 +1,30 @@
+---
+// src/leaderboard/components/GamesGrid.astro
+---
+
+<section class='max-w-5xl px-4 py-16 mx-auto text-white'>
+	<h2 class='mb-8 text-3xl font-bold text-center'>Beer Olympics Games</h2>
+	<div id='games' class='grid gap-8 sm:grid-cols-2 md:grid-cols-3'></div>
+
+	<script type='module'>
+		const container = document.getElementById('games')
+		const res = await fetch(
+			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/games.json'
+		)
+		const games = await res.json()
+
+		const html = games
+			.map(
+				(game) => `
+			<div class="p-4 transition-all bg-gray-800 border border-gray-700 shadow rounded-xl hover:shadow-xl">
+				<img src="${game.image}" alt="${game.name}" class="object-contain w-full h-32 mb-4 rounded" />
+				<h3 class="mb-2 text-xl font-semibold">${game.name}</h3>
+				<p class="text-sm text-gray-300">${game.description}</p>
+			</div>
+		`
+			)
+			.join('')
+
+		container.innerHTML = html
+	</script>
+</section>
