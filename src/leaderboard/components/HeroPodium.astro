@@ -1,0 +1,40 @@
+---
+// HeroWithClientFetch.astro
+---
+
+<section class='py-16 text-center text-white bg-gray-800'>
+	<img src='/hero-image.jpg' alt='Hero Image' class='w-32 mx-auto mb-4 rounded-full' />
+	<h1 class='text-4xl font-bold'>Leaderboard Showdown</h1>
+	<p class='mt-2 text-lg'>Track the scores. Rule the board.</p>
+
+	<div id='podium' class='mt-12'></div>
+
+	<script type='module'>
+		const container = document.getElementById('podium')
+		const res = await fetch(
+			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/src/leaderboard/teams.json'
+		)
+		const teams = await res.json()
+		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
+		const podiumHTML = `
+			<div class="flex items-end justify-center max-w-xl gap-4 mx-auto">
+				<div class="flex flex-col items-center justify-end w-24 h-40 p-2 text-white bg-gray-700 rounded-lg">
+					<p class="mb-1 text-sm">2nd</p>
+					<div class="text-lg font-semibold">${top[1].team}</div>
+					<div class="text-sm text-gray-300">${top[1].score} pts</div>
+				</div>
+				<div class="flex flex-col items-center justify-end w-24 p-2 text-black bg-yellow-500 rounded-lg shadow-lg h-52">
+					<p class="mb-1 text-sm font-bold">🥇 1st</p>
+					<div class="text-lg font-bold">${top[0].team}</div>
+					<div class="text-sm">${top[0].score} pts</div>
+				</div>
+				<div class="flex flex-col items-center justify-end w-24 h-32 p-2 text-white bg-gray-600 rounded-lg">
+					<p class="mb-1 text-sm">3rd</p>
+					<div class="text-lg font-semibold">${top[2].team}</div>
+					<div class="text-sm text-gray-300">${top[2].score} pts</div>
+				</div>
+			</div>
+		`
+		container.innerHTML = podiumHTML
+	</script>
+</section>

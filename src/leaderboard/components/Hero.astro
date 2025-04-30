@@ -1,62 +1,12 @@
 ---
 // src/leaderboard/components/Hero.astro
-import { useEffect, useState } from 'react'
-
-type Team = {
-	team: string
-	score: number
-	members: string[]
-}
-
-const DATA_URL = 'https://raw.githubusercontent.com/your-username/leaderboard-data/main/teams.json'
-
-const Hero = () => {
-	const [topThree, setTopThree] = useState<Team[]>([])
-
-	useEffect(() => {
-		fetch(DATA_URL)
-			.then((res) => res.json())
-			.then((data: Team[]) => {
-				const sorted = [...data].sort((a, b) => b.score - a.score)
-				setTopThree(sorted.slice(0, 3))
-			})
-	}, [])
-
-	const [first, second, third] = topThree
-
-	return (
-		<section className='bg-gray-800 py-16 text-center text-white'>
-			<img src='/hero-image.jpg' alt='Hero Image' className='mx-auto mb-4 w-32 rounded-full' />
-			<h1 className='text-4xl font-bold'>Leaderboard Showdown</h1>
-			<p className='mt-2 text-lg'>Track the scores. Rule the board.</p>
-
-			{topThree.length === 3 && (
-				<div className='mx-auto mt-12 flex max-w-xl items-end justify-center gap-4'>
-					{/* 2nd place */}
-					<div className='flex h-40 w-24 flex-col items-center justify-end rounded-lg bg-gray-700 p-2'>
-						<p className='mb-1 text-sm text-gray-300'>2nd</p>
-						<div className='text-lg font-semibold'>{second.team}</div>
-						<div className='text-sm text-gray-400'>{second.score} pts</div>
-					</div>
-
-					{/* 1st place */}
-					<div className='flex h-52 w-24 flex-col items-center justify-end rounded-lg bg-yellow-500 p-2 text-black shadow-lg'>
-						<p className='mb-1 text-sm font-bold'>🥇 1st</p>
-						<div className='text-lg font-bold'>{first.team}</div>
-						<div className='text-sm'>{first.score} pts</div>
-					</div>
-
-					{/* 3rd place */}
-					<div className='flex h-32 w-24 flex-col items-center justify-end rounded-lg bg-gray-600 p-2'>
-						<p className='mb-1 text-sm text-gray-300'>3rd</p>
-						<div className='text-lg font-semibold'>{third.team}</div>
-						<div className='text-sm text-gray-400'>{third.score} pts</div>
-					</div>
-				</div>
-			)}
-		</section>
-	)
-}
-
-export default Hero
+import HeroPodium from './HeroPodium.astro'
 ---
+
+<section class='py-16 text-center text-white bg-gray-800'>
+	<!-- <img src='/hero-image.jpg' alt='Hero Image' class='w-32 mx-auto mb-4 rounded-full' />
+	<h1 class='text-4xl font-bold'>Leaderboard Showdown</h1>
+	<p class='mt-2 text-lg'>Track the scores. Rule the board.</p> -->
+
+	<HeroPodium client:load />
+</section>
