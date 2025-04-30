@@ -1,13 +1,19 @@
 ---
-// HeroWithClientFetch.astro
+// src/leaderboard/components/HeroPodium.astro
 ---
 
-<section class='py-16 text-center text-white bg-gray-800'>
-	<img src='/hero-image.jpg' alt='Hero Image' class='w-32 mx-auto mb-4 rounded-full' />
-	<h1 class='text-4xl font-bold'>Leaderboard Showdown</h1>
+<section class='flex flex-col py-16 text-center text-white bg-gray-800 gap-y-4'>
+	<h1 class='font-mono text-5xl font-bold'>Beer Olympics</h1>
+	<img
+		src='https://dnvi9ybfxfxsa.cloudfront.net/daybanner/images/mastertemplates/1587/227_32148863_1.jpg'
+		alt='Hero Image'
+		class='mx-auto mb-4 shadow-xl w-96 rounded-xl'
+	/>
+
+	<h1 class='text-4xl font-bold'>Leaderboard</h1>
 	<p class='mt-2 text-lg'>Track the scores. Rule the board.</p>
 
-	<div id='podium' class='mt-12'></div>
+	<div id='podium' class='mt-16'></div>
 
 	<script type='module'>
 		const container = document.getElementById('podium')
@@ -16,25 +22,54 @@
 		)
 		const teams = await res.json()
 		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
+		const maxScore = top[0].score
+		const maxHeight = 220
+		const minHeight = 50
+
+		const getHeight = (score) => {
+			const scaled = (score / maxScore) * maxHeight
+			return Math.max(scaled, minHeight)
+		}
+
 		const podiumHTML = `
-			<div class="flex items-end justify-center max-w-xl gap-4 mx-auto">
-				<div class="flex flex-col items-center justify-end w-24 h-40 p-2 text-white bg-gray-700 rounded-lg">
-					<p class="mb-1 text-sm">2nd</p>
-					<div class="text-lg font-semibold">${top[1].team}</div>
-					<div class="text-sm text-gray-300">${top[1].score} pts</div>
-				</div>
-				<div class="flex flex-col items-center justify-end w-24 p-2 text-black bg-yellow-500 rounded-lg shadow-lg h-52">
-					<p class="mb-1 text-sm font-bold">🥇 1st</p>
-					<div class="text-lg font-bold">${top[0].team}</div>
-					<div class="text-sm">${top[0].score} pts</div>
-				</div>
-				<div class="flex flex-col items-center justify-end w-24 h-32 p-2 text-white bg-gray-600 rounded-lg">
-					<p class="mb-1 text-sm">3rd</p>
-					<div class="text-lg font-semibold">${top[2].team}</div>
-					<div class="text-sm text-gray-300">${top[2].score} pts</div>
-				</div>
+		<div class="flex items-end justify-center max-w-4xl gap-8 mx-auto">
+
+			<!-- 2nd Place -->
+			<div class="flex flex-col items-center gap-2">
+			<div class="text-sm leading-tight text-center text-white">
+				<div class="font-semibold">${top[1].team}</div>
+				<div>${top[1].score} pts</div>
 			</div>
+			<div class="relative flex items-start justify-center w-24 text-black bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
+				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥈</div>
+			</div>
+			</div>
+
+			<!-- 1st Place -->
+			<div class="flex flex-col items-center gap-2">
+			<div class="text-sm leading-tight text-center text-white">
+				<div class="font-bold">${top[0].team}</div>
+				<div>${top[0].score} pts</div>
+			</div>
+			<div class="relative flex items-start justify-center w-24 text-black bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
+				<div class="absolute inset-x-0 text-4xl font-bold top-2">🥇</div>
+			</div>
+			</div>
+
+			<!-- 3rd Place -->
+			<div class="flex flex-col items-center gap-2">
+			<div class="text-sm leading-tight text-center text-white">
+				<div class="font-semibold">${top[2].team}</div>
+				<div>${top[2].score} pts</div>
+			</div>
+			<div class="relative flex items-start justify-center w-24 text-white rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
+				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥉</div>
+			</div>
+			</div>
+
+		</div>
 		`
+
 		container.innerHTML = podiumHTML
 	</script>
 </section>

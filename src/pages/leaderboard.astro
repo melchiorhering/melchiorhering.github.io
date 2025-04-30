@@ -1,7 +1,6 @@
 ---
 import PersonLeaderboardLayout from '@/layouts/PersonLeaderboardLayout.astro'
 import HeroPodium from '../leaderboard/components/HeroPodium.astro'
-import LeaderboardComponent from '../leaderboard/components/Leaderboard'
 
 const meta = {
 	title: '🏅 Individual Leaderboard',
@@ -11,6 +10,5 @@ const meta = {
 ---
 
 <PersonLeaderboardLayout {meta}>
-	<HeroPodium client:load />
-	<!-- <LeaderboardComponent /> -->
+	<HeroPodium />
 </PersonLeaderboardLayout>
