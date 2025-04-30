@@ -1,12 +1,18 @@
 [
-  {
-    "team": "Team Rocket",
-    "score": 125,
-    "members": ["Jessie", "James"]
-  },
-  {
-    "team": "Team Plasma",
-    "score": 110,
-    "members": ["N", "Ghetsis"]
-  }
+	{
+		"team": "Team Rocket",
+		"score": 125,
+		"members": ["Jessie", "James"]
+	},
+	{
+		"team": "Team Plasma",
+		"score": 110,
+		"members": ["N", "Ghetsis"]
+	},
+
+	{
+		"team": "Team Testttyyy",
+		"score": 90,
+		"members": ["Jacob", "Bente"]
+	}
 ]
