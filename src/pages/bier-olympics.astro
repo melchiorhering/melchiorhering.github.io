@@ -1,5 +1,5 @@
 ---
-import PersonLeaderboardLayout from '@/layouts/PersonLeaderboardLayout.astro'
+import BierOlympicsLayout from '@/layouts/BierOlympicsLayout.astro'
 import HeroPodium from '@/components/leaderboard/HeroPodium.astro'
 import LeaderboardTable from '@/components/leaderboard/LeaderboardTable.astro'
 import GamesGrid from '@/components/leaderboard/GamesGrid.astro'
@@ -16,9 +16,9 @@ const meta = {
 }
 ---
 
-<PersonLeaderboardLayout {meta}>
+<BierOlympicsLayout {meta}>
 	<HeroPodium />
 	<LeaderboardTable />
 	<TeamRoster />
 	<GamesGrid />
-</PersonLeaderboardLayout>
+</BierOlympicsLayout>
