@@ -8,10 +8,22 @@
 
 	<script is:inline type='module'>
 		const container = document.getElementById('games')
-		const res = await fetch(
-			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/src/data/games.json'
-		)
-		const games = await res.json()
+		const CACHE_KEY = 'games-cache-v1'
+		const CACHE_TTL_MS = 60 * 1000
+
+		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+
+		const games = isFresh
+			? cached.data
+			: await fetch(
+					'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/src/data/games.json'
+				)
+					.then((res) => res.json())
+					.then((data) => {
+						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+						return data
+					})
 
 		const html = games
 			.map(

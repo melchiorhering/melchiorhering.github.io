@@ -5,7 +5,7 @@
 <section class='flex flex-col items-center justify-center h-screen pt-4 text-center gap-y-6'>
 	<h1 class='text-5xl font-bold'>Beer Olympics</h1>
 	<img
-		src='https://dnvi9ybfxfxsa.cloudfront.net/daybanner/images/mastertemplates/1587/227_32148863_1.jpg'
+		src='images/beer-olympics.jpg'
 		alt='Hero Image'
 		class='px-4 my-2 rounded-full rounded-4xl w-96'
 	/>
@@ -17,10 +17,23 @@
 
 	<script is:inline type='module'>
 		const container = document.getElementById('podium')
-		const res = await fetch(
-			'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
-		)
-		const teams = await res.json()
+		const CACHE_KEY = 'teams-cache-v1'
+		const CACHE_TTL_MS = 60 * 1000
+
+		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+
+		const teams = isFresh
+			? cached.data
+			: await fetch(
+					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
+				)
+					.then((res) => res.json())
+					.then((data) => {
+						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+						return data
+					})
+
 		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
 		const maxScore = top[0].score
 		const maxHeight = 220
