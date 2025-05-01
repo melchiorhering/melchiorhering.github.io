@@ -4,27 +4,28 @@
 
 <section id='teams' class='max-w-5xl px-4 py-16 mx-auto'>
 	<h2 class='mb-8 text-4xl font-bold text-center drop-shadow-lg'>Team Roosters</h2>
-
 	<div id='team-roster' class='grid gap-8 text-white md:grid-cols-2'></div>
 
 	<script is:inline type='module'>
 		const container = document.getElementById('team-roster')
 		const CACHE_KEY = 'teams-cache-v1'
-		const CACHE_TTL_MS = 60 * 1000
+		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
 
 		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
 		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
 
-		const teams = isFresh
-			? cached.data
-			: await fetch(
-					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
-				)
-					.then((res) => res.json())
-					.then((data) => {
-						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
-						return data
-					})
+		const teams =
+			fetchEnabled && !isFresh
+				? await fetch(
+						'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
+					)
+						.then((res) => res.json())
+						.then((data) => {
+							localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+							return data
+						})
+				: cached?.data || []
 
 		const colors = [
 			'from-pink-500 to-purple-600',
@@ -44,7 +45,7 @@
 			'🧠',
 			'🎉',
 			'👑',
-			'🦄',
+			'🦤',
 			'🌈',
 			'🐉',
 			'🐍',
@@ -55,14 +56,14 @@
 			'🐙',
 			'🧙',
 			'🧛',
-			'🧞',
-			'🦸',
-			'🦹',
-			'🧌',
+			'🧜',
+			'🤸',
+			'🤹',
+			'🧜',
 			'💀',
 			'🐵',
 			'🐸',
-			'🦁',
+			'🐯',
 			'🐼',
 			'🐨',
 			'🐧',
@@ -81,22 +82,22 @@
 			'🍇',
 			'🥥',
 			'🥑',
-			'🫐',
+			'🥐',
 			'🍿'
 		]
 
 		const html = teams
 			.map(
 				(team, i) => `
-				<div class="p-6 text-center transform transition-all bg-gradient-to-br ${colors[i % colors.length]} rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl">
-					<h3 class="mb-3 text-2xl font-extrabold text-white drop-shadow-sm">
+			<div class="p-6 text-center transform transition-all bg-gradient-to-br ${colors[i % colors.length]} rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl">
+				<h3 class="mb-3 text-2xl font-extrabold text-white drop-shadow-sm">
 					${emoji[i % emoji.length]} ${team.team}
-					</h3>
-					<div class="grid grid-cols-2 text-lg font-semibold text-white gap-y-2 place-items-center">
-						${team.members.map((member) => `<div>${member}</div>`).join('')}
-					</div>
+				</h3>
+				<div class="grid grid-cols-2 text-lg font-semibold text-white gap-y-2 place-items-center">
+					${team.members.map((member) => `<div>${member}</div>`).join('')}
 				</div>
-			`
+			</div>
+		`
 			)
 			.join('')
 

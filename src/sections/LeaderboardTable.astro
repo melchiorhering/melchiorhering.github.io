@@ -19,23 +19,24 @@
 
 	<script is:inline type='module'>
 		const body = document.getElementById('leaderboard-body')
-
 		const CACHE_KEY = 'teams-cache-v1'
-		const CACHE_TTL_MS = 60 * 1000 // 1 minute
+		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
 
 		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
 		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
 
-		const teams = isFresh
-			? cached.data
-			: await fetch(
-					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
-				)
-					.then((res) => res.json())
-					.then((data) => {
-						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
-						return data
-					})
+		const teams =
+			fetchEnabled && !isFresh
+				? await fetch(
+						'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
+					)
+						.then((res) => res.json())
+						.then((data) => {
+							localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+							return data
+						})
+				: cached?.data || []
 
 		const sorted = [...teams].sort((a, b) => b.score - a.score)
 		const medals = ['🥇', '🥈', '🥉']

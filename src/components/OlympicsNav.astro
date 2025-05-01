@@ -9,7 +9,7 @@ const links = [
 ]
 ---
 
-<nav class='z-40 w-screen max-w-sm pt-1 mx-auto top-2 sm:max-w-xl md:max-w-2xl lg:max-w-4xl'>
+<nav class='absolute inset-x-0 top-0 z-40 w-full mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-4xl'>
 	<div
 		class='grid grid-cols-3 gap-3 px-4 py-3 rounded shadow-lg bg-gray-900/80 ring-1 ring-white/10 backdrop-blur-md'
 	>
@@ -34,4 +34,117 @@ const links = [
 			})
 		}
 	</div>
+
+	<!-- Admin Toggle -->
+	<div class='px-4 mt-2 text-right'>
+		<button id='admin-toggle' class='text-xs text-gray-400 underline hover:text-white'>
+			Admin
+		</button>
+	</div>
+
+	<!-- Collapsible Admin Panel -->
+	<div
+		id='admin-panel'
+		class='flex-col hidden gap-2 px-4 py-3 mt-1 text-sm bg-gray-800 rounded shadow'
+	>
+		<div class='flex items-center gap-2'>
+			<label for='fetch-name' class='text-white'>Naam:</label>
+			<input
+				id='fetch-name'
+				type='text'
+				class='px-2 py-1 text-black rounded'
+				autocomplete='off'
+				aria-label='Naam'
+			/>
+		</div>
+
+		<!-- Clean horizontal admin options -->
+		<div
+			id='fetch-toggle-wrapper'
+			class='flex flex-row flex-wrap items-center hidden w-full pt-2 mt-2 text-white border-t gap-x-4 gap-y-2 border-white/10'
+		>
+			<label class='flex items-center gap-2'>
+				<input type='checkbox' id='toggle-fetch' />
+				Live updates aan
+			</label>
+
+			<label class='flex items-center gap-2'>
+				TTL:
+				<input
+					id='ttl-input'
+					type='number'
+					min='10'
+					step='10'
+					class='w-20 rounded px-1 py-0.5 text-black'
+				/>
+				<span class='text-xs text-gray-300'>sec</span>
+			</label>
+
+			<button
+				id='manual-fetch'
+				class='px-3 py-1 text-sm text-white bg-blue-600 rounded hover:bg-blue-500'
+			>
+				Fetch Now
+			</button>
+		</div>
+	</div>
+
+	<script is:inline type='module'>
+		const allowedName = 'Stijn'
+		const adminToggle = document.getElementById('admin-toggle')
+		const adminPanel = document.getElementById('admin-panel')
+		const nameInput = document.getElementById('fetch-name')
+		const toggleWrapper = document.getElementById('fetch-toggle-wrapper')
+		const toggleCheckbox = document.getElementById('toggle-fetch')
+		const ttlInput = document.getElementById('ttl-input')
+		const manualFetchBtn = document.getElementById('manual-fetch')
+
+		// Show/hide admin panel
+		adminToggle.addEventListener('click', () => {
+			adminPanel.classList.toggle('hidden')
+		})
+
+		// Init toggle state
+		if (localStorage.getItem('enable-fetch') === 'true') {
+			toggleCheckbox.checked = true
+		}
+
+		// Init TTL
+		const savedTTL = localStorage.getItem('fetch-ttl')
+		if (savedTTL) {
+			ttlInput.value = parseInt(savedTTL) / 1000
+		}
+
+		nameInput.addEventListener('input', () => {
+			if (nameInput.value.trim().toLowerCase() === allowedName.toLowerCase()) {
+				toggleWrapper.classList.remove('hidden')
+			} else {
+				toggleWrapper.classList.add('hidden')
+				localStorage.removeItem('enable-fetch')
+			}
+		})
+
+		toggleCheckbox.addEventListener('change', (e) => {
+			if (e.target.checked) {
+				localStorage.setItem('enable-fetch', 'true')
+			} else {
+				localStorage.removeItem('enable-fetch')
+			}
+		})
+
+		ttlInput.addEventListener('change', () => {
+			const ttl = parseInt(ttlInput.value || '60') * 1000
+			localStorage.setItem('fetch-ttl', ttl.toString())
+		})
+
+		manualFetchBtn.addEventListener('click', async () => {
+			const url =
+				'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
+			const res = await fetch(url)
+			const data = await res.json()
+			localStorage.setItem('teams-cache-v1', JSON.stringify({ data, timestamp: Date.now() }))
+			alert('Data manually fetched and cached!')
+			location.reload()
+		})
+	</script>
 </nav>

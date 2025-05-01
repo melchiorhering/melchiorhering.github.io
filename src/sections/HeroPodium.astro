@@ -4,9 +4,9 @@
 
 <section
 	id='hero-podium'
-	class='flex flex-col items-center justify-center h-screen pt-12 text-center gap-y-4'
+	class='flex flex-col items-center justify-center h-screen pt-12 text-center gap-y-6'
 >
-	<h1 class='text-4xl font-bold uppercase'>Bier Olympics</h1>
+	<h1 class='pt-4 text-4xl font-bold uppercase'>Bier Olympics</h1>
 	<img
 		src='/images/beer-olympics.jpg'
 		alt='Hero Image'
@@ -14,21 +14,19 @@
 	/>
 
 	<h1 class='text-4xl font-bold'>Top 3</h1>
-	<!-- <p class='text-lg'>Bekijk de scores hier!</p> -->
-
 	<div id='podium' class='px-4 py-2'></div>
-
 	<script is:inline type='module'>
 		const container = document.getElementById('podium')
 		const CACHE_KEY = 'teams-cache-v1'
-		const CACHE_TTL_MS = 60 * 1000
+		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
 
 		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
 		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
+		const shouldFetch = fetchEnabled || !isFresh
 
-		const teams = isFresh
-			? cached.data
-			: await fetch(
+		const teams = shouldFetch
+			? await fetch(
 					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
 				)
 					.then((res) => res.json())
@@ -36,6 +34,7 @@
 						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
 						return data
 					})
+			: cached?.data || []
 
 		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
 		const maxScore = top[0].score
@@ -48,43 +47,39 @@
 		}
 
 		const podiumHTML = `
-		<div class="flex items-end justify-center max-w-4xl gap-8 mx-auto">
-
-			<!-- 2nd Place -->
-			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center">
+	<div class="flex items-end justify-center max-w-4xl gap-8 mx-auto">
+		<!-- 2nd Place -->
+		<div class="flex flex-col items-center gap-2">
+			<div class="text-sm text-center">
 				<div class="font-semibold">${top[1].team}</div>
 				<div>${top[1].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
+			<div class="relative w-24 bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
 				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥈</div>
 			</div>
-			</div>
-
-			<!-- 1st Place -->
-			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center ">
+		</div>
+		<!-- 1st Place -->
+		<div class="flex flex-col items-center gap-2">
+			<div class="text-sm text-center">
 				<div class="font-bold">${top[0].team}</div>
 				<div>${top[0].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
+			<div class="relative w-24 bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
 				<div class="absolute inset-x-0 text-4xl font-bold top-2">🥇</div>
 			</div>
-			</div>
-
-			<!-- 3rd Place -->
-			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center">
+		</div>
+		<!-- 3rd Place -->
+		<div class="flex flex-col items-center gap-2">
+			<div class="text-sm text-center">
 				<div class="font-semibold">${top[2].team}</div>
 				<div>${top[2].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
+			<div class="relative w-24 rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
 				<div class="absolute inset-x-0 text-2xl font-bold top-2">🥉</div>
 			</div>
-			</div>
-
 		</div>
-		`
+	</div>
+	`
 
 		container.innerHTML = podiumHTML
 	</script>

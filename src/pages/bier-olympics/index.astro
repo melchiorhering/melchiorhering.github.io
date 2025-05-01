@@ -1,5 +1,5 @@
 ---
-import BierOlympicsLayout from '@/layouts/BierOlympicsLayout.astro'
+import OlympicsLayout from '@/layouts/OlympicsLayout.astro'
 import HeroPodium from '@/sections/HeroPodium.astro'
 import LeaderboardTable from '@/sections/LeaderboardTable.astro'
 import GamesGrid from '@/sections/GamesGrid.astro'
@@ -19,7 +19,7 @@ const meta = {
 }
 ---
 
-<BierOlympicsLayout {meta}>
+<OlympicsLayout {meta}>
 	<OlympicsNav />
 	<HeroPodium />
 	<SpotifyBlock />
@@ -27,4 +27,4 @@ const meta = {
 	<TeamRoster />
 	<GamesGrid />
 	<OlympicsMap />
-</BierOlympicsLayout>
+</OlympicsLayout>
