@@ -29,7 +29,11 @@
 			.map(
 				(game) => `
 			<div class="p-4 transition-all bg-gray-800 border border-gray-700 shadow rounded-xl hover:shadow-xl">
-				<img src="${game.image}" alt="${game.name}" class="object-contain w-full h-32 mb-4 rounded" />
+				<img
+					src="${game.image}"
+					alt="${game.name}"
+					class="object-cover w-full h-48 mb-4 rounded-lg"
+				/>
 				<h3 class="mb-2 text-xl font-semibold">${game.name}</h3>
 				<p class="text-sm text-gray-100">${game.description}</p>
 			</div>
