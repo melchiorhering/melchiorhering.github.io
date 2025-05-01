@@ -1,68 +1,32 @@
 [
-    {
-        "team": "Team 1",
-        "score": 0,
-        "members": [
-            "Professor Elm",
-            "Professor Sycamore",
-            "3",
-            "ben",
-            "Serena"
-        ]
-    },
-    {
-        "team": "Team 2",
-        "score": 0,
-        "members": [
-            "Professor Oak",
-            "Ghetsis",
-            "Professor Birch",
-            "James",
-            "Bente"
-        ]
-    },
-    {
-        "team": "Team 3",
-        "score": 0,
-        "members": [
-            "6",
-            "Jessie",
-            "7",
-            "1",
-            "Misty"
-        ]
-    },
-    {
-        "team": "Team 4",
-        "score": 0,
-        "members": [
-            "Jacob",
-            "Dawn",
-            "Cynthia",
-            "4",
-            "Professor Kukui"
-        ]
-    },
-    {
-        "team": "Team 5",
-        "score": 0,
-        "members": [
-            "N",
-            "2",
-            "5",
-            "Gary",
-            "Ash"
-        ]
-    },
-    {
-        "team": "Team 6",
-        "score": 0,
-        "members": [
-            "8",
-            "May",
-            "Professor Rowan",
-            "9",
-            "Brock"
-        ]
-    }
+	{
+		"team": "Team 1",
+		"score": 0,
+		"members": ["Professor Elm", "Professor Sycamore", "3", "ben", "Serena"]
+	},
+	{
+		"team": "Team 2",
+		"score": 0,
+		"members": ["Professor Oak", "Ghetsis", "Professor Birch", "James", "Bente"]
+	},
+	{
+		"team": "Team 3",
+		"score": 0,
+		"members": ["6", "Jessie", "7", "1", "Misty"]
+	},
+	{
+		"team": "Team 4",
+		"score": 0,
+		"members": ["Jacob", "Dawn", "Cynthia", "4", "Professor Kukui"]
+	},
+	{
+		"team": "Team 5",
+		"score": 0,
+		"members": ["N", "2", "5", "Gary", "Ash"]
+	},
+	{
+		"team": "Team 6",
+		"score": 0,
+		"members": ["8", "May", "Professor Rowan", "9", "Brock"]
+	}
 ]
