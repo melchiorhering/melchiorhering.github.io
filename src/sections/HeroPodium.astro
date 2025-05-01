@@ -6,7 +6,7 @@
 	id='hero-podium'
 	class='flex flex-col items-center justify-center space-y-4 text-center h-dvh'
 >
-	<h1 class='pt-4 text-4xl font-bold uppercase'>Drink Olympics</h1>
+	<h1 class='text-4xl font-bold uppercase'>Drink Olympics</h1>
 	<img
 		src='/images/beer-olympics.jpg'
 		alt='Hero Image'
@@ -14,7 +14,7 @@
 	/>
 
 	<h1 class='text-4xl font-bold'>Top 3</h1>
-	<div id='podium' class='px-4 py-2'></div>
+	<div id='podium'></div>
 	<script is:inline type='module'>
 		const container = document.getElementById('podium')
 		const CACHE_KEY = 'teams-cache-v1'
@@ -47,7 +47,7 @@
 		}
 
 		const podiumHTML = `
-	<div class="flex items-end justify-center max-w-4xl gap-8">
+	<div class="flex items-end justify-center max-w-4xl gap-x-8">
 		<!-- 2nd Place -->
 		<div class="flex flex-col items-center gap-2">
 			<div class="text-sm text-center">
