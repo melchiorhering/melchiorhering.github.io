@@ -11,26 +11,20 @@ interface Props {
 	meta: SiteMeta
 }
 
-const {
-	meta: {
-		description = 'De webpagina voor het feestje van Stijn en Minke. Hier kan je alle information vinden over de Beer Olympics, inclusief de teams, de spellen en de scores.',
-		ogImage = 'leaderboard/images/beer-olympics.jpg',
-		title = '🏅 Bier Olympics'
-	}
-} = Astro.props
+const { meta } = Astro.props
 ---
 
 <html lang={siteConfig.lang}>
 	<head>
-		<BaseHead description={description} ogImage={ogImage} title={title} />
+		<BaseHead meta={meta} />
 		<meta property='og:type' content='website' />
-		<meta property='og:title' content={title} />
-		<meta property='og:description' content={description} />
-		<meta property='og:image' content={ogImage} />
+		<meta property='og:title' content={meta.title} />
+		<meta property='og:description' content={meta.description} />
+		<meta property='og:image' content={meta.ogImage} />
 		<meta name='twitter:card' content='summary_large_image' />
-		<meta name='twitter:title' content={title} />
-		<meta name='twitter:description' content={description} />
-		<meta name='twitter:image' content={ogImage} />
+		<meta name='twitter:title' content={meta.title} />
+		<meta name='twitter:description' content={meta.description} />
+		<meta name='twitter:image' content={meta.ogImage} />
 	</head>
 
 	<body class='flex justify-center'>

@@ -4,16 +4,15 @@
 import '../styles/app.css'
 
 import type { SiteMeta } from '@/types'
-import { siteConfig } from '@/site-config'
 
-type Props = SiteMeta
+type Props = {
+	meta: SiteMeta
+}
 
-const { description, ogImage, title } = Astro.props
-
-const titleSeparator = '•'
-const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`
+const { meta } = Astro.props
+const siteTitle = `${meta.title} | ${meta.siteTitle || 'Default Site Title'}`
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
-const socialImageURL = new URL(ogImage ? ogImage : 'images/favicon.svg', Astro.url).href
+const socialImageURL = new URL(meta.ogImage ? meta.ogImage : 'images/favicon.svg', Astro.url).href
 ---
 
 <meta charset='utf-8' />
@@ -22,8 +21,8 @@ const socialImageURL = new URL(ogImage ? ogImage : 'images/favicon.svg', Astro.u
 <title>{siteTitle}</title>
 
 {/* Icons / Favicon */}
-<link href='favicon/favicon.svg' rel='icon' sizes='any' />
-<link href='favicon/favicon.svg' rel='icon' type='image/svg+xml' />
+<link href='/favicon/favicon.svg' rel='icon' sizes='any' />
+<link href='/favicon/favicon.svg' rel='icon' type='image/svg+xml' />
 <link href='/apple-touch-icon.png' rel='apple-touch-icon' />
 <link href='/manifest.webmanifest' rel='manifest' />
 
@@ -43,31 +42,34 @@ const socialImageURL = new URL(ogImage ? ogImage : 'images/favicon.svg', Astro.u
 />
 <link rel='preload' href='/fonts/ClashDisplay-Variable.ttf' as='font' type='font/ttf' crossorigin /> -->
 
+{/* Dynamic Meta Tags */}
+{Object.entries(meta).map(([key, value]) => <meta name={key} content={value} />)}
+
 {/* Canonical URL */}
 <link rel='canonical' href={canonicalURL} />
 
 {/* Primary Meta Tags */}
 <meta content={siteTitle} name='title' />
-<meta content={description} name='description' />
-<meta content={siteConfig.author} name='author' />
+<meta content={meta.description} name='description' />
+<meta content={meta.author} name='author' />
 
 {/* Theme Colour */}
 <meta content='' name='theme-color' />
 
 {/* Open Graph / Facebook */}
 <meta content='website' property='og:type' />
-<meta content={title} property='og:title' />
-<meta content={description} property='og:description' />
+<meta content={meta.title} property='og:title' />
+<meta content={meta.description} property='og:description' />
 <meta content={canonicalURL} property='og:url' />
-<meta content={siteConfig.title} property='og:site_name' />
-<meta content={siteConfig.ogLocale} property='og:locale' />
+<meta content={meta.siteTitle} property='og:site_name' />
+<meta content={meta.ogLocale} property='og:locale' />
 <meta content={socialImageURL} property='og:image' />
 <meta content='1200' property='og:image:width' />
 <meta content='630' property='og:image:height' />
 <!-- {
 	articleDate && (
 		<>
-			<meta content={siteConfig.author} property='article:author' />
+			<meta content={meta.author} property='article:author' />
 			<meta content={articleDate} property='article:published_time' />
 		</>
 	)
@@ -76,14 +78,14 @@ const socialImageURL = new URL(ogImage ? ogImage : 'images/favicon.svg', Astro.u
 {/* Twitter */}
 <meta content='summary_large_image' property='twitter:card' />
 <meta content={canonicalURL} property='twitter:url' />
-<meta content={title} property='twitter:title' />
-<meta content={description} property='twitter:description' />
+<meta content={meta.title} property='twitter:title' />
+<meta content={meta.description} property='twitter:description' />
 <meta content={socialImageURL} property='twitter:image' />
 
 {/* Sitemap */}
 <link href='/sitemap-index.xml' rel='sitemap' />
 
 {/* RSS auto-discovery */}
-<link href='/rss.xml' rel='alternate' title={siteConfig.title} type='application/rss+xml' />
+<link href='/rss.xml' rel='alternate' title={meta.siteTitle} type='application/rss+xml' />
 
 <meta content={Astro.generator} name='generator' />

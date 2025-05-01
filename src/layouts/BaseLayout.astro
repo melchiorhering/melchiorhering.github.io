@@ -13,14 +13,12 @@ interface Props {
 	meta: SiteMeta
 }
 
-const {
-	meta: { description = siteConfig.description, ogImage, title }
-} = Astro.props
+const { meta } = Astro.props
 ---
 
 <html lang={siteConfig.lang}>
 	<head>
-		<BaseHead description={description} ogImage={ogImage} title={title} />
+		<BaseHead meta={meta} />
 	</head>
 
 	<body class='flex justify-center bg-background'>

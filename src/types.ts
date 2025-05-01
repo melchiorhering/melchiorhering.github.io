@@ -20,7 +20,7 @@ export type SiteMeta = {
 	title: string
 	description?: string
 	ogImage?: string | undefined
-	// articleDate?: string | undefined
+	[key: string]: string | undefined // Allow dynamic meta tags
 }
 
 // Update type definition if necessary
