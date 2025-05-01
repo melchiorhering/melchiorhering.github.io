@@ -1,17 +1,42 @@
 [
 	{
-		"name": "Flip Cup",
-		"description": "Teams compete to drink and flip their cups in sequence.",
-		"image": "/images/flipcup.png"
+		"name": "Panty met Tennisbal",
+		"description": "Alle teamleden dragen om de beurt een panty met een tennisbal op het hoofd. Zonder handen moeten ze bekers omstoten. Na elke beker wisselt de panty van speler. Het team dat als eerste alle bekers omgooit wint. Verliezers drinken alle omgevallen drankjes.",
+		"image": "https://i.ytimg.com/vi/nU5um0jbaRA/maxresdefault.jpg"
 	},
 	{
-		"name": "Beer Pong",
-		"description": "Throw ping pong balls into cups of beer to eliminate them.",
-		"image": "/images/beerpong.png"
+		"name": "Rondjes om de Stok",
+		"description": "Iedere speler draait 10 rondjes om een stok, voert drie opdrachten uit of drinkt, en sprint naar de finish. Het team dat als eerste compleet finisht wint. Het verliezende team doet een extra opdracht of neemt een shot.",
+		"image": "https://cdn.webshopapp.com/shops/195953/files/302860962/stigslag-stok-voor-doundoun-sangban-glad-maat-l-38.jpg"
 	},
 	{
-		"name": "Drunk Jenga",
-		"description": "Each Jenga block has a rule. Pull one, follow it.",
-		"image": "/images/jenga.png"
+		"name": "Kubb Drankvariant",
+		"description": "Alle teamleden gooien om beurten stokken naar bierblikken van de tegenpartij. Elk omgevallen blik moet door de tegenpartij gedronken worden. Het team dat als eerste alle blikken omgooit en daarna de Ice-koning raakt, wint. Verliezers doen een atje.",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlVIuhOG_awk0Z6jSskkHvS2gLi0dEcYGAOw&s"
+	},
+	{
+		"name": "Flessenvoetbal",
+		"description": "Elke speler verdedigt een eigen fles. De tegenpartij probeert de flessen om te schieten. Bij omvallen moet het team snel drinken en de fles terugplaatsen. Na 5 minuten wint het team met de meeste gevulde, rechtopstaande flessen. Verliezers legen hun flessen.",
+		"image": "https://www.moodkids.nl/wp-content/uploads/2014/06/wk-voetbal-spel-kinderen.jpg"
+	},
+	{
+		"name": "Balansbattle",
+		"description": "Iedere speler draagt een dienblad met gevulde bekers door een parcours. Het team dat het snelste finisht met het minst gemorste drank wint. Verliezers moeten de gemorste hoeveelheid schatten en opdrinken.",
+		"image": "https://www.partytent4rent.nl/Company/_Template/Pictures/Products/600x600/Partytent4Rent_Dienblad_1.jpg"
+	},
+	{
+		"name": "Blind Vertrouwen",
+		"description": "Iedere speler doet om de beurt een blinddoek om en wordt door het team verbaal door een hindernisparcours geleid. Aan het eind moet een drankje gedronken worden. Het team dat dit met alle spelers het snelst voltooit wint. Verliezers nemen een groepsshot.",
+		"image": "https://www.groeneteamuitjes.nl/wp-content/uploads/2019/06/DSC03192.jpg"
+	},
+	{
+		"name": "Bekerrace met Lepels",
+		"description": "Alle spelers vervoeren shotjes op een lepel over een parcours. Bij morsen moet opnieuw worden begonnen en een slok worden genomen. Na 5 minuten wint het team dat de meeste drank veilig overbrengt. Verliezers drinken hun gemorste shots alsnog.",
+		"image": "https://www.specialsvoordezorg.nl/files/eierlopen-3.jpg"
+	},
+	{
+		"name": "Sprint Flip Cup",
+		"description": "Alle teamleden sprinten één voor één naar een tafel, flippen een cup, en verplaatsen een shotglas naar de kant van het andere team. Het team dat als eerste al hun cups succesvol heeft geflipt wint. Het verliezende team drinkt alle overgezette shots.",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgStMPV0deej6nQQH2hSX9Cnod_jyMAZ8OPbXqKjkVTPBVoabdj_eZL3NcpLh52dsbuw&usqp=CAU"
 	}
 ]
