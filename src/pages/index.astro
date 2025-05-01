@@ -1,11 +1,11 @@
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
-import Hero from '@/components/Hero.astro'
+import Hero from '@/components/landing/Hero.astro'
 import AboutSection from '@/sections/AboutSection.astro'
 import BlogSection from '@/sections/BlogSection.astro'
 import ExperienceSection from '@/sections/ExperienceSection.astro'
 import { allBlogPosts, toolsData } from '@/data/data'
-import ToolsSlideshow from '@/components/ToolsSlideshow.astro'
+import ToolsSlideshow from '@/components/landing/ToolsSlideshow.astro'
 import Container from '@/components/Container.astro'
 
 const blogPosts = await allBlogPosts

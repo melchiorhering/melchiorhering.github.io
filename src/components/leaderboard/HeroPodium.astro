@@ -2,25 +2,23 @@
 // src/components/leaderboard/HeroPodium.astro
 ---
 
-<section
-	class='flex flex-col items-center justify-center h-screen pt-4 text-center text-white bg-gray-800 gap-y-4'
->
+<section class='flex flex-col items-center justify-center h-screen pt-4 text-center gap-y-6'>
 	<h1 class='text-5xl font-bold'>Beer Olympics</h1>
 	<img
 		src='https://dnvi9ybfxfxsa.cloudfront.net/daybanner/images/mastertemplates/1587/227_32148863_1.jpg'
 		alt='Hero Image'
-		class='mx-auto mb-4 shadow-xl w-96 rounded-xl'
+		class='px-4 my-2 rounded-full rounded-4xl w-96'
 	/>
 
 	<h1 class='text-4xl font-bold'>Top 3</h1>
-	<p class='mt-2 text-lg'>Track your team here!</p>
+	<p class='text-lg'>Track your team here!</p>
 
-	<div id='podium'></div>
+	<div id='podium' class='px-4'></div>
 
 	<script is:inline type='module'>
 		const container = document.getElementById('podium')
 		const res = await fetch(
-			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/teams.json'
+			'https://raw.githubusercontent.com/melchiorhering/melchiorhering.github.io/main/src/data/teams.json'
 		)
 		const teams = await res.json()
 		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
@@ -38,33 +36,33 @@
 
 			<!-- 2nd Place -->
 			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center text-white">
+			<div class="text-sm leading-tight text-center">
 				<div class="font-semibold">${top[1].team}</div>
 				<div>${top[1].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 text-black bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
+			<div class="relative flex items-start justify-center w-24 bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
 				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥈</div>
 			</div>
 			</div>
 
 			<!-- 1st Place -->
 			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center text-white">
+			<div class="text-sm leading-tight text-center ">
 				<div class="font-bold">${top[0].team}</div>
 				<div>${top[0].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 text-black bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
+			<div class="relative flex items-start justify-center w-24 bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
 				<div class="absolute inset-x-0 text-4xl font-bold top-2">🥇</div>
 			</div>
 			</div>
 
 			<!-- 3rd Place -->
 			<div class="flex flex-col items-center gap-2">
-			<div class="text-sm leading-tight text-center text-white">
+			<div class="text-sm leading-tight text-center">
 				<div class="font-semibold">${top[2].team}</div>
 				<div>${top[2].score} pts</div>
 			</div>
-			<div class="relative flex items-start justify-center w-24 text-white rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
+			<div class="relative flex items-start justify-center w-24 rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
 				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥉</div>
 			</div>
 			</div>

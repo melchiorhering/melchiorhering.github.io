@@ -1,0 +1,24 @@
+[
+    {
+        "team": "Team 1",
+        "score": 0,
+        "members": [
+            "Brock",
+            "James",
+            "Jacob",
+            "Misty",
+            "Jessie"
+        ]
+    },
+    {
+        "team": "Team 2",
+        "score": 0,
+        "members": [
+            "Ghetsis",
+            "Ash",
+            "Gary",
+            "Bente",
+            "N"
+        ]
+    }
+]
