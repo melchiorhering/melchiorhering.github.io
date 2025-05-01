@@ -1,9 +1,11 @@
 ---
 import BierOlympicsLayout from '@/layouts/BierOlympicsLayout.astro'
-import HeroPodium from '@/components/leaderboard/HeroPodium.astro'
-import LeaderboardTable from '@/components/leaderboard/LeaderboardTable.astro'
-import GamesGrid from '@/components/leaderboard/GamesGrid.astro'
-import TeamRoster from '@/components/leaderboard/TeamRoster.astro'
+import HeroPodium from '@/sections/HeroPodium.astro'
+import LeaderboardTable from '@/sections/LeaderboardTable.astro'
+import GamesGrid from '@/sections/GamesGrid.astro'
+import TeamRoster from '@/sections/TeamRoster.astro'
+import OlympicsNav from '@/components/OlympicsNav.astro'
+import OlympicsMap from '@/components/OlympicsMap.astro'
 
 const meta = {
 	title: '🏅 Bier Olympics',
@@ -17,8 +19,10 @@ const meta = {
 ---
 
 <BierOlympicsLayout {meta}>
+	<OlympicsNav />
 	<HeroPodium />
 	<LeaderboardTable />
 	<TeamRoster />
 	<GamesGrid />
+	<OlympicsMap />
 </BierOlympicsLayout>

@@ -22,44 +22,16 @@
 	display: none;
 }
 
-/* Keyframes for Smooth Rotation */
-@keyframes rotate {
-	0% {
-		transform: rotate(0deg);
+@layer base {
+	* {
+		@apply border-border;
 	}
-	25% {
-		transform: rotate(90deg);
+	body {
+		@apply bg-background text-foreground;
 	}
-	50% {
-		transform: rotate(180deg);
-	}
-	75% {
-		transform: rotate(270deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
 
-/* Keyframes for Random Wobbles */
-@keyframes wobble {
-	0% {
-		transform: translate(-50%, -50%) rotate(0deg) scale(1);
-	}
-	20% {
-		transform: translate(-48%, -52%) rotate(45deg) scale(1.05);
-	}
-	40% {
-		transform: translate(-52%, -48%) rotate(90deg) scale(1.1);
-	}
-	60% {
-		transform: translate(-49%, -51%) rotate(135deg) scale(1.08);
-	}
-	80% {
-		transform: translate(-51%, -50%) rotate(180deg) scale(1.03);
-	}
-	100% {
-		transform: translate(-50%, -50%) rotate(360deg) scale(1);
+	html {
+		scroll-behavior: smooth;
 	}
 }
 
@@ -151,6 +123,47 @@
 	transition: all 0.5s ease-out;
 }
 
+/* Keyframes for Smooth Rotation */
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(90deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	75% {
+		transform: rotate(270deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Keyframes for Random Wobbles */
+@keyframes wobble {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg) scale(1);
+	}
+	20% {
+		transform: translate(-48%, -52%) rotate(45deg) scale(1.05);
+	}
+	40% {
+		transform: translate(-52%, -48%) rotate(90deg) scale(1.1);
+	}
+	60% {
+		transform: translate(-49%, -51%) rotate(135deg) scale(1.08);
+	}
+	80% {
+		transform: translate(-51%, -50%) rotate(180deg) scale(1.03);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg) scale(1);
+	}
+}
+
 /* Tailwind Base Layer - Color Variables */
 @layer base {
 	:root {
@@ -202,14 +215,5 @@
 		--border: 240 3.7% 15.9%;
 		--input: 240 3.7% 15.9%;
 		--ring: 240 4.9% 83.9%;
-	}
-}
-
-@layer base {
-	* {
-		@apply border-border;
-	}
-	body {
-		@apply bg-background text-foreground;
 	}
 }

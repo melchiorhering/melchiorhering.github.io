@@ -4,7 +4,8 @@ import type { SiteMeta } from '@/types'
 import BaseHead from '@/components/BaseHead.astro'
 
 import ThemeProvider from '@/components/ThemeProvider.astro'
-
+import Footer from '@/components/layout/Footer.astro'
+import Container from '@/components/Container.astro'
 import { siteConfig } from '@/site-config'
 
 interface Props {
@@ -34,18 +35,14 @@ const { meta } = Astro.props
 			<main
 				class='flex min-h-screen flex-col justify-between font-satoshi text-[0.92rem] leading-relaxed'
 			>
-				<!-- <Container>
-					<Header />
-				</Container> -->
-
 				<!-- Main content: Hero + Leaderboard slot -->
 				<div>
 					<slot />
 				</div>
 
-				<!-- <Container>
+				<Container>
 					<Footer />
-				</Container> -->
+				</Container>
 			</main>
 		</div>
 	</body>

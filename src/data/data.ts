@@ -86,15 +86,13 @@ export const heroData = {
 			text: 'Resume',
 			href: '/resume-stijn-hering.pdf',
 			iconName: 'download',
-			class:
-				'flex justify-center items-center space-x-2 w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto font-mono'
+			class: 'bg-blue-600 hover:bg-blue-500 font-mono'
 		},
 		{
 			text: 'Contact',
 			href: '#contact',
 			iconName: 'e-mail',
-			class:
-				'flex justify-center items-center space-x-2 w-full px-5 py-2 mt-6 text-sm tracking-wider text-white uppercase transition-colors duration-300 transform bg-slate-700 rounded-lg hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto font-mono'
+			class: 'bg-slate-700 hover:bg-blue-500 font-mono'
 		}
 	],
 	heading: {

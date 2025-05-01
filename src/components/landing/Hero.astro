@@ -27,10 +27,13 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 					{heroData.description.text}
 				</p>
 
-				<div class='flex flex-col gap-x-2 sm:flex-row sm:justify-center lg:justify-start'>
+				<div class='flex flex-wrap gap-3'>
 					{
 						heroData.buttons.map((button) => (
-							<a href={button.href} class={button.class}>
+							<a
+								href={button.href}
+								class={`inline-flex items-center gap-2 rounded-sm px-8 py-2 text-sm font-semibold text-white shadow transition ${button.class}`}
+							>
 								{button.iconName && <Icon name={button.iconName} class='w-5 h-5' />}
 								{button.text}
 							</a>
