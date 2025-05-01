@@ -1,26 +1,37 @@
 ---
 const links = [
+	{ href: '#spotify-player', label: 'Playlist', icon: '🎶' },
 	{ href: '#klassement', label: 'Klassement', icon: '📊' },
 	{ href: '#teams', label: 'Teams', icon: '👥' },
 	{ href: '#spellen', label: 'Spellen', icon: '🎮' },
-	{ href: '#locatie', label: 'Locatie', icon: '📍' }
+	{ href: '#locatie', label: 'Locatie', icon: '📍' },
+	{ href: 'https://your-ticket-site.com', label: 'Tickets', icon: '🎉' }
 ]
 ---
 
-<nav class='z-40 w-full max-w-sm pt-2 mx-auto top-4 sm:max-w-xl md:max-w-2xl lg:max-w-4xl'>
+<nav class='z-40 w-screen max-w-sm pt-1 mx-auto top-2 sm:max-w-xl md:max-w-2xl lg:max-w-4xl'>
 	<div
-		class='grid grid-cols-2 gap-3 px-4 py-3 shadow-lg rounded-xl bg-gray-900/80 ring-1 ring-white/10 backdrop-blur-md sm:flex sm:flex-wrap sm:justify-center sm:gap-4'
+		class='grid grid-cols-3 gap-3 px-4 py-3 rounded shadow-lg bg-gray-900/80 ring-1 ring-white/10 backdrop-blur-md'
 	>
 		{
-			links.map(({ href, label, icon }) => (
-				<a
-					href={href}
-					class='inline-flex items-center justify-center gap-1 px-4 py-2 text-sm font-medium text-white transition bg-gray-800 rounded-full hover:bg-gray-700'
-				>
-					<span>{icon}</span>
-					<span>{label}</span>
-				</a>
-			))
+			links.map(({ href, label, icon }, i) => {
+				const isLast = i === links.length - 1
+				const isOdd = links.length % 3 !== 0
+				const forceFullWidth = isOdd && isLast
+				return (
+					<a
+						href={href}
+						target={href.startsWith('http') ? '_blank' : '_self'}
+						rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+						class={`inline-flex items-center justify-center gap-1 rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white transition hover:bg-gray-700 ${
+							forceFullWidth ? 'col-span-3 justify-center' : ''
+						}`}
+					>
+						<span>{icon}</span>
+						<span>{label}</span>
+					</a>
+				)
+			})
 		}
 	</div>
 </nav>

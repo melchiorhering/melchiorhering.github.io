@@ -6,6 +6,7 @@ import GamesGrid from '@/sections/GamesGrid.astro'
 import TeamRoster from '@/sections/TeamRoster.astro'
 import OlympicsNav from '@/components/OlympicsNav.astro'
 import OlympicsMap from '@/components/OlympicsMap.astro'
+import SpotifyBlock from '@/sections/SpotifyBlock.astro'
 
 const meta = {
 	title: '🏅 Bier Olympics',
@@ -21,6 +22,7 @@ const meta = {
 <BierOlympicsLayout {meta}>
 	<OlympicsNav />
 	<HeroPodium />
+	<SpotifyBlock />
 	<LeaderboardTable />
 	<TeamRoster />
 	<GamesGrid />
