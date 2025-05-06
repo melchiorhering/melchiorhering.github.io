@@ -38,7 +38,7 @@ export const experience = [
 	{
 		company: 'PostNL',
 		role: 'Data Scientist | Software Engineer',
-		period: '2024 – Today',
+		period: 'Feb 2024 – May 2025',
 		logo: '/src/assets/postnl-logo.png',
 		achievements: [
 			'Led the development of the internal Data Science Portal using AWS CDK and CI/CD pipelines — now hosting 40+ Data Scientists and 30+ production apps.',
@@ -49,7 +49,7 @@ export const experience = [
 	{
 		company: 'PostNL',
 		role: 'Data Scientist | Data Engineer',
-		period: '2022 – 2024',
+		period: 'Jun 2022 – Feb 2024 ',
 		logo: '/src/assets/postnl-logo.png',
 		achievements: [
 			'Delivered insights via dashboards and reports to support data-driven decisions.',
