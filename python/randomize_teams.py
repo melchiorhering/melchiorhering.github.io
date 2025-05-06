@@ -1,15 +1,33 @@
-"""
-This script randomizes a list of names into teams and saves the result to a JSON file.
-
-Usage:
-```python
-uv run --no-project python/randomize_teams.py
-```
-"""
-
 import json
 import random
 import os
+import requests
+
+
+# === CONFIGURATION ===
+API_URL = "https://script.google.com/macros/s/AKfycbwvbNVA3QZVJk1gsQ69ZKdOKHkVtsthxa_4kvVgoULrhVutan6noejy_bPJDH0zjpppqA/exec"  # Replace!
+SET_TEAMS_URL = f"{API_URL}/setTeams"  # optional, if you create a separate endpoint
+GET_NAMES_URL = f"{API_URL}?names=1"  # adjust as needed
+MAX_TEAM_MEMBERS = 5
+MIN_TEAM_MEMBERS = 4
+OUTPUT_JSON = os.path.join(os.getcwd(), "src/data/teams.json")
+
+
+def fetch_names():
+    """Fetch names from your Google Apps Script endpoint"""
+    res = requests.get(GET_NAMES_URL)
+    print("🔍 Raw response:", res.text)  # <-- Add this
+
+    try:
+        names = res.json()
+    except Exception as e:
+        print("❌ Failed to parse JSON:", e)
+        raise
+
+    if not isinstance(names, list):
+        raise Exception("❌ Invalid response")
+    print(f"📋 Fetched {len(names)} names")
+    return names
 
 
 def randomize_teams(names, max_team_members, min_team_members=3):
@@ -18,21 +36,21 @@ def randomize_teams(names, max_team_members, min_team_members=3):
     teams = []
     team_number = 1
 
-    # Create initial teams
     for i in range(0, len(names), max_team_members):
-        team_members = names[i : i + max_team_members]
-        team = {
-            "team": f"Team {team_number}",
-            "score": 0,
-            "members": team_members,
-        }
-        teams.append(team)
+        chunk = names[i : i + max_team_members]
+        teams.append(
+            {
+                "team": f"Team {team_number}",
+                "score": 0,
+                "members": chunk,
+            }
+        )
         team_number += 1
 
-    # Redistribute members from smaller teams to ensure all names are placed
-    while len(teams[-1]["members"]) < min_team_members and len(teams) > 1:
-        last_team = teams.pop()
-        for member in last_team["members"]:
+    # Redistribute small final team
+    while len(teams) > 1 and len(teams[-1]["members"]) < min_team_members:
+        extra = teams.pop()["members"]
+        for member in extra:
             for team in teams:
                 if len(team["members"]) < max_team_members:
                     team["members"].append(member)
@@ -41,57 +59,29 @@ def randomize_teams(names, max_team_members, min_team_members=3):
     return teams
 
 
-def save_teams_to_file(teams, output_path):
-    """Save the teams to a JSON file."""
-    with open(output_path, "w") as file:
-        json.dump(teams, file, indent=4)
-    print(f"Teams have been randomized and saved to {output_path}")
+def save_to_file(teams, path="src/data/teams.json"):
+    with open(path, "w") as f:
+        json.dump(teams, f, indent=4)
+    print(f"💾 Saved teams to {path}")
+
+
+def upload_to_google_apps_script(teams):
+    response = requests.post(API_URL, json=teams)
+    print("🚀 Upload response:", response.text)
+    response.raise_for_status()
 
 
 def main():
-    """Main function to randomize teams and save to a file."""
-    # Input: List of names and max team members
-    names = [
-        "Jessie",
-        "James",
-        "N",
-        "Ghetsis",
-        "Jacob",
-        "Bente",
-        "Ash",
-        "Misty",
-        "Brock",
-        "Gary",
-        "ben",
-        "May",
-        "Dawn",
-        "Serena",
-        "Cynthia",
-        "Professor Oak",
-        "Professor Sycamore",
-        "Professor Kukui",
-        "Professor Elm",
-        "Professor Rowan",
-        "Professor Birch",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-    ]
-    max_team_members = 5
-    min_team_members = 4  # Minimum members per team
+    names = fetch_names()
+    if not names:
+        print("⚠️ No names found in the sheet. Aborting.")
+        return
 
-    # Generate teams
-    teams = randomize_teams(names, max_team_members, min_team_members)
-
-    # Output to JSON file
-    output_file = os.path.join(os.getcwd(), "src/data/teams.json")
-    save_teams_to_file(teams, output_file)
+    teams = randomize_teams(
+        names, max_team_members=MAX_TEAM_MEMBERS, min_team_members=MIN_TEAM_MEMBERS
+    )
+    save_to_file(teams)
+    upload_to_google_apps_script(teams)
 
 
 if __name__ == "__main__":

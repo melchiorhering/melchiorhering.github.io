@@ -83,7 +83,12 @@ function testOnEdit() {
 }
 
 // Return full JSON list of teams
-function doGet() {
+function doGet(e) {
+	// ✅ Support for GET ...?names=1 to return only player names
+	if (e?.parameter?.names === '1') {
+		return getPlayerNames()
+	}
+
 	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
 	const data = sheet.getDataRange().getValues()
 	const headers = data[0]
@@ -91,13 +96,70 @@ function doGet() {
 	const rows = data.slice(1).map((row) => {
 		const obj = {}
 		headers.forEach((h, i) => (obj[h.toLowerCase()] = row[i]))
-		if (obj.members) obj.members = obj.members.split(',').map((name) => name.trim())
+		if (obj.members) {
+			obj.members = obj.members.split(',').map((name) => name.trim())
+		}
 		return obj
 	})
 
-	return ContentService.createTextOutput(JSON.stringify(rows)).setMimeType(
-		ContentService.MimeType.JSON
-	)
+	const json = JSON.stringify(rows)
+	const output = ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON)
+
+	// Optional cache control
+	if (e?.parameter?.nocache === '1') {
+		output.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+	}
+
+	return output
+}
+
+function setTeams(e) {
+	try {
+		if (!e || !e.postData || !e.postData.contents) {
+			return ContentService.createTextOutput('Missing payload').setMimeType(
+				ContentService.MimeType.TEXT
+			)
+		}
+
+		const teams = JSON.parse(e.postData.contents)
+		const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
+
+		// Clear the sheet
+		sheet.clearContents()
+		sheet.clearFormats()
+
+		// Set headers
+		const headers = ['Team', 'Score', 'Members', 'Result']
+		sheet.getRange(1, 1, 1, headers.length).setValues([headers])
+		sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#f1f3f4')
+		sheet.setColumnWidths(1, 4, 140)
+		sheet.setColumnWidth(3, 250)
+		sheet.getRange(1, 1, 1, headers.length).setHorizontalAlignment('center')
+
+		// Add team data
+		teams.forEach((team, i) => {
+			sheet
+				.getRange(i + 2, 1, 1, 4)
+				.setValues([[team.team, team.score || 0, (team.members || []).join(', '), '']])
+		})
+
+		// Add dropdown to the "Result" column (D) for each team row
+		const validationRange = sheet.getRange(2, 4, teams.length) // from row 2, column 4
+		const rule = SpreadsheetApp.newDataValidation()
+			.requireValueInList(['Win', 'Draw'], true)
+			.setAllowInvalid(false)
+			.build()
+		validationRange.setDataValidation(rule)
+
+		return ContentService.createTextOutput('Teams updated with headers and dropdown').setMimeType(
+			ContentService.MimeType.TEXT
+		)
+	} catch (err) {
+		Logger.log('❌ Error in setTeams: ' + err.message)
+		return ContentService.createTextOutput('Error: ' + err.message).setMimeType(
+			ContentService.MimeType.TEXT
+		)
+	}
 }
 
 /**
@@ -115,4 +177,25 @@ function doPost(e) {
 	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
 	sheet.appendRow([new Date(), e.parameter.name])
 	return ContentService.createTextOutput('Success')
+}
+
+function getPlayerNames() {
+	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
+	const data = sheet.getDataRange().getValues()
+
+	if (data.length < 2) {
+		// No names yet
+		return ContentService.createTextOutput(JSON.stringify([])).setMimeType(
+			ContentService.MimeType.JSON
+		)
+	}
+
+	const names = data
+		.slice(1)
+		.map((row) => row[1])
+		.filter(Boolean)
+
+	return ContentService.createTextOutput(JSON.stringify(names)).setMimeType(
+		ContentService.MimeType.JSON
+	)
 }

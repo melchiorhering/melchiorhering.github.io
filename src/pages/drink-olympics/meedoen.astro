@@ -1,0 +1,18 @@
+---
+import OlympicsLayout from '@/layouts/OlympicsLayout.astro'
+import OlympicsJoinForm from '@/components/OlympicsJoinForm.astro'
+
+const meta = {
+	title: '🏅 Drink Olympics',
+	description:
+		'Hét verjaardagsfeest van het jaar staat voor de deur! Minke is net 28 geworden en Stijn doet gezellig mee — ook 28. Welkom bij de Drink Olympics: dé plek waar je alles vindt over de teams, spellen en scores voor deze legendarische dag vol competitie, drank en plezier.',
+	ogImage: '/images/beer-olympics.jpg',
+	'og:type': 'website',
+	'twitter:card': 'summary_large_image'
+	// Add any additional meta tags here
+}
+---
+
+<OlympicsLayout {meta}>
+	<OlympicsJoinForm />
+</OlympicsLayout>

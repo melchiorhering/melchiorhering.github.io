@@ -1,0 +1,83 @@
+<section class='flex items-center justify-center min-h-screen'>
+	<div
+		class='w-full max-w-md px-6 py-12 mx-auto text-center bg-white shadow-xl rounded-xl dark:bg-gray-900'
+	>
+		<!-- Hero Image -->
+		<div
+			class='w-40 mx-auto mb-6 transition rounded-full shadow-2xl ring-4 ring-yellow-500 hover:scale-105 md:w-56'
+		>
+			<a href={`${import.meta.env.BASE_URL}drink-olympics`}>
+				<img
+					src={`${import.meta.env.BASE_URL}images/beer-olympics.jpg`}
+					alt='Drink Olympics Hero'
+					class='object-cover w-full h-auto rounded-full'
+				/>
+			</a>
+		</div>
+
+		<h2 class='mb-2 text-3xl font-extrabold text-gray-800 dark:text-white'>Voeg je naam toe!</h2>
+		<p class='mb-6 text-gray-600 dark:text-gray-300'>
+			Wil je meedoen met de <strong>Drink Olympics</strong>? Laat dan hieronder je naam achter! 🍻
+		</p>
+
+		<form id='nameForm' class='flex flex-col gap-4' aria-label='Naam toevoegen'>
+			<input
+				type='text'
+				name='name'
+				required
+				placeholder='Jouw naam'
+				class='px-4 py-3 text-black bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+				aria-label='Naam invoerveld'
+			/>
+			<button
+				type='submit'
+				class='px-6 py-3 font-semibold text-white transition bg-blue-600 rounded-md hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
+			>
+				Verstuur
+			</button>
+			<p id='responseMsg' class='mt-2 text-sm font-medium'></p>
+		</form>
+
+		<script is:inline type='module'>
+			const form = document.getElementById('nameForm')
+			const msg = document.getElementById('responseMsg')
+			const endpoint =
+				'https://script.google.com/macros/s/AKfycbwvbNVA3QZVJk1gsQ69ZKdOKHkVtsthxa_4kvVgoULrhVutan6noejy_bPJDH0zjpppqA/exec'
+
+			form.addEventListener('submit', async (e) => {
+				e.preventDefault()
+				const button = form.querySelector('button')
+				const formData = new FormData(form)
+				const name = formData.get('name')?.toString().trim()
+
+				if (!name) return
+
+				button.disabled = true
+				msg.textContent = ''
+				msg.className = 'mt-2 text-sm font-medium'
+
+				try {
+					const res = await fetch(endpoint, {
+						method: 'POST',
+						body: new URLSearchParams({ name })
+					})
+					const text = await res.text()
+
+					if (text.includes('Success')) {
+						msg.textContent = '✅ Toegevoegd! 🍻'
+						msg.classList.add('text-green-600')
+						form.reset()
+					} else {
+						msg.textContent = '⚠️ Er ging iets mis bij het toevoegen.'
+						msg.classList.add('text-yellow-500')
+					}
+				} catch (err) {
+					msg.textContent = '❌ Geen verbinding. Probeer opnieuw.'
+					msg.classList.add('text-red-600')
+				} finally {
+					button.disabled = false
+				}
+			})
+		</script>
+	</div>
+</section>
