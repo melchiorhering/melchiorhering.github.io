@@ -1,42 +1,47 @@
 [
 	{
-		"name": "Panty met Tennisbal",
-		"description": "Alle teamleden dragen om de beurt een panty met een tennisbal op het hoofd. Zonder handen moeten ze bekers omstoten. Na elke beker wisselt de panty van speler. Het team dat als eerste alle bekers omgooit wint. Verliezers drinken alle omgevallen drankjes.",
+		"name": "Het Panty en Tennisbal Spel",
+		"description": "Alle teamleden dragen om de beurt een panty met een tennisbal op het hoofd. Zonder handen moeten ze bekers omstoten. Na elke beker wisselt de panty van speler. Het team dat als eerste alle bekers omgooit wint. De verliezers moeten drinken",
 		"image": "https://i.ytimg.com/vi/nU5um0jbaRA/maxresdefault.jpg"
 	},
 	{
 		"name": "Rondjes om de Stok",
-		"description": "Iedere speler draait 10 rondjes om een stok, voert drie opdrachten uit of drinkt, en sprint naar de finish. Het team dat als eerste compleet finisht wint. Het verliezende team doet een extra opdracht of neemt een shot.",
+		"description": "Iedere speler draait 8 rondjes om een stok (voorhoofd op de stok, en draaien maar), loopt het parkour af, heen en terug, tikt het volgende teamlid aan. Het team dat als eerste compleet finisht wint. Het verliezende team moet drinken",
 		"image": "https://cdn.webshopapp.com/shops/195953/files/302860962/stigslag-stok-voor-doundoun-sangban-glad-maat-l-38.jpg"
 	},
 	{
 		"name": "Kubb Drankvariant",
-		"description": "Alle teamleden gooien om beurten stokken naar bierblikken van de tegenpartij. Elk omgevallen blik moet door de tegenpartij gedronken worden. Het team dat als eerste alle blikken omgooit en daarna de Ice-koning raakt, wint. Verliezers doen een atje.",
+		"description": "Twee teams spelen een drankvariant van Kubb! In plaats van houten blokken gebruik je bierblikken of Stelzz, met in het midden een klein flesje Smirnoff Ice als koning. Teams gooien om beurten stokken vanaf hun achterlijn om de blikken van de tegenpartij om te werpen. Omgevallen blikken worden terug in het veld van de tegenstander gezet en moeten eerst worden omgegooid voordat de achterlijn opnieuw mag worden aangevallen. Als alle blikken liggen, mag een team op de Ice-koning mikken. Wie die als eerste omgooit, wint. Het verliezende team drinkt alle overgebleven blikken en kiest onderling wie de Ice moet atten.",
 		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlVIuhOG_awk0Z6jSskkHvS2gLi0dEcYGAOw&s"
 	},
 	{
 		"name": "Flessenvoetbal",
-		"description": "Elke speler verdedigt een eigen fles. De tegenpartij probeert de flessen om te schieten. Bij omvallen moet het team snel drinken en de fles terugplaatsen. Na 5 minuten wint het team met de meeste gevulde, rechtopstaande flessen. Verliezers legen hun flessen.",
-		"image": "https://www.moodkids.nl/wp-content/uploads/2014/06/wk-voetbal-spel-kinderen.jpg"
+		"description": "Iedere speler verdedigt zijn eigen gevulde fles (bijv. bier of Stelzz) zonder dop. Met een bal proberen spelers elkaars flessen om te schieten – alleen voeten zijn toegestaan. Als je fles omvalt, moet je eerst de bal halen, daarna de fles rechtzetten én een slok nemen. Het team met de meeste rechtopstaande, gevulde flessen wint. Verliezers drinken de inhoud van hun omgevallen flessen op.",
+		"image": "https://assets.weethetsnel.nl/instructie/2165/1.jpg"
 	},
 	{
 		"name": "Balansbattle",
-		"description": "Iedere speler draagt een dienblad met gevulde bekers door een parcours. Het team dat het snelste finisht met het minst gemorste drank wint. Verliezers moeten de gemorste hoeveelheid schatten en opdrinken.",
+		"description": "Beide teams vullen en stapelen bekers op een dienblad. Spelers leggen om de beurt een parcours af en geven het dienblad dan door aan de volgende. Het team dat als eerste finisht met het minste gemorste drank wint. Verliezers drinken wat er over is – of juist gemorst is.",
 		"image": "https://www.partytent4rent.nl/Company/_Template/Pictures/Products/600x600/Partytent4Rent_Dienblad_1.jpg"
 	},
 	{
 		"name": "Blind Vertrouwen",
-		"description": "Iedere speler doet om de beurt een blinddoek om en wordt door het team verbaal door een hindernisparcours geleid. Aan het eind moet een drankje gedronken worden. Het team dat dit met alle spelers het snelst voltooit wint. Verliezers nemen een groepsshot.",
+		"description": "Elke speler krijgt om de beurt een blinddoek op en wordt door teamgenoten verbaal door een parcours geleid. Aan het einde wacht een drankje dat de geblinddoekte speler moet vinden en leegdrinken – uiteraard met hulp van zijn team. Daarna wordt hij teruggeleid en is de volgende aan de beurt. Het team dat dit met alle spelers het snelst afrondt wint. De verliezers drinken als straf nog een extra drankje.",
 		"image": "https://www.groeneteamuitjes.nl/wp-content/uploads/2019/06/DSC03192.jpg"
 	},
 	{
-		"name": "Bekerrace met Lepels",
-		"description": "Alle spelers vervoeren shotjes op een lepel over een parcours. Bij morsen moet opnieuw worden begonnen en een slok worden genomen. Na 5 minuten wint het team dat de meeste drank veilig overbrengt. Verliezers drinken hun gemorste shots alsnog.",
+		"name": "Bekerrace met een Twist",
+		"description": "Spelers vervoeren om de beurt een klein dienblad met een gevulde beker – het dienblad moet met de mond worden vastgehouden. Ze volgen een parcours zonder te morsen. Wordt er gemorst, dan moet de speler terug en een slok nemen. Het team dat als eerste het volledige parcours aflegt, wint. Verliezers drinken de gemorste inhoud alsnog.",
 		"image": "https://www.specialsvoordezorg.nl/files/eierlopen-3.jpg"
 	},
 	{
 		"name": "Sprint Flip Cup",
-		"description": "Alle teamleden sprinten één voor één naar een tafel, flippen een cup, en verplaatsen een shotglas naar de kant van het andere team. Het team dat als eerste al hun cups succesvol heeft geflipt wint. Het verliezende team drinkt alle overgezette shots.",
+		"description": "Alle teamleden sprinten één voor één naar een tafel, flippen een cup, en verplaatsen een shotglas naar de kant van het andere team. Het team dat het snels is en het shotglaasje naar de andere kant heeft verplaatst wint. Het verliezende team moet drinken.",
 		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbgStMPV0deej6nQQH2hSX9Cnod_jyMAZ8OPbXqKjkVTPBVoabdj_eZL3NcpLh52dsbuw&usqp=CAU"
+	},
+	{
+		"name": "Zaklopen",
+		"description": "Elk teamlid springt in een zak door een parcours. Op de helft moet er een shotje gedronken worden voordat je terug mag springen. Zodra een speler terug is, is de volgende aan de beurt. Het team dat als eerste met alle leden finisht, wint. De Verliezers moeen (jawel) drinken.",
+		"image": "https://www.spelactief.nl/media/pages/activiteiten/zaklopen/b86be55ed0-1609691261/zaklopen-lopen-jute-zak-spelactief-900x.jpg"
 	}
 ]

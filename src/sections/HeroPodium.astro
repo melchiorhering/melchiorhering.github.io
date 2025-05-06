@@ -4,83 +4,89 @@
 
 <section
 	id='hero-podium'
-	class='flex flex-col items-center justify-center space-y-4 text-center h-dvh'
+	class='flex flex-col items-center justify-center px-4 space-y-8 text-center text-white h-dvh'
 >
-	<h1 class='text-4xl font-bold uppercase'>Drink Olympics</h1>
+	<!-- Title -->
+	<div>
+		<h1
+			class='text-3xl font-extrabold tracking-wide uppercase drop-shadow-md sm:text-6xl md:text-5xl'
+		>
+			Drink Olympics
+		</h1>
+		<p class='mt-2 text-lg text-gray-400 sm:text-xl'>🍻 Drank. Spellen. Glorie. 🍻</p>
+	</div>
+
+	<!-- Hero Image -->
+
 	<img
 		src='/images/beer-olympics.jpg'
-		alt='Hero Image'
-		class='w-64 px-4 my-2 rounded-full rounded-4xl'
+		alt='Drink Olympics Hero'
+		class='mx-auto my-2 rounded-full shadow-2xl w-52 ring-4 ring-yellow-500 md:w-64'
 	/>
 
-	<h1 class='text-4xl font-bold'>Top 3</h1>
-	<div id='podium'></div>
-	<script is:inline type='module'>
-		const container = document.getElementById('podium')
-		const CACHE_KEY = 'teams-cache-v1'
-		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
+	<!-- Event Details -->
+	<div class='max-w-md px-2 space-y-2 text-sm text-gray-200 sm:max-w-xl sm:text-base sm:text-lg'>
+		<p>
+			Welkom bij de <strong>Drink Olympics</strong> — het legendarische verjaardagsfeestje van
+			<strong>Minke</strong> & <strong>Stijn</strong>! Trommel je team op, trek iets comfortabels
+			aan en bereid je voor op een middag vol drank, spellen en gezelligheid. 🍻
+		</p>
 
-		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
-		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
-		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
-		const shouldFetch = fetchEnabled || !isFresh
-
-		const teams = shouldFetch
-			? await fetch(
-					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
-				)
-					.then((res) => res.json())
-					.then((data) => {
-						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
-						return data
-					})
-			: cached?.data || []
-
-		const top = [...teams].sort((a, b) => b.score - a.score).slice(0, 3)
-		const maxScore = top[0].score
-		const maxHeight = 220
-		const minHeight = 50
-
-		const getHeight = (score) => {
-			const scaled = (score / maxScore) * maxHeight
-			return Math.max(scaled, minHeight)
-		}
-
-		const podiumHTML = `
-	<div class="flex items-end justify-center max-w-4xl gap-x-8">
-		<!-- 2nd Place -->
-		<div class="flex flex-col items-center gap-2">
-			<div class="text-sm text-center">
-				<div class="font-semibold">${top[1].team}</div>
-				<div>${top[1].score} pts</div>
+		<div class='grid grid-cols-1 gap-2 sm:grid-cols-2'>
+			<div
+				class='flex flex-col items-center justify-center px-4 py-3 bg-gray-800 shadow rounded-xl sm:px-6 sm:py-4'
+			>
+				<span class='text-xs text-gray-400 uppercase sm:text-sm'>Datum & Tijd</span>
+				<span class='mt-1 text-base font-semibold text-white sm:text-lg'
+					>Zaterdag 10 mei – 14:00</span
+				>
 			</div>
-			<div class="relative w-24 bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1].score)}px;">
-				<div class="absolute inset-x-0 text-3xl font-bold top-2">🥈</div>
+
+			<div
+				class='flex flex-col items-center justify-center px-4 py-3 bg-gray-800 shadow rounded-xl sm:px-6 sm:py-4'
+			>
+				<span class='text-xs text-gray-400 uppercase sm:text-sm'>Locatie</span>
+				<a
+					href='#locatie'
+					class='mt-1 text-base font-semibold text-yellow-400 hover:text-yellow-300 hover:underline sm:text-lg'
+				>
+					Het Westerpark
+				</a>
 			</div>
 		</div>
-		<!-- 1st Place -->
-		<div class="flex flex-col items-center gap-2">
-			<div class="text-sm text-center">
-				<div class="font-bold">${top[0].team}</div>
-				<div>${top[0].score} pts</div>
-			</div>
-			<div class="relative w-24 bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0].score)}px;">
-				<div class="absolute inset-x-0 text-4xl font-bold top-2">🥇</div>
-			</div>
-		</div>
-		<!-- 3rd Place -->
-		<div class="flex flex-col items-center gap-2">
-			<div class="text-sm text-center">
-				<div class="font-semibold">${top[2].team}</div>
-				<div>${top[2].score} pts</div>
-			</div>
-			<div class="relative w-24 rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2].score)}px;">
-				<div class="absolute inset-x-0 text-2xl font-bold top-2">🥉</div>
-			</div>
+
+		<!-- Weather Forecast -->
+		<div
+			id='weather'
+			class='flex items-center justify-center px-4 py-3 text-sm text-gray-300 bg-gray-800 shadow rounded-xl sm:px-6 sm:text-base'
+		>
+			🌤️ Weersverwachting wordt geladen...
 		</div>
 	</div>
-	`
-
-		container.innerHTML = podiumHTML
-	</script>
 </section>
+
+<!-- Weather Script -->
+<script is:inline type='module'>
+	const weatherBox = document.getElementById('weather')
+
+	try {
+		const res = await fetch(
+			'https://api.open-meteo.com/v1/forecast?latitude=52.3872&longitude=4.8723&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=auto&start_date=2025-05-10&end_date=2025-05-10'
+		)
+		const data = await res.json()
+		const day = data?.daily
+
+		if (day) {
+			const max = day.temperature_2m_max[0]
+			const min = day.temperature_2m_min[0]
+			const rain = day.precipitation_sum[0]
+			const summary = rain > 0 ? `${rain} mm regen` : 'droog weer'
+
+			weatherBox.innerHTML = `🌤️ <strong>Weer op 10 mei:</strong>&nbsp;${min}°C – ${max}°C, ${summary} verwacht.`
+		} else {
+			weatherBox.innerHTML = '🌤️ Geen weerdata beschikbaar.'
+		}
+	} catch (error) {
+		weatherBox.innerHTML = '⚠️ Weersinformatie kon niet worden geladen.'
+	}
+</script>
