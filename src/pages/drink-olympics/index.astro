@@ -1,6 +1,6 @@
 ---
 import OlympicsLayout from '@/layouts/OlympicsLayout.astro'
-import HeroPodium from '@/sections/HeroPodium.astro'
+import OlympicHero from '@/sections/OlympicHero.astro'
 import LeaderboardTable from '@/sections/LeaderboardTable.astro'
 import GamesGrid from '@/sections/GamesGrid.astro'
 import TeamRoster from '@/sections/TeamRoster.astro'
@@ -21,7 +21,7 @@ const meta = {
 
 <OlympicsLayout {meta}>
 	<OlympicsNav />
-	<HeroPodium />
+	<OlympicHero />
 	<LeaderboardTable />
 	<SpotifyBlock />
 	<TeamRoster />
