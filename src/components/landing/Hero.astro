@@ -27,12 +27,12 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 					{heroData.description.text}
 				</p>
 
-				<div class='flex flex-wrap gap-3'>
+				<div class='flex w-full gap-3 py-4 md:w-5/6'>
 					{
 						heroData.buttons.map((button) => (
 							<a
 								href={button.href}
-								class={`inline-flex items-center gap-2 rounded-sm px-8 py-2 text-sm font-semibold text-white shadow transition ${button.class}`}
+								class={`inline-flex flex-1 items-center justify-center gap-2 rounded-md px-6 py-2 text-sm font-semibold text-white shadow transition hover:scale-105 hover:shadow-lg ${button.class}`}
 							>
 								{button.iconName && <Icon name={button.iconName} class='w-5 h-5' />}
 								{button.text}

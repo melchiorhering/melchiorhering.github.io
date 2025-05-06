@@ -32,7 +32,7 @@ export const labels: Labels[] = [
 ]
 
 export const about: string =
-	'I’m a versatile Data Scientist with a strong background in Machine Learning, AI, Data Engineering, Web Development, and Cloud Computing. Technology excites me, and I have a knack for quickly picking up and applying new innovations. I balance creativity with practicality, aiming to deliver the best possible solutions. I’m proficient in a range of programming languages and cloud tools, and I enjoy taking on interdisciplinary projects where I can contribute in multiple roles. I’m committed to continuous learning, making sure I stay ahead of the curve in this fast-evolving field.'
+	'I’m a Software Engineer focused on Data Science and Engineering at PostNL, where I develop scalable solutions that drive operational efficiency. I led the creation of our internal Data Science Portal — a platform now used by 40+ data scientists to build and deploy over 30 Streamlit applications in production, supported by AWS CDK infrastructure and CI/CD pipelines. Within the AI Center of Excellence, I initiated and contributed to multiple generative AI projects using both open-source (HuggingFace) and proprietary tools (ChatGPT, Claude, Azure, Bedrock, SageMaker), including PostNLChat and a system that summarizes phone conversations for the sales team. I also specialize in predictive modeling, data integration, and building robust ETL workflows. My expertise spans cloud platforms like AWS and Azure, and full-stack development using frameworks such as Django, FastAPI, Streamlit, React, Vue, and Astro. I integrate data and user experience to create practical, intuitive applications that help stakeholders make better decisions.'
 
 export const experience = [
 	{
@@ -41,9 +41,9 @@ export const experience = [
 		period: '2024 – Today',
 		logo: '/src/assets/postnl-logo.png',
 		achievements: [
-			'Led the development of the PostNL Data Science Platform, establishing the main infrastructure and implementing CI/CD pipelines for efficient deployment.',
-			'Created the initial PostLit package, an internal Python package that seamlessly integrates with Streamlit.',
-			'Initiated and developed the pipeline for a GenAI project aimed at reducing manual administrative workload.'
+			'Led the development of the internal Data Science Portal using AWS CDK and CI/CD pipelines — now hosting 40+ Data Scientists and 30+ production apps.',
+			'Created the initial PostLit Python package for integrating Streamlit dashboards into the PostNL ecosystem.',
+			'Developed PostNLChat, an internal ChatGPT-like interface, and built a GenAI workflow that automates call summaries for the sales team.'
 		]
 	},
 	{
@@ -52,10 +52,10 @@ export const experience = [
 		period: '2022 – 2024',
 		logo: '/src/assets/postnl-logo.png',
 		achievements: [
-			'Specialize in delivering valuable insights to business stakeholders through dashboards and reports.',
-			'Advise on data matters, providing guidance to ensure effective data strategies.',
-			'Integrate new data sources into our data lake and manage ETL processes in AWS.',
-			'Focus on leveraging data to enhance operational efficiency and improve process reliability at PostNL.'
+			'Delivered insights via dashboards and reports to support data-driven decisions.',
+			'Guided stakeholders on data architecture and integration strategy.',
+			'Maintained and extended ETL pipelines and managed data lake ingestion in AWS.',
+			'Improved operational efficiency by embedding data-driven workflows.'
 		]
 	},
 	{
@@ -64,7 +64,7 @@ export const experience = [
 		period: 'Dec 2022 - Nov 2022',
 		logo: '/src/assets/aurai-logo.png',
 		achievements: [
-			'Upon completion of the traineeship, I transitioned into a consultant role, undertaking assignments that apply my data engineering expertise to solve client challenges.'
+			'Completed traineeship and transitioned into consultancy, applying data engineering principles to real-world client problems.'
 		]
 	}
 ]
@@ -78,7 +78,7 @@ export const allBlogPosts: Promise<BlogPost[]> = (async () => {
 
 export const heroData = {
 	description: {
-		text: 'I’m a versatile Data/ML Engineer skilled in Python, TypeScript, ML/AI, the Web, Cloud, Databases and DevOps. With a background in ML, AI, Data Engineering, Web Development, and Cloud, I swiftly adopt new technologies to build scalable, user-friendly solutions that solve real problems.',
+		text: 'I’m a versatile Data/ML Engineer skilled in Python, TypeScript, ML/AI, the Web, Cloud, Databases, and DevOps. I build scalable, user-friendly solutions using modern technologies and a fast-learning mindset.',
 		class: 'text-gray-600 dark:text-white'
 	},
 	buttons: [
@@ -86,13 +86,13 @@ export const heroData = {
 			text: 'Resume',
 			href: '/resume-stijn-hering.pdf',
 			iconName: 'download',
-			class: 'bg-blue-600 hover:bg-blue-500 font-mono'
+			class: 'bg-blue-600 hover:bg-blue-900'
 		},
 		{
 			text: 'Contact',
-			href: '#contact',
+			href: 'https://www.linkedin.com/in/stijn-hering-contact/',
 			iconName: 'e-mail',
-			class: 'bg-slate-700 hover:bg-blue-500 font-mono'
+			class: 'bg-slate-700 hover:bg-slate-400'
 		}
 	],
 	heading: {
