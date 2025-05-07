@@ -1,4 +1,4 @@
 {
-  "enableFetch": true,
+  "enableFetch": false,
   "ttl": 1200000
 }
