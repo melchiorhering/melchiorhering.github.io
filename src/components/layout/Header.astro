@@ -6,20 +6,20 @@ const webpageLogo = '/favicon/favicon.svg'
 
 <header class='flex w-full max-w-[90rem] flex-wrap py-4 text-sm sm:flex-nowrap sm:justify-start'>
 	<nav
-		class='relative mx-auto my-auto flex w-full items-center justify-between sm:flex sm:items-center'
+		class='relative flex items-center justify-between w-full mx-auto my-auto sm:flex sm:items-center'
 		aria-label='global'
 	>
 		<a
-			class='flex items-center justify-center gap-x-2 text-lg font-semibold md:gap-x-4 md:text-2xl md:text-xl'
+			class='flex items-center justify-center text-lg font-semibold gap-x-2 md:gap-x-4 md:text-2xl md:text-xl'
 			href='/'
 			aria-label='Brand'
 		>
 			<img
 				src={webpageLogo}
 				alt='Webpage logo'
-				class='items-align flex h-14 w-auto justify-center md:h-28'
+				class='flex justify-center w-auto items-align h-14 md:h-28'
 			/>
-			<span class='flex font-satoshi text-xl md:text-3xl'> Information </span>
+			<span class='flex text-xl font-satoshi md:text-3xl'> Information </span>
 
 			<div id='menu-links' class='flex flex-row items-center justify-center gap-x-4 sm:gap-x-4'>
 				{
@@ -40,7 +40,7 @@ const webpageLogo = '/favicon/favicon.svg'
 						href={resume}
 						download
 					>
-						<div class='animate-download-bounce duration-300 ease-in-out'>
+						<div class='duration-300 ease-in-out download-bounce'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								width='32'

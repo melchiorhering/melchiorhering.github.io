@@ -65,16 +65,6 @@
 	overflow: hidden;
 }
 
-/* Glitch */
-.glitch {
-	position: relative;
-	text-shadow:
-		0.05em 0 0 rgba(255, 0, 0, 0.75),
-		-0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
-		0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-	animation: glitch 0.5s infinite;
-}
-
 /* Gradient Class */
 .gradient {
 	--size: 800px;
@@ -118,50 +108,38 @@
 	}
 }
 
+@keyframes download-bounce {
+	0%,
+	100% {
+		transform: translateY(-15%);
+	}
+	50% {
+		transform: translateY(0);
+	}
+}
+
+.download-bounce {
+	animation: download-bounce 2s infinite;
+}
+
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+.terminal-cursor {
+	display: inline-block;
+	animation: blink 1s step-start infinite;
+}
+
 /* Viewport Transition Effect */
 * {
 	transition: all 0.5s ease-out;
-}
-
-/* Keyframes for Smooth Rotation */
-@keyframes rotate {
-	0% {
-		transform: rotate(0deg);
-	}
-	25% {
-		transform: rotate(90deg);
-	}
-	50% {
-		transform: rotate(180deg);
-	}
-	75% {
-		transform: rotate(270deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
-/* Keyframes for Random Wobbles */
-@keyframes wobble {
-	0% {
-		transform: translate(-50%, -50%) rotate(0deg) scale(1);
-	}
-	20% {
-		transform: translate(-48%, -52%) rotate(45deg) scale(1.05);
-	}
-	40% {
-		transform: translate(-52%, -48%) rotate(90deg) scale(1.1);
-	}
-	60% {
-		transform: translate(-49%, -51%) rotate(135deg) scale(1.08);
-	}
-	80% {
-		transform: translate(-51%, -50%) rotate(180deg) scale(1.03);
-	}
-	100% {
-		transform: translate(-50%, -50%) rotate(360deg) scale(1);
-	}
 }
 
 /* Tailwind Base Layer - Color Variables */
