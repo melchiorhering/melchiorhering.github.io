@@ -1,16 +1,16 @@
-<section class='flex items-center justify-center min-h-screen'>
+<section class='flex min-h-screen items-center justify-center'>
 	<div
-		class='w-full max-w-md px-6 py-12 mx-auto text-center bg-white shadow-xl rounded-xl dark:bg-gray-900'
+		class='mx-auto w-full max-w-md rounded-xl bg-white px-6 py-12 text-center shadow-xl dark:bg-gray-900'
 	>
 		<!-- Hero Image -->
 		<div
-			class='w-40 mx-auto mb-6 transition rounded-full shadow-2xl ring-4 ring-yellow-500 hover:scale-105 md:w-56'
+			class='mx-auto mb-6 w-40 rounded-full shadow-2xl ring-4 ring-yellow-500 transition hover:scale-105 md:w-56'
 		>
 			<a href={`${import.meta.env.BASE_URL}drink-olympics`}>
 				<img
 					src={`${import.meta.env.BASE_URL}images/beer-olympics.jpg`}
 					alt='Drink Olympics Hero'
-					class='object-cover w-full h-auto rounded-full'
+					class='h-auto w-full rounded-full object-cover'
 				/>
 			</a>
 		</div>
@@ -26,12 +26,12 @@
 				name='name'
 				required
 				placeholder='Jouw naam'
-				class='px-4 py-3 text-black bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
+				class='rounded-md border border-gray-300 bg-gray-100 px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
 				aria-label='Naam invoerveld'
 			/>
 			<button
 				type='submit'
-				class='px-6 py-3 font-semibold text-white transition bg-blue-600 rounded-md hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
+				class='rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
 			>
 				Verstuur
 			</button>
@@ -42,7 +42,7 @@
 			const form = document.getElementById('nameForm')
 			const msg = document.getElementById('responseMsg')
 			const endpoint =
-				'https://script.google.com/macros/s/AKfycbwvbNVA3QZVJk1gsQ69ZKdOKHkVtsthxa_4kvVgoULrhVutan6noejy_bPJDH0zjpppqA/exec'
+				'https://script.google.com/macros/s/AKfycbyNoXrb1X89KTKgPwkIh_nYOGHDZnd_EZIrmwnTT4rbQD10gcX8Wvw2PJhQWCQLzneAVQ/exec'
 
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault()

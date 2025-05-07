@@ -2,8 +2,8 @@
 // src/leaderboard/components/TeamRoster.astro
 ---
 
-<section id='teams' class='max-w-5xl px-4 pt-6 mx-auto'>
-	<h2 class='mb-8 text-4xl font-bold text-center drop-shadow-lg'>Team Rooster</h2>
+<section id='teams' class='mx-auto max-w-5xl px-4 pt-6'>
+	<h2 class='mb-8 text-center text-4xl font-bold drop-shadow-lg'>Team Rooster</h2>
 	<div id='team-roster' class='grid gap-8 text-white md:grid-cols-2'></div>
 
 	<script is:inline type='module'>
@@ -18,7 +18,7 @@
 		const teams =
 			fetchEnabled && !isFresh
 				? await fetch(
-						'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
+						'https://script.google.com/macros/s/AKfycbyNoXrb1X89KTKgPwkIh_nYOGHDZnd_EZIrmwnTT4rbQD10gcX8Wvw2PJhQWCQLzneAVQ/exec'
 					)
 						.then((res) => res.json())
 						.then((data) => {

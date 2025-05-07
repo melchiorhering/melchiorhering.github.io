@@ -2,109 +2,101 @@
 // src/components/leaderboard/LeaderboardTable.astro
 ---
 
-<section id='klassement' class='max-w-4xl px-4 pt-6 mx-auto'>
-	<h2 class='mb-4 text-4xl font-bold text-center'>Klassement</h2>
-
-	<!-- Podium -->
+<section id='klassement' class='mx-auto max-w-4xl px-4 pt-6'>
+	<h2 class='mb-4 text-center text-4xl font-bold'>Klassement</h2>
 	<div id='podium' class='mb-16'></div>
 
-	<!-- Leaderboard Table -->
 	<div class='overflow-x-auto font-semibold text-white'>
-		<table class='w-full bg-gray-900 border-collapse rounded-md shadow-lg'>
+		<table class='w-full border-collapse rounded-md bg-gray-900 shadow-lg'>
 			<thead class='bg-gray-700'>
 				<tr>
-					<th class='p-3 text-sm font-semibold tracking-wider text-left'>#</th>
-					<th class='p-3 text-sm font-semibold tracking-wider text-left'>Team</th>
-					<th class='p-3 text-sm font-semibold tracking-wider text-right'>Score</th>
+					<th class='p-3 text-left text-sm font-semibold tracking-wider'>#</th>
+					<th class='p-3 text-left text-sm font-semibold tracking-wider'>Team</th>
+					<th class='p-3 text-right text-sm font-semibold tracking-wider'>Score</th>
 				</tr>
 			</thead>
-			<tbody id='leaderboard-body' class='text-sm divide-y divide-gray-700'></tbody>
+			<tbody id='leaderboard-body' class='divide-y divide-gray-700 text-sm'></tbody>
 		</table>
 	</div>
 
 	<script is:inline type='module'>
-		const body = document.getElementById('leaderboard-body')
 		const podium = document.getElementById('podium')
+		const body = document.getElementById('leaderboard-body')
+
+		const CONFIG_URL =
+			'https://script.google.com/macros/s/AKfycbyNoXrb1X89KTKgPwkIh_nYOGHDZnd_EZIrmwnTT4rbQD10gcX8Wvw2PJhQWCQLzneAVQ/exec?config=github'
+		const DATA_URL =
+			'https://script.google.com/macros/s/AKfycbyNoXrb1X89KTKgPwkIh_nYOGHDZnd_EZIrmwnTT4rbQD10gcX8Wvw2PJhQWCQLzneAVQ/exec'
 
 		const CACHE_KEY = 'teams-cache-v1'
-		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
 
+		const fetchConfig = async () => {
+			try {
+				const res = await fetch(CONFIG_URL)
+				return await res.json()
+			} catch {
+				return { enableFetch: false, ttl: 60000 }
+			}
+		}
+
+		const fetchTeams = async () => {
+			const res = await fetch(DATA_URL)
+			return await res.json()
+		}
+
+		const config = await fetchConfig()
 		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
-		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
-		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
-		const shouldFetch = fetchEnabled || !isFresh
-
-		const teams = shouldFetch
-			? await fetch(
-					'https://script.google.com/macros/s/AKfycbx5dfoJhQTjR2QdsraYKbt2nkAqsy9702douB08uyliGH8YaVHCOWL1q7eKLXkxf8efkA/exec'
-				)
-					.then((res) => res.json())
-					.then((data) => {
+		const isFresh = cached && Date.now() - cached.timestamp < config.ttl
+		const teams =
+			config.enableFetch || !isFresh
+				? await fetchTeams().then((data) => {
 						localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
 						return data
 					})
-			: cached?.data || []
+				: cached?.data || []
 
 		const sorted = [...teams].sort((a, b) => b.score - a.score)
 		const medals = ['🥇', '🥈', '🥉']
 
-		// Leaderboard Table Rows
-		const rows = sorted
-			.map((team, index) => {
-				const rank = index + 1
-				const medal = medals[index] || rank
-				return `
-					<tr class="hover:bg-gray-800">
-						<td class="p-3">${medal}</td>
-						<td class="p-3 font-medium">${team.team}</td>
-						<td class="p-3 font-semibold text-right">${team.score}</td>
-					</tr>
-				`
-			})
+		body.innerHTML = sorted
+			.map(
+				(team, i) => `
+				<tr class="hover:bg-gray-800">
+					<td class="p-3">${medals[i] || i + 1}</td>
+					<td class="p-3 font-medium">${team.team}</td>
+					<td class="p-3 font-semibold text-right">${team.score}</td>
+				</tr>`
+			)
 			.join('')
-		body.innerHTML = rows
 
-		// Podium
 		const top = sorted.slice(0, 3)
-		const maxScore = top[0].score
-		const maxHeight = 220
-		const minHeight = 80 // was 50
+		const maxScore = top[0]?.score || 1
+		const maxHeight = 220,
+			minHeight = 80
 		const getHeight = (score) => Math.max((score / maxScore) * maxHeight, minHeight)
 
-		const podiumHTML = `
+		podium.innerHTML = `
 		<div class="flex items-end justify-center max-w-4xl text-white gap-x-8">
-			<!-- 2nd Place -->
-			<div class="flex flex-col items-center gap-2">
+			${[1, 0, 2]
+				.map((i, j) => {
+					const team = top[i]
+					const medal = ['🥈', '🥇', '🥉'][j] // ✅ correct medal for position
+					const bg = ['bg-gray-300', 'bg-yellow-500', 'bg-amber-700'][j]
+					const size = ['text-3xl', 'text-4xl', 'text-2xl'][j]
+					const weight = j === 1 ? 'bold' : 'semibold'
+
+					return `
+				<div class="flex flex-col items-center gap-2">
 				<div class="text-sm text-center">
-					<div class="font-semibold">${top[1]?.team || ''}</div>
-					<div>${top[1]?.score || 0} pts</div>
+					<div class="font-${weight}">${team?.team || ''}</div>
+					<div>${team?.score || 0} pts</div>
 				</div>
-				<div class="relative w-24 bg-gray-300 rounded-lg shadow" style="height: ${getHeight(top[1]?.score || 0)}px;">
-					<div class="absolute inset-0 flex items-start justify-center pt-2 text-3xl font-bold">🥈</div>
+				<div class="relative w-24 rounded-lg shadow ${bg}" style="height: ${getHeight(team?.score || 0)}px;">
+					<div class="absolute inset-0 flex items-start justify-center pt-2 ${size} font-bold">${medal}</div>
 				</div>
-			</div>
-			<!-- 1st Place -->
-			<div class="flex flex-col items-center gap-2">
-				<div class="text-sm text-center">
-					<div class="font-bold">${top[0]?.team || ''}</div>
-					<div>${top[0]?.score || 0} pts</div>
-				</div>
-				<div class="relative w-24 bg-yellow-500 rounded-lg shadow-lg" style="height: ${getHeight(top[0]?.score || 0)}px;">
-					<div class="absolute inset-0 flex items-start justify-center pt-2 text-4xl font-bold">🥇</div>
-				</div>
-			</div>
-			<!-- 3rd Place -->
-			<div class="flex flex-col items-center gap-2">
-				<div class="text-sm text-center">
-					<div class="font-semibold">${top[2]?.team || ''}</div>
-					<div>${top[2]?.score || 0} pts</div>
-				</div>
-				<div class="relative w-24 rounded-lg shadow bg-amber-700" style="height: ${getHeight(top[2]?.score || 0)}px;">
-					<div class="absolute inset-0 flex items-start justify-center pt-2 text-2xl font-bold">🥉</div>
-				</div>
-			</div>
-		</div>
-	`
-		podium.innerHTML = podiumHTML
+				</div>`
+				})
+				.join('')}
+		</div>`
 	</script>
 </section>

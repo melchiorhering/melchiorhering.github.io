@@ -1,44 +1,117 @@
-/**
- * ---- TEAM LOGIC ----
- */
+/** =============================
+ * CONFIG MANAGEMENT (GitHub JSON)
+ * ============================= */
 
-// Update GitHub with teams.json
+// Upload updated config to GitHub
+function setConfigToGithub(e) {
+	if (!e || !e.postData?.contents) {
+		return ContentService.createTextOutput('Missing payload')
+	}
+
+	const config = JSON.parse(e.postData.contents)
+	const payload = JSON.stringify(config, null, 2)
+	const { repo, path, branch } = getConfigInfo()
+	const token = getGithubToken()
+
+	const sha = fetchFileSHA(repo, path, branch, token)
+
+	const res = UrlFetchApp.fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+		method: 'put',
+		contentType: 'application/json',
+		headers: getGithubHeaders(token),
+		payload: JSON.stringify({
+			message: 'Update live-config.json from admin panel',
+			content: Utilities.base64Encode(payload),
+			sha,
+			branch
+		})
+	})
+
+	return ContentService.createTextOutput(res.getContentText())
+}
+
+// Fetch config from GitHub
+function getConfigFromGithub() {
+	const { repo, path, branch } = getConfigInfo()
+	const token = getGithubToken()
+
+	const res = UrlFetchApp.fetch(
+		`https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`,
+		{
+			headers: getGithubHeaders(token)
+		}
+	)
+
+	const data = JSON.parse(res.getContentText())
+	const decoded = Utilities.newBlob(Utilities.base64Decode(data.content)).getDataAsString()
+
+	return ContentService.createTextOutput(decoded).setMimeType(ContentService.MimeType.JSON)
+}
+
+// Config constants
+function getConfigInfo() {
+	return {
+		repo: 'melchiorhering/melchiorhering.github.io',
+		path: 'src/data/live-config.json',
+		branch: 'main'
+	}
+}
+
+// Token getter
+function getGithubToken() {
+	return PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN')
+}
+
+// Standard headers for GitHub API
+function getGithubHeaders(token) {
+	return {
+		Authorization: `token ${token}`,
+		Accept: 'application/vnd.github.v3+json'
+	}
+}
+
+// Fetch SHA for existing file on GitHub
+function fetchFileSHA(repo, path, branch, token) {
+	const res = UrlFetchApp.fetch(
+		`https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`,
+		{
+			headers: { Authorization: `token ${token}` }
+		}
+	)
+	return JSON.parse(res.getContentText()).sha
+}
+
+/** =============================
+ * TEAM DATA (Google Sheets + GitHub)
+ * ============================= */
+
+// Sync current sheet to GitHub
 function updateTeamScores() {
 	try {
 		const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
-		const data = sheet.getDataRange().getValues() // includes headers
-		const json = []
+		const data = sheet.getDataRange().getValues()
+		const teams = []
 
 		for (let i = 1; i < data.length; i++) {
 			const row = data[i]
-			json.push({
+			teams.push({
 				team: row[0],
 				score: isNaN(parseInt(row[1])) ? 0 : parseInt(row[1]),
 				members: row[2] ? row[2].split(',').map((name) => name.trim()) : []
 			})
 		}
 
-		const payload = JSON.stringify(json, null, 2)
-		const githubToken = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN')
+		const payload = JSON.stringify(teams, null, 2)
 		const repo = 'melchiorhering/melchiorhering.github.io'
 		const path = 'src/data/teams.json'
 		const branch = 'main'
+		const token = getGithubToken()
+		const sha = fetchFileSHA(repo, path, branch, token)
 
-		// Fetch current file SHA
-		const sha = JSON.parse(
-			UrlFetchApp.fetch(`https://api.github.com/repos/${repo}/contents/${path}?ref=${branch}`, {
-				headers: { Authorization: `token ${githubToken}` }
-			}).getContentText()
-		).sha
-
-		// Commit to GitHub
 		UrlFetchApp.fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
 			method: 'put',
 			contentType: 'application/json',
-			headers: {
-				Authorization: `token ${githubToken}`,
-				Accept: 'application/vnd.github.v3+json'
-			},
+			headers: getGithubHeaders(token),
 			payload: JSON.stringify({
 				message: 'Update teams.json from Google Sheet',
 				content: Utilities.base64Encode(payload),
@@ -53,7 +126,7 @@ function updateTeamScores() {
 	}
 }
 
-// Update score on 'Win' or 'Draw'
+// Update score on edit (Win +3 / Draw +1)
 function onEdit(e) {
 	const sheet = e.source.getActiveSheet()
 	const range = e.range
@@ -73,7 +146,7 @@ function onEdit(e) {
 	}
 }
 
-// Manually test the onEdit handler
+// Admin trigger for local testing
 function testOnEdit() {
 	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
 	const range = sheet.getRange('D2')
@@ -82,12 +155,13 @@ function testOnEdit() {
 	onEdit({ source: SpreadsheetApp.getActiveSpreadsheet(), range })
 }
 
-// Return full JSON list of teams
+/** =============================
+ * PUBLIC API ROUTES
+ * ============================= */
+
 function doGet(e) {
-	// ✅ Support for GET ...?names=1 to return only player names
-	if (e?.parameter?.names === '1') {
-		return getPlayerNames()
-	}
+	if (e?.parameter?.config === 'github') return getConfigFromGithub()
+	if (e?.parameter?.names === '1') return getPlayerNames()
 
 	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
 	const data = sheet.getDataRange().getValues()
@@ -96,16 +170,13 @@ function doGet(e) {
 	const rows = data.slice(1).map((row) => {
 		const obj = {}
 		headers.forEach((h, i) => (obj[h.toLowerCase()] = row[i]))
-		if (obj.members) {
-			obj.members = obj.members.split(',').map((name) => name.trim())
-		}
+		if (obj.members) obj.members = obj.members.split(',').map((name) => name.trim())
 		return obj
 	})
 
 	const json = JSON.stringify(rows)
 	const output = ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON)
 
-	// Optional cache control
 	if (e?.parameter?.nocache === '1') {
 		output.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
 	}
@@ -113,9 +184,50 @@ function doGet(e) {
 	return output
 }
 
+function doPost(e) {
+	const action = e?.parameter?.action
+
+	if (action === 'setConfig') return setConfigToGithub(e)
+
+	// Default: add player name
+	Logger.log(JSON.stringify(e))
+	if (!e || !e.parameter?.name) {
+		return ContentService.createTextOutput('Missing name').setMimeType(ContentService.MimeType.TEXT)
+	}
+
+	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
+	sheet.appendRow([new Date(), e.parameter.name])
+	return ContentService.createTextOutput('Success')
+}
+
+/** =============================
+ * SHEET HELPERS
+ * ============================= */
+
+// Return only player names
+function getPlayerNames() {
+	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
+	const data = sheet.getDataRange().getValues()
+
+	if (data.length < 2) {
+		return ContentService.createTextOutput(JSON.stringify([])).setMimeType(
+			ContentService.MimeType.JSON
+		)
+	}
+
+	const names = data
+		.slice(1)
+		.map((row) => row[1])
+		.filter(Boolean)
+	return ContentService.createTextOutput(JSON.stringify(names)).setMimeType(
+		ContentService.MimeType.JSON
+	)
+}
+
+// Reset the Teams sheet and populate with new data
 function setTeams(e) {
 	try {
-		if (!e || !e.postData || !e.postData.contents) {
+		if (!e?.postData?.contents) {
 			return ContentService.createTextOutput('Missing payload').setMimeType(
 				ContentService.MimeType.TEXT
 			)
@@ -124,11 +236,9 @@ function setTeams(e) {
 		const teams = JSON.parse(e.postData.contents)
 		const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
 
-		// Clear the sheet
 		sheet.clearContents()
 		sheet.clearFormats()
 
-		// Set headers
 		const headers = ['Team', 'Score', 'Members', 'Result']
 		sheet.getRange(1, 1, 1, headers.length).setValues([headers])
 		sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold').setBackground('#f1f3f4')
@@ -136,15 +246,14 @@ function setTeams(e) {
 		sheet.setColumnWidth(3, 250)
 		sheet.getRange(1, 1, 1, headers.length).setHorizontalAlignment('center')
 
-		// Add team data
 		teams.forEach((team, i) => {
 			sheet
 				.getRange(i + 2, 1, 1, 4)
 				.setValues([[team.team, team.score || 0, (team.members || []).join(', '), '']])
 		})
 
-		// Add dropdown to the "Result" column (D) for each team row
-		const validationRange = sheet.getRange(2, 4, teams.length) // from row 2, column 4
+		// Add dropdown to Result column
+		const validationRange = sheet.getRange(2, 4, teams.length)
 		const rule = SpreadsheetApp.newDataValidation()
 			.requireValueInList(['Win', 'Draw'], true)
 			.setAllowInvalid(false)
@@ -160,42 +269,4 @@ function setTeams(e) {
 			ContentService.MimeType.TEXT
 		)
 	}
-}
-
-/**
- * ---- SPELERS LOGIC ----
- */
-
-// Accept POSTs to add a name to the "Spelers" sheet
-function doPost(e) {
-	Logger.log(JSON.stringify(e)) // Inspect the event object
-
-	if (!e || !e.parameter || !e.parameter.name) {
-		return ContentService.createTextOutput('Missing name').setMimeType(ContentService.MimeType.TEXT)
-	}
-
-	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
-	sheet.appendRow([new Date(), e.parameter.name])
-	return ContentService.createTextOutput('Success')
-}
-
-function getPlayerNames() {
-	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
-	const data = sheet.getDataRange().getValues()
-
-	if (data.length < 2) {
-		// No names yet
-		return ContentService.createTextOutput(JSON.stringify([])).setMimeType(
-			ContentService.MimeType.JSON
-		)
-	}
-
-	const names = data
-		.slice(1)
-		.map((row) => row[1])
-		.filter(Boolean)
-
-	return ContentService.createTextOutput(JSON.stringify(names)).setMimeType(
-		ContentService.MimeType.JSON
-	)
 }
