@@ -96,7 +96,7 @@ export const heroData = {
 		}
 	],
 	heading: {
-		class: 'font-mono text-4xl md:text-5xl font-semibold text-gray-800 dark:text-white'
+		class: 'font-mono text-[34px] md:text-5xl font-semibold text-gray-800 dark:text-white'
 	},
 	texts: [
 		{
@@ -118,7 +118,7 @@ export const heroData = {
 			delay: 70
 		},
 		{
-			text: 'Lots of Software Engineering...',
+			text: 'And Software Engineering...',
 			class:
 				'text-transparent bg-clip-text bg-gradient-to-r from-sky-700 to-sky-500 dark:from-sky-500 dark:to-sky-300',
 			delay: 70,
