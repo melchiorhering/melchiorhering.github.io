@@ -61,7 +61,7 @@ export const experience = [
 	{
 		company: 'Aurai',
 		role: 'Junior Data Engineer',
-		period: 'Dec 2022 - Nov 2022',
+		period: 'Dec 2022 - Nov 2023',
 		logo: '/src/assets/aurai-logo.png',
 		achievements: [
 			'Completed traineeship and transitioned into consultancy, applying data engineering principles to real-world client problems.'
