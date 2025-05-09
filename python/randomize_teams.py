@@ -21,6 +21,7 @@ GROUPS_TOGETHER = [
         "Uma Koimans",
         "Priscilla",
     ],
+    ["Monse Dekker", "Wutru Frijdal"],
     ["Lucie", "Renske", "Klaas", "Martijn", "Minke"],
     ["Sophie Sander", "Emma"],
     ["Pieter", "Je oude moeder", "Daan", "Rutger", "Stijn"],
@@ -109,7 +110,9 @@ def save_to_file(teams, path="src/data/teams.json"):
 
 
 def upload_to_google_apps_script(teams):
-    response = requests.post(API_URL, json=teams)
+    payload = json.dumps(teams)
+    headers = {"Content-Type": "application/json"}  # important: avoid preflight
+    response = requests.post(API_URL, data=payload, headers=headers)
     print("🚀 Upload response:", response.text)
     response.raise_for_status()
 
@@ -124,86 +127,8 @@ def main():
         names, max_team_members=MAX_TEAM_MEMBERS, min_team_members=MIN_TEAM_MEMBERS
     )
     save_to_file(teams, OUTPUT_JSON)
-    # upload_to_google_apps_script(teams)
+    upload_to_google_apps_script(teams)
 
 
 if __name__ == "__main__":
-    # main()
-    upload_to_google_apps_script(
-        [
-            {
-                "team": "Team 1",
-                "score": 0,
-                "members": [
-                    "Severijn de beste broer van 5",
-                    "Isis Koimans",
-                    "Soesja",
-                    "Uma Koimans",
-                    "Priscilla",
-                ],
-            },
-            {
-                "team": "Team 2",
-                "score": 0,
-                "members": ["Lucie", "Renske", "Klaas", "Martijn", "Minke"],
-            },
-            {
-                "team": "Team 3",
-                "score": 0,
-                "members": ["Pieter", "Je oude moeder", "Daan", "Rutger", "Stijn"],
-            },
-            {
-                "team": "Team 4",
-                "score": 0,
-                "members": [
-                    "Willem",
-                    "Felix",
-                    "Geheimpje",
-                    "Lute Wilhelm",
-                    "Sanne!!!!!",
-                ],
-            },
-            {
-                "team": "Team 5",
-                "score": 0,
-                "members": [
-                    "Mr Ape",
-                    "Wie dit leest trekt een bak",
-                    "Saartje",
-                    "Lucas",
-                    "Wutru Frijdal",
-                ],
-            },
-            {
-                "team": "Team 6",
-                "score": 0,
-                "members": ["Noortje", "Julius", "Maarten", "Stellie", "Ties"],
-            },
-            {
-                "team": "Team 7",
-                "score": 0,
-                "members": [
-                    "Dafit",
-                    "Lotte van Nieuwland",
-                    "Monse Dekker",
-                    "Noah",
-                    "Lou de Ledge",
-                ],
-            },
-            {
-                "team": "Team 8",
-                "score": 0,
-                "members": ["Bibi", "Bart Vos", "Janne", "Thijs Hoffman", "Roland"],
-            },
-            {
-                "team": "Team 9",
-                "score": 0,
-                "members": ["guigne", "Puk", "Jan(neke)", "Misses frumz", "Puck"],
-            },
-            {
-                "team": "Team 10",
-                "score": 0,
-                "members": ["Paul", "CR7 Tate Mendel", "Sophie Sander", "Emma", "Faye"],
-            },
-        ]
-    )
+    main()

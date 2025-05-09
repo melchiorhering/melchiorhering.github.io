@@ -1,112 +1,58 @@
 [
-    {
-        "team": "Team 2",
-        "score": 0,
-        "members": [
-            "Severijn de beste broer van 5",
-            "Isis Koimans",
-            "Soesja",
-            "Uma Koimans",
-            "Priscilla"
-        ]
-    },
-    {
-        "team": "Team 3",
-        "score": 0,
-        "members": [
-            "Lucie",
-            "Renske",
-            "Klaas",
-            "Martijn",
-            "Minke"
-        ]
-    },
-    {
-        "team": "Team 5",
-        "score": 0,
-        "members": [
-            "Pieter",
-            "Je oude moeder",
-            "Daan",
-            "Rutger",
-            "Stijn"
-        ]
-    },
-    {
-        "team": "Team 6",
-        "score": 0,
-        "members": [
-            "Willem",
-            "Saartje",
-            "Noortje",
-            "Geheimpje",
-            "Julius"
-        ]
-    },
-    {
-        "team": "Team 7",
-        "score": 0,
-        "members": [
-            "Lute Wilhelm",
-            "Ties",
-            "Monse Dekker",
-            "Dafit",
-            "Roland"
-        ]
-    },
-    {
-        "team": "Team 8",
-        "score": 0,
-        "members": [
-            "Mr Ape",
-            "Misses frumz",
-            "Noah",
-            "Felix",
-            "Maarten"
-        ]
-    },
-    {
-        "team": "Team 9",
-        "score": 0,
-        "members": [
-            "Lotte van Nieuwland",
-            "Puck",
-            "Janne",
-            "Lucas",
-            "Bart Vos"
-        ]
-    },
-    {
-        "team": "Team 10",
-        "score": 0,
-        "members": [
-            "Thijs Hoffman",
-            "Lou de Ledge",
-            "Bibi",
-            "Stellie",
-            "Jan(neke)"
-        ]
-    },
-    {
-        "team": "Team 11",
-        "score": 0,
-        "members": [
-            "Sanne!!!!!",
-            "Wie dit leest trekt een bak",
-            "Faye",
-            "guigne",
-            "Wutru Frijdal"
-        ]
-    },
-    {
-        "team": "Team 13",
-        "score": 0,
-        "members": [
-            "Paul",
-            "CR7 Tate Mendel",
-            "Sophie Sander",
-            "Emma",
-            "Puk"
-        ]
-    }
+	{
+		"team": "Team 1",
+		"score": 0,
+		"members": [
+			"Severijn de beste broer van 5",
+			"Isis Koimans",
+			"Soesja",
+			"Uma Koimans",
+			"Priscilla"
+		]
+	},
+	{
+		"team": "Team 2",
+		"score": 0,
+		"members": ["Lucie", "Renske", "Klaas", "Martijn", "Minke"]
+	},
+	{
+		"team": "Team 3",
+		"score": 0,
+		"members": ["Pieter", "Je oude moeder", "Daan", "Rutger", "Stijn"]
+	},
+	{
+		"team": "Team 4",
+		"score": 0,
+		"members": ["Puk", "Lotte van Nieuwland", "Bart Vos", "Maarten", "Noortje"]
+	},
+	{
+		"team": "Team 5",
+		"score": 0,
+		"members": ["Bibi", "guigne", "Geheimpje", "Ties", "Thijs Hoffman"]
+	},
+	{
+		"team": "Team 6",
+		"score": 0,
+		"members": ["Lute Wilhelm", "Mr Ape", "Saartje", "Dafit", "Stellie"]
+	},
+	{
+		"team": "Team 7",
+		"score": 0,
+		"members": ["Roland", "Lou de Ledge", "Lucas", "Faye", "Noah"]
+	},
+	{
+		"team": "Team 8",
+		"score": 0,
+		"members": ["Misses frumz", "Jan(neke)", "Willem", "Janne", "Felix"]
+	},
+	{
+		"team": "Team 9",
+		"score": 0,
+		"members": ["Paul", "CR7 Tate Mendel", "Monse Dekker", "Wutru Frijdal"]
+	},
+	{
+		"team": "Team 10",
+		"score": 0,
+		"members": ["Emma", "Sophie Sander", "Wie dit leest trekt een bak", "Sanne!!!!!", "Julius"]
+	}
 ]

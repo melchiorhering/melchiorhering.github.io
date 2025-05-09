@@ -42,7 +42,7 @@
 			const form = document.getElementById('nameForm')
 			const msg = document.getElementById('responseMsg')
 			const endpoint =
-				'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec'
+				'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec'
 
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault()
@@ -68,6 +68,7 @@
 						msg.classList.add('text-green-600')
 						form.reset()
 					} else {
+						console.log(text)
 						msg.textContent = '⚠️ Er ging iets mis bij het toevoegen.'
 						msg.classList.add('text-yellow-500')
 					}

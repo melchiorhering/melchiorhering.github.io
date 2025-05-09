@@ -97,11 +97,11 @@ const links = [
 
 	<script is:inline type='module'>
 		const CONFIG_GET_ENDPOINT =
-			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec?config=github'
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec?config=github'
 		const CONFIG_POST_ENDPOINT =
-			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec?action=setConfig'
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec?action=setConfig'
 		const DATA_ENDPOINT =
-			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec'
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec'
 		const CACHE_KEY = 'teams-cache-v1'
 
 		const allowedName = 'Stijn'
@@ -164,7 +164,7 @@ const links = [
 			try {
 				const res = await fetch(CONFIG_POST_ENDPOINT, {
 					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
+					headers: { 'Content-Type': 'text/plain' }, // ← avoids CORS preflight
 					body: JSON.stringify(config)
 				})
 
