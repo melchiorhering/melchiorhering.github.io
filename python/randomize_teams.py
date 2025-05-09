@@ -59,7 +59,7 @@ def validate_groups(names):
 def randomize_teams(names, max_team_members, min_team_members=3):
     validate_groups(names)
 
-    # Separate grouped and remaining names
+    # Split names into grouped and remaining
     grouped_names = set(n for group in GROUPS_TOGETHER for n in group)
     remaining_names = [n for n in names if n not in grouped_names]
     random.shuffle(remaining_names)
@@ -67,30 +67,41 @@ def randomize_teams(names, max_team_members, min_team_members=3):
     teams = []
     team_number = 1
 
-    # Add each group as a fixed team
+    # Add grouped teams
     for group in GROUPS_TOGETHER:
         if len(group) > max_team_members:
             raise ValueError(
                 f"Group {group} exceeds max team size ({max_team_members})"
             )
 
-        teams.append({"team": f"Team {team_number}", "score": 0, "members": group})
+        teams.append(
+            {"team": f"Team {team_number}", "score": 0, "members": list(group)}
+        )
         team_number += 1
 
-    # Add remaining names into teams
+    # Add remaining names as individual teams
     for i in range(0, len(remaining_names), max_team_members):
         chunk = remaining_names[i : i + max_team_members]
         teams.append({"team": f"Team {team_number}", "score": 0, "members": chunk})
         team_number += 1
 
-    # Redistribute if final team is too small
-    while len(teams) > 1 and len(teams[-1]["members"]) < min_team_members:
-        extra = teams.pop()["members"]
-        for member in extra:
-            for team in teams:
-                if len(team["members"]) < max_team_members:
-                    team["members"].append(member)
-                    break
+    # Gather teams that are too small
+    small_teams = [t for t in teams if len(t["members"]) < min_team_members]
+    teams = [t for t in teams if len(t["members"]) >= min_team_members]
+
+    # Redistribute small team members
+    leftovers = [m for t in small_teams for m in t["members"]]
+    for member in leftovers:
+        for team in teams:
+            if len(team["members"]) < max_team_members:
+                team["members"].append(member)
+                break
+        else:
+            # If all teams are full, start a new team
+            teams.append(
+                {"team": f"Team {team_number}", "score": 0, "members": [member]}
+            )
+            team_number += 1
 
     return teams
 

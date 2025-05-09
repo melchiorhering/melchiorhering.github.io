@@ -1,14 +1,5 @@
 [
     {
-        "team": "Team 1",
-        "score": 0,
-        "members": [
-            "Paul",
-            "CR7 Tate Mendel",
-            "Stellie"
-        ]
-    },
-    {
         "team": "Team 2",
         "score": 0,
         "members": [
@@ -31,14 +22,6 @@
         ]
     },
     {
-        "team": "Team 4",
-        "score": 0,
-        "members": [
-            "Sophie Sander",
-            "Emma"
-        ]
-    },
-    {
         "team": "Team 5",
         "score": 0,
         "members": [
@@ -53,32 +36,32 @@
         "team": "Team 6",
         "score": 0,
         "members": [
-            "Felix",
+            "Willem",
+            "Saartje",
+            "Noortje",
             "Geheimpje",
-            "Faye",
-            "Roland",
-            "Dafit"
+            "Julius"
         ]
     },
     {
         "team": "Team 7",
         "score": 0,
         "members": [
-            "Puck",
-            "Willem",
-            "Thijs Hoffman",
-            "Bibi",
-            "Ties"
+            "Lute Wilhelm",
+            "Ties",
+            "Monse Dekker",
+            "Dafit",
+            "Roland"
         ]
     },
     {
         "team": "Team 8",
         "score": 0,
         "members": [
-            "guigne",
-            "Lou de Ledge",
-            "Puk",
-            "Lotte van Nieuwland",
+            "Mr Ape",
+            "Misses frumz",
+            "Noah",
+            "Felix",
             "Maarten"
         ]
     },
@@ -86,22 +69,22 @@
         "team": "Team 9",
         "score": 0,
         "members": [
+            "Lotte van Nieuwland",
+            "Puck",
             "Janne",
-            "Monse Dekker",
-            "Jan(neke)",
-            "Misses frumz",
-            "Lute Wilhelm"
+            "Lucas",
+            "Bart Vos"
         ]
     },
     {
         "team": "Team 10",
         "score": 0,
         "members": [
-            "Bart Vos",
-            "Noortje",
-            "Wie dit leest trekt een bak",
-            "Lucas",
-            "Noah"
+            "Thijs Hoffman",
+            "Lou de Ledge",
+            "Bibi",
+            "Stellie",
+            "Jan(neke)"
         ]
     },
     {
@@ -109,10 +92,21 @@
         "score": 0,
         "members": [
             "Sanne!!!!!",
-            "Saartje",
-            "Mr Ape",
-            "Wutru Frijdal",
-            "Julius"
+            "Wie dit leest trekt een bak",
+            "Faye",
+            "guigne",
+            "Wutru Frijdal"
+        ]
+    },
+    {
+        "team": "Team 13",
+        "score": 0,
+        "members": [
+            "Paul",
+            "CR7 Tate Mendel",
+            "Sophie Sander",
+            "Emma",
+            "Puk"
         ]
     }
 ]
