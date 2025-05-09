@@ -1,6 +1,6 @@
 import json
+from pathlib import Path
 import random
-import os
 import requests
 
 # === CONFIGURATION ===
@@ -9,7 +9,7 @@ SET_TEAMS_URL = f"{API_URL}/setTeams"  # optional
 GET_NAMES_URL = f"{API_URL}?names=1"  # adjust as needed
 MAX_TEAM_MEMBERS = 5
 MIN_TEAM_MEMBERS = 4
-OUTPUT_JSON = os.path.join(os.getcwd(), "src/data/teams.json")
+OUTPUT_JSON = Path("../src/data/teams.json")
 
 # Players who want to be together in the same team
 GROUPS_TOGETHER = [
@@ -57,48 +57,33 @@ def validate_groups(names):
 
 
 def randomize_teams(names, max_team_members, min_team_members=3):
-    random.shuffle(names)
-
-    # Validate group members exist
     validate_groups(names)
 
-    # Remove grouped members from the names list
-    grouped_names = set()
-    for group in GROUPS_TOGETHER:
-        grouped_names.update(group)
-    remaining_names = [name for name in names if name not in grouped_names]
+    # Separate grouped and remaining names
+    grouped_names = set(n for group in GROUPS_TOGETHER for n in group)
+    remaining_names = [n for n in names if n not in grouped_names]
+    random.shuffle(remaining_names)
 
     teams = []
     team_number = 1
 
-    # Add grouped teams first
+    # Add each group as a fixed team
     for group in GROUPS_TOGETHER:
         if len(group) > max_team_members:
             raise ValueError(
-                f"Group {group} exceeds the max team size of {max_team_members}"
+                f"Group {group} exceeds max team size ({max_team_members})"
             )
-        teams.append(
-            {
-                "team": f"Team {team_number}",
-                "score": 0,
-                "members": group,
-            }
-        )
+
+        teams.append({"team": f"Team {team_number}", "score": 0, "members": group})
         team_number += 1
 
-    # Fill the rest of the teams with remaining names
+    # Add remaining names into teams
     for i in range(0, len(remaining_names), max_team_members):
         chunk = remaining_names[i : i + max_team_members]
-        teams.append(
-            {
-                "team": f"Team {team_number}",
-                "score": 0,
-                "members": chunk,
-            }
-        )
+        teams.append({"team": f"Team {team_number}", "score": 0, "members": chunk})
         team_number += 1
 
-    # Redistribute small final team if needed
+    # Redistribute if final team is too small
     while len(teams) > 1 and len(teams[-1]["members"]) < min_team_members:
         extra = teams.pop()["members"]
         for member in extra:
@@ -131,8 +116,8 @@ def main():
     teams = randomize_teams(
         names, max_team_members=MAX_TEAM_MEMBERS, min_team_members=MIN_TEAM_MEMBERS
     )
-    save_to_file(teams)
-    upload_to_google_apps_script(teams)
+    save_to_file(teams, OUTPUT_JSON)
+    # upload_to_google_apps_script(teams)
 
 
 if __name__ == "__main__":
