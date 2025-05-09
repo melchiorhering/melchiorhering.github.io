@@ -4,7 +4,7 @@ import os
 import requests
 
 # === CONFIGURATION ===
-API_URL = "https://script.google.com/macros/s/AKfycbwvbNVA3QZVJk1gsQ69ZKdOKHkVtsthxa_4kvVgoULrhVutan6noejy_bPJDH0zjpppqA/exec"  # Replace!
+API_URL = "https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec"  # Replace!
 SET_TEAMS_URL = f"{API_URL}/setTeams"  # optional
 GET_NAMES_URL = f"{API_URL}?names=1"  # adjust as needed
 MAX_TEAM_MEMBERS = 5

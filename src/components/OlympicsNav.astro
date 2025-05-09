@@ -1,6 +1,4 @@
 ---
-// src/components/OlympicsNav.astro
-
 const links = [
 	{ href: '#spotify-player', label: 'Playlist', icon: '🎶' },
 	{ href: '#klassement', label: 'Klassement', icon: '📊' },
@@ -44,7 +42,7 @@ const links = [
 		</button>
 	</div>
 
-	<!-- Collapsible Admin Panel -->
+	<!-- Admin Panel -->
 	<div
 		id='admin-panel'
 		class='mt-1 hidden flex-col gap-2 rounded bg-gray-800 px-4 py-3 text-sm shadow'
@@ -60,10 +58,9 @@ const links = [
 			/>
 		</div>
 
-		<!-- Clean horizontal admin options -->
 		<div
 			id='fetch-toggle-wrapper'
-			class='mt-2 flex hidden w-full flex-row flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-2 text-white'
+			class='mt-2 hidden w-full flex-row flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-2 text-white'
 		>
 			<label class='flex items-center gap-2'>
 				<input type='checkbox' id='toggle-fetch' />
@@ -75,11 +72,11 @@ const links = [
 				<input
 					id='ttl-input'
 					type='number'
-					min='10'
-					step='10'
+					min='1'
+					step='1'
 					class='w-20 rounded px-1 py-0.5 text-black'
 				/>
-				<span class='text-xs text-gray-300'>sec</span>
+				<span class='text-xs text-gray-300'>min</span>
 			</label>
 
 			<button
@@ -88,10 +85,25 @@ const links = [
 			>
 				Fetch Now
 			</button>
+
+			<button
+				id='save-config'
+				class='rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-500'
+			>
+				Opslaan
+			</button>
 		</div>
 	</div>
 
 	<script is:inline type='module'>
+		const CONFIG_GET_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec?config=github'
+		const CONFIG_POST_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec?action=setConfig'
+		const DATA_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbzgf8t0TL3TNrRm9sNHium6vtXW0IyRu_dld34fvnS5URTYv3iUW4BUdSfB-ceogLXgug/exec'
+		const CACHE_KEY = 'teams-cache-v1'
+
 		const allowedName = 'Stijn'
 		const adminToggle = document.getElementById('admin-toggle')
 		const adminPanel = document.getElementById('admin-panel')
@@ -100,53 +112,75 @@ const links = [
 		const toggleCheckbox = document.getElementById('toggle-fetch')
 		const ttlInput = document.getElementById('ttl-input')
 		const manualFetchBtn = document.getElementById('manual-fetch')
+		const saveBtn = document.getElementById('save-config')
 
-		// Show/hide admin panel
+		let config = {
+			enableFetch: false,
+			ttl: 1800000 // default 30 min
+		}
+
 		adminToggle.addEventListener('click', () => {
 			adminPanel.classList.toggle('hidden')
 		})
 
-		// Init toggle state
-		if (localStorage.getItem('enable-fetch') === 'true') {
-			toggleCheckbox.checked = true
-		}
-
-		// Init TTL
-		const savedTTL = localStorage.getItem('fetch-ttl')
-		if (savedTTL) {
-			ttlInput.value = parseInt(savedTTL) / 1000
-		}
-
 		nameInput.addEventListener('input', () => {
-			if (nameInput.value.trim().toLowerCase() === allowedName.toLowerCase()) {
+			const name = nameInput.value.trim().toLowerCase()
+			if (name === allowedName.toLowerCase()) {
 				toggleWrapper.classList.remove('hidden')
 			} else {
 				toggleWrapper.classList.add('hidden')
-				localStorage.removeItem('enable-fetch')
 			}
 		})
+
+		// Init: fetch config from GitHub
+		const loadConfig = async () => {
+			try {
+				const res = await fetch(CONFIG_GET_ENDPOINT)
+				config = await res.json()
+			} catch {
+				config = { enableFetch: false, ttl: 1800000 }
+			}
+			toggleCheckbox.checked = config.enableFetch
+			ttlInput.value = config.ttl / 60000
+		}
 
 		toggleCheckbox.addEventListener('change', (e) => {
-			if (e.target.checked) {
-				localStorage.setItem('enable-fetch', 'true')
-			} else {
-				localStorage.removeItem('enable-fetch')
-			}
+			config.enableFetch = e.target.checked
 		})
 
-		ttlInput.addEventListener('change', () => {
-			const ttl = parseInt(ttlInput.value || '60') * 1000
-			localStorage.setItem('fetch-ttl', ttl.toString())
+		ttlInput.addEventListener('input', () => {
+			config.ttl = parseInt(ttlInput.value || '30') * 60000
 		})
 
 		manualFetchBtn.addEventListener('click', async () => {
-			const url =
-				'https://script.google.com/macros/s/AKfycbyNoXrb1X89KTKgPwkIh_nYOGHDZnd_EZIrmwnTT4rbQD10gcX8Wvw2PJhQWCQLzneAVQ/exec'
-			const res = await fetch(url)
+			const res = await fetch(DATA_ENDPOINT)
 			const data = await res.json()
-			localStorage.setItem('teams-cache-v1', JSON.stringify({ data, timestamp: Date.now() }))
-			alert('Data manually fetched and cached!')
+			localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+			alert('Data handmatig opgehaald en opgeslagen!')
 			location.reload()
 		})
+
+		saveBtn.addEventListener('click', async () => {
+			try {
+				const res = await fetch(CONFIG_POST_ENDPOINT, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(config)
+				})
+
+				if (!res.ok) {
+					alert('❌ Config opslaan mislukt.')
+					return
+				}
+
+				const result = await res.json()
+				const commitUrl = result.commit?.html_url || 'https://github.com'
+				alert(`✅ Config opgeslagen!\n\nBekijk commit:\n${commitUrl}`)
+			} catch (err) {
+				alert('❌ Fout bij opslaan van config: ' + err.message)
+			}
+		})
+
+		await loadConfig()
 	</script>
 </nav>
