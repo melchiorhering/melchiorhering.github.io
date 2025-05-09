@@ -76,7 +76,7 @@
 		const getHeight = (score) => Math.max((score / maxScore) * maxHeight, minHeight)
 
 		podium.innerHTML = `
-		<div class="flex items-end justify-center max-w-4xl text-white gap-x-8">
+		<div class="flex items-end justify-center max-w-4xl gap-x-8">
 			${[1, 0, 2]
 				.map((i, j) => {
 					const team = top[i]
