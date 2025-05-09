@@ -14,15 +14,15 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<div class='flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-6 lg:px-8'>
-		<h1 class='block font-mono font-bold text-7xl sm:text-9xl'>404</h1>
-		<Image src={thisIsFine} alt='This is fine..' class='w-auto m-4 rounded-md md:h-56' />
+		<h1 class='block font-mono text-7xl font-bold sm:text-9xl'>404</h1>
+		<Image src={thisIsFine} alt='This is fine..' class='m-4 w-auto rounded-md md:h-56' />
 		<p class='mt-3 text-muted-foreground'>Oops, something went wrong.</p>
 		<p class=''>Sorry, we couldn't find your page.</p>
 		<Button
 			title='Back to home'
 			href='/'
 			style='button'
-			class='flex items-center justify-center mt-5'
+			class='mt-5 flex items-center justify-center'
 		>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
