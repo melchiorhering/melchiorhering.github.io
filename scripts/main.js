@@ -29,25 +29,31 @@ function doGet(e) {
 
 function doPost(e) {
 	try {
-		// 👇 Check for raw JSON payload with enableFetch or ttl
+		// 👇 Handle form-style submissions (e.g., from <form>)
+		if (e?.parameter?.name) {
+			const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
+			sheet.appendRow([new Date(), e.parameter.name])
+			return ContentService.createTextOutput('Success')
+		}
+
+		// 👇 Handle JSON payloads
 		if (e?.postData?.contents) {
 			const parsed = JSON.parse(e.postData.contents)
+
 			if (parsed.enableFetch !== undefined || parsed.ttl !== undefined) {
 				e.parsedBody = parsed
 				return setConfigToGithub(e)
 			}
+
+			if (Array.isArray(parsed) && parsed[0]?.members) {
+				e.parsedBody = parsed
+				return setTeams(e)
+			}
 		}
 
-		// 👇 Default fallback: Add player name
-		if (!e || !e.parameter?.name) {
-			return ContentService.createTextOutput('Missing name').setMimeType(
-				ContentService.MimeType.TEXT
-			)
-		}
-
-		const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
-		sheet.appendRow([new Date(), e.parameter.name])
-		return ContentService.createTextOutput('Success')
+		return ContentService.createTextOutput('Missing or invalid input').setMimeType(
+			ContentService.MimeType.TEXT
+		)
 	} catch (err) {
 		Logger.log('❌ Error in doPost: ' + err.message)
 		return ContentService.createTextOutput('Error: ' + err.message).setMimeType(
