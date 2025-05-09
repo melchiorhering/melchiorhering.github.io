@@ -65,7 +65,6 @@ def randomize_teams(names, max_team_members, min_team_members=3):
     random.shuffle(remaining_names)
 
     teams = []
-    team_number = 1
 
     # Add grouped teams
     for group in GROUPS_TOGETHER:
@@ -74,16 +73,12 @@ def randomize_teams(names, max_team_members, min_team_members=3):
                 f"Group {group} exceeds max team size ({max_team_members})"
             )
 
-        teams.append(
-            {"team": f"Team {team_number}", "score": 0, "members": list(group)}
-        )
-        team_number += 1
+        teams.append({"team": "", "score": 0, "members": list(group)})
 
     # Add remaining names as individual teams
     for i in range(0, len(remaining_names), max_team_members):
         chunk = remaining_names[i : i + max_team_members]
-        teams.append({"team": f"Team {team_number}", "score": 0, "members": chunk})
-        team_number += 1
+        teams.append({"team": "", "score": 0, "members": chunk})
 
     # Gather teams that are too small
     small_teams = [t for t in teams if len(t["members"]) < min_team_members]
@@ -98,10 +93,11 @@ def randomize_teams(names, max_team_members, min_team_members=3):
                 break
         else:
             # If all teams are full, start a new team
-            teams.append(
-                {"team": f"Team {team_number}", "score": 0, "members": [member]}
-            )
-            team_number += 1
+            teams.append({"team": "", "score": 0, "members": [member]})
+
+    # ✅ Reassign clean team numbers
+    for i, team in enumerate(teams, start=1):
+        team["team"] = f"Team {i}"
 
     return teams
 
@@ -132,4 +128,82 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    upload_to_google_apps_script(
+        [
+            {
+                "team": "Team 1",
+                "score": 0,
+                "members": [
+                    "Severijn de beste broer van 5",
+                    "Isis Koimans",
+                    "Soesja",
+                    "Uma Koimans",
+                    "Priscilla",
+                ],
+            },
+            {
+                "team": "Team 2",
+                "score": 0,
+                "members": ["Lucie", "Renske", "Klaas", "Martijn", "Minke"],
+            },
+            {
+                "team": "Team 3",
+                "score": 0,
+                "members": ["Pieter", "Je oude moeder", "Daan", "Rutger", "Stijn"],
+            },
+            {
+                "team": "Team 4",
+                "score": 0,
+                "members": [
+                    "Willem",
+                    "Felix",
+                    "Geheimpje",
+                    "Lute Wilhelm",
+                    "Sanne!!!!!",
+                ],
+            },
+            {
+                "team": "Team 5",
+                "score": 0,
+                "members": [
+                    "Mr Ape",
+                    "Wie dit leest trekt een bak",
+                    "Saartje",
+                    "Lucas",
+                    "Wutru Frijdal",
+                ],
+            },
+            {
+                "team": "Team 6",
+                "score": 0,
+                "members": ["Noortje", "Julius", "Maarten", "Stellie", "Ties"],
+            },
+            {
+                "team": "Team 7",
+                "score": 0,
+                "members": [
+                    "Dafit",
+                    "Lotte van Nieuwland",
+                    "Monse Dekker",
+                    "Noah",
+                    "Lou de Ledge",
+                ],
+            },
+            {
+                "team": "Team 8",
+                "score": 0,
+                "members": ["Bibi", "Bart Vos", "Janne", "Thijs Hoffman", "Roland"],
+            },
+            {
+                "team": "Team 9",
+                "score": 0,
+                "members": ["guigne", "Puk", "Jan(neke)", "Misses frumz", "Puck"],
+            },
+            {
+                "team": "Team 10",
+                "score": 0,
+                "members": ["Paul", "CR7 Tate Mendel", "Sophie Sander", "Emma", "Faye"],
+            },
+        ]
+    )
