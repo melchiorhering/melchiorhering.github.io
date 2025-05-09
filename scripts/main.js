@@ -1,14 +1,72 @@
 /** =============================
+ * PUBLIC API ROUTES
+ * ============================= */
+
+function doGet(e) {
+	if (e?.parameter?.config === 'github') return getConfigFromGithub()
+	if (e?.parameter?.names === '1') return getPlayerNames()
+
+	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
+	const data = sheet.getDataRange().getValues()
+	const headers = data[0]
+
+	const rows = data.slice(1).map((row) => {
+		const obj = {}
+		headers.forEach((h, i) => (obj[h.toLowerCase()] = row[i]))
+		if (obj.members) obj.members = obj.members.split(',').map((name) => name.trim())
+		return obj
+	})
+
+	const json = JSON.stringify(rows)
+	const output = ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON)
+
+	if (e?.parameter?.nocache === '1') {
+		output.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+	}
+
+	return output
+}
+
+function doPost(e) {
+	try {
+		// 👇 Check for raw JSON payload with enableFetch or ttl
+		if (e?.postData?.contents) {
+			const parsed = JSON.parse(e.postData.contents)
+			if (parsed.enableFetch !== undefined || parsed.ttl !== undefined) {
+				e.parsedBody = parsed
+				return setConfigToGithub(e)
+			}
+		}
+
+		// 👇 Default fallback: Add player name
+		if (!e || !e.parameter?.name) {
+			return ContentService.createTextOutput('Missing name').setMimeType(
+				ContentService.MimeType.TEXT
+			)
+		}
+
+		const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
+		sheet.appendRow([new Date(), e.parameter.name])
+		return ContentService.createTextOutput('Success')
+	} catch (err) {
+		Logger.log('❌ Error in doPost: ' + err.message)
+		return ContentService.createTextOutput('Error: ' + err.message).setMimeType(
+			ContentService.MimeType.TEXT
+		)
+	}
+}
+
+/** =============================
  * CONFIG MANAGEMENT (GitHub JSON)
  * ============================= */
 
 // Upload updated config to GitHub
 function setConfigToGithub(e) {
-	if (!e || !e.postData?.contents) {
+	if (!e || (!e.parsedBody && !e.postData?.contents)) {
 		return ContentService.createTextOutput('Missing payload')
 	}
 
-	const config = JSON.parse(e.postData.contents)
+	const config = e.parsedBody || JSON.parse(e.postData.contents)
 	const payload = JSON.stringify(config, null, 2)
 	const { repo, path, branch } = getConfigInfo()
 	const token = getGithubToken()
@@ -27,7 +85,9 @@ function setConfigToGithub(e) {
 		})
 	})
 
-	return ContentService.createTextOutput(res.getContentText())
+	return ContentService.createTextOutput(res.getContentText()).setMimeType(
+		ContentService.MimeType.JSON
+	)
 }
 
 // Fetch config from GitHub
@@ -153,51 +213,6 @@ function testOnEdit() {
 	range.setValue('Win')
 
 	onEdit({ source: SpreadsheetApp.getActiveSpreadsheet(), range })
-}
-
-/** =============================
- * PUBLIC API ROUTES
- * ============================= */
-
-function doGet(e) {
-	if (e?.parameter?.config === 'github') return getConfigFromGithub()
-	if (e?.parameter?.names === '1') return getPlayerNames()
-
-	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Teams')
-	const data = sheet.getDataRange().getValues()
-	const headers = data[0]
-
-	const rows = data.slice(1).map((row) => {
-		const obj = {}
-		headers.forEach((h, i) => (obj[h.toLowerCase()] = row[i]))
-		if (obj.members) obj.members = obj.members.split(',').map((name) => name.trim())
-		return obj
-	})
-
-	const json = JSON.stringify(rows)
-	const output = ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON)
-
-	if (e?.parameter?.nocache === '1') {
-		output.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
-	}
-
-	return output
-}
-
-function doPost(e) {
-	const action = e?.parameter?.action
-
-	if (action === 'setConfig') return setConfigToGithub(e)
-
-	// Default: add player name
-	Logger.log(JSON.stringify(e))
-	if (!e || !e.parameter?.name) {
-		return ContentService.createTextOutput('Missing name').setMimeType(ContentService.MimeType.TEXT)
-	}
-
-	const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Spelers')
-	sheet.appendRow([new Date(), e.parameter.name])
-	return ContentService.createTextOutput('Success')
 }
 
 /** =============================
