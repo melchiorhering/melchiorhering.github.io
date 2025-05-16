@@ -36,6 +36,26 @@ export const about: string =
 
 export const experience = [
 	{
+		company: 'TenneT TSO',
+		role: 'Data Engineer',
+		period: 'May 2025 – Present',
+		logo: '/src/assets/tennet-logo.jpg',
+		achievements: [
+			'Working on a data migration project, moving from on prem solution to a cloud platform.',
+			'Building a data pipeline to ingest and process data from and to various sources.',
+			'Working with Azure, Azure Databricks, PySpark, and Azure Data Factory.'
+		]
+	},
+	{
+		company: 'Team Rockstars IT',
+		role: 'Data Engineer | ML Engineer | AI Engineer | Software Engineer',
+		period: 'May 2025 – Present',
+		logo: '/src/assets/teamrockstars-logo.webp',
+		achievements: [
+			'Working on multiple projects for different clients, focusing on data engineering, machine learning and AI solutions.'
+		]
+	},
+	{
 		company: 'PostNL',
 		role: 'Data Scientist | Software Engineer',
 		period: 'Feb 2024 – May 2025',
