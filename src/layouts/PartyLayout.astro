@@ -1,0 +1,49 @@
+---
+import type { SiteMeta } from '@/types'
+
+import BaseHead from '@/components/BaseHead.astro'
+// ThemeProvider hebben we hier niet meer nodig, we forceren Dark Mode!
+import Footer from '@/components/layout/Footer.astro'
+import Container from '@/components/Container.astro'
+import { siteConfig } from '@/site-config'
+
+interface Props {
+	meta: SiteMeta
+}
+
+const { meta } = Astro.props
+---
+
+<html lang={siteConfig.lang} class='dark bg-[#0a0a0a]'>
+	<head>
+		<meta charset='utf-8' />
+
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+		<BaseHead meta={meta} />
+		<meta property='og:type' content='website' />
+		<meta property='og:title' content={meta.title} />
+		<meta property='og:description' content={meta.description} />
+		<meta property='og:image' content={meta.ogImage} />
+		<meta name='twitter:card' content='summary_large_image' />
+		<meta name='twitter:title' content={meta.title} />
+		<meta name='twitter:description' content={meta.description} />
+		<meta name='twitter:image' content={meta.ogImage} />
+	</head>
+
+	<body class='flex justify-center bg-[#0a0a0a] text-white'>
+		<div class='w-full'>
+			<main
+				class='flex min-h-screen flex-col justify-between font-satoshi text-[0.92rem] leading-relaxed'
+			>
+				<div class='w-full'>
+					<slot />
+				</div>
+
+				<Container>
+					<Footer />
+				</Container>
+			</main>
+		</div>
+	</body>
+</html>

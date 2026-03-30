@@ -1,2 +1,1 @@
-## Resume
-
+## Personal Page

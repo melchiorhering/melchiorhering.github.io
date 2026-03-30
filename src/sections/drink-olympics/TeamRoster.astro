@@ -1,0 +1,120 @@
+---
+// src/leaderboard/components/TeamRoster.astro
+---
+
+<section id='teams' class='mx-auto max-w-5xl px-4 pt-6'>
+	<h2 class='mb-8 text-center text-4xl font-bold drop-shadow-lg'>Team Rooster</h2>
+	<div id='team-roster' class='grid gap-8 text-white md:grid-cols-2'></div>
+
+	<script is:inline type='module'>
+		const container = document.getElementById('team-roster')
+		const CACHE_KEY = 'teams-cache-v1'
+		const CACHE_TTL_MS = parseInt(localStorage.getItem('fetch-ttl') || '60000')
+
+		const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null')
+		const isFresh = cached && Date.now() - cached.timestamp < CACHE_TTL_MS
+		const fetchEnabled = localStorage.getItem('enable-fetch') === 'true'
+
+		const teams =
+			fetchEnabled && !isFresh
+				? await fetch(
+						'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec'
+					)
+						.then((res) => res.json())
+						.then((data) => {
+							localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+							return data
+						})
+				: cached?.data || []
+
+		const colors = [
+			'from-pink-500 to-purple-600',
+			'from-cyan-500 to-blue-600',
+			'from-yellow-500 to-orange-500',
+			'from-green-400 to-emerald-500',
+			'from-red-400 to-rose-500',
+			'from-indigo-400 to-purple-600',
+			'from-teal-400 to-cyan-500',
+			'from-lime-400 to-green-500',
+			'from-orange-400 to-amber-500',
+			'from-sky-400 to-blue-500',
+			'from-fuchsia-500 to-pink-500',
+			'from-violet-500 to-indigo-600',
+			'from-amber-400 to-yellow-500',
+			'from-rose-400 to-red-500',
+			'from-emerald-400 to-lime-500',
+			'from-purple-400 to-fuchsia-500',
+			'from-blue-400 to-indigo-500'
+		]
+
+		const emoji = [
+			'🏆',
+			'🎯',
+			'🍻',
+			'🔥',
+			'💪',
+			'🥳',
+			'🚀',
+			'🎮',
+			'🧠',
+			'🎉',
+			'👑',
+			'🦤',
+			'🌈',
+			'🐉',
+			'🐍',
+			'🐯',
+			'🦖',
+			'👽',
+			'🤖',
+			'🐙',
+			'🧙',
+			'🧛',
+			'🧜',
+			'🤸',
+			'🤹',
+			'🧜',
+			'💀',
+			'🐵',
+			'🐸',
+			'🐯',
+			'🐼',
+			'🐨',
+			'🐧',
+			'🐺',
+			'🐔',
+			'🦆',
+			'🐢',
+			'🐬',
+			'🐳',
+			'🦓',
+			'🍕',
+			'🍔',
+			'🍩',
+			'🍭',
+			'🍉',
+			'🍇',
+			'🥥',
+			'🥑',
+			'🥐',
+			'🍿'
+		]
+
+		const html = teams
+			.map(
+				(team, i) => `
+			<div class="p-6 text-center transform transition-all bg-gradient-to-br ${colors[i % colors.length]} rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl">
+				<h3 class="mb-3 text-2xl font-extrabold text-white drop-shadow-sm">
+					${emoji[i % emoji.length]} ${team.team}
+				</h3>
+				<div class="grid grid-cols-2 text-lg font-semibold text-white gap-y-2 place-items-center">
+					${team.members.map((member) => `<div>${member}</div>`).join('')}
+				</div>
+			</div>
+		`
+			)
+			.join('')
+
+		container.innerHTML = html
+	</script>
+</section>

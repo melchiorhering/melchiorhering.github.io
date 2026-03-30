@@ -1,0 +1,186 @@
+---
+const links = [
+	{ href: '#spotify-player', label: 'Playlist', icon: '🎶' },
+	{ href: '#klassement', label: 'Klassement', icon: '📊' },
+	{ href: '#teams', label: 'Teams', icon: '👥' },
+	{ href: '#spellen', label: 'Spellen', icon: '🎮' },
+	{ href: '#locatie', label: 'Locatie', icon: '📍' },
+	{ href: 'https://skatecafe.weticket.io/nachtwinkel', label: 'AftrParty', icon: '🎉' }
+]
+---
+
+<nav class='absolute inset-x-0 top-0 z-40 mx-auto sm:max-w-xl md:max-w-2xl lg:max-w-4xl'>
+	<div
+		class='grid grid-cols-3 gap-3 rounded bg-gray-900/80 px-4 py-3 shadow-lg ring-1 ring-white/10 backdrop-blur-md'
+	>
+		{
+			links.map(({ href, label, icon }, i) => {
+				const isLast = i === links.length - 1
+				const isOdd = links.length % 3 !== 0
+				const forceFullWidth = isOdd && isLast
+				return (
+					<a
+						href={href}
+						target={href.startsWith('http') ? '_blank' : '_self'}
+						rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+						class={`inline-flex items-center justify-center gap-1 rounded-lg bg-gray-800 px-4 py-2 text-center text-sm font-medium text-white transition hover:bg-gray-700 ${
+							forceFullWidth ? 'col-span-3 justify-center' : ''
+						}`}
+					>
+						<span>{icon}</span>
+						<span>{label}</span>
+					</a>
+				)
+			})
+		}
+	</div>
+
+	<!-- Admin Toggle -->
+	<div class='mt-2 px-4 text-right'>
+		<button id='admin-toggle' class='text-xs text-gray-400 underline hover:text-white'>
+			Admin
+		</button>
+	</div>
+
+	<!-- Admin Panel -->
+	<div
+		id='admin-panel'
+		class='mt-1 hidden flex-col gap-2 rounded bg-gray-800 px-4 py-3 text-sm shadow'
+	>
+		<div class='mx-auto flex items-center gap-2'>
+			<label for='fetch-name' class='text-white'>Naam:</label>
+			<input
+				id='fetch-name'
+				type='text'
+				class='w-full rounded px-2 py-1 text-black'
+				autocomplete='off'
+				aria-label='Naam'
+			/>
+		</div>
+
+		<div
+			id='fetch-toggle-wrapper'
+			class='mt-2 hidden w-full flex-row flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-2 text-white'
+		>
+			<label class='flex items-center gap-2'>
+				<input type='checkbox' id='toggle-fetch' />
+				Live updates aan
+			</label>
+
+			<label class='flex items-center gap-2'>
+				TTL:
+				<input
+					id='ttl-input'
+					type='number'
+					min='1'
+					step='1'
+					class='w-20 rounded px-1 py-0.5 text-black'
+				/>
+				<span class='text-xs text-gray-300'>min</span>
+			</label>
+
+			<button
+				id='manual-fetch'
+				class='rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-500'
+			>
+				Fetch Now
+			</button>
+
+			<button
+				id='save-config'
+				class='rounded bg-green-600 px-3 py-1 text-sm text-white hover:bg-green-500'
+			>
+				Opslaan
+			</button>
+		</div>
+	</div>
+
+	<script is:inline type='module'>
+		const CONFIG_GET_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec?config=github'
+		const CONFIG_POST_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec?action=setConfig'
+		const DATA_ENDPOINT =
+			'https://script.google.com/macros/s/AKfycbwTkuS8q3CNQBMyMV_BerSX-MHz1oeq_h5XLwHvisVRR4xW54kYnNka2t35ZR3o4UUpyw/exec'
+		const CACHE_KEY = 'teams-cache-v1'
+
+		const allowedName = 'Stijn'
+		const adminToggle = document.getElementById('admin-toggle')
+		const adminPanel = document.getElementById('admin-panel')
+		const nameInput = document.getElementById('fetch-name')
+		const toggleWrapper = document.getElementById('fetch-toggle-wrapper')
+		const toggleCheckbox = document.getElementById('toggle-fetch')
+		const ttlInput = document.getElementById('ttl-input')
+		const manualFetchBtn = document.getElementById('manual-fetch')
+		const saveBtn = document.getElementById('save-config')
+
+		let config = {
+			enableFetch: false,
+			ttl: 1800000 // default 30 min
+		}
+
+		adminToggle.addEventListener('click', () => {
+			adminPanel.classList.toggle('hidden')
+		})
+
+		nameInput.addEventListener('input', () => {
+			const name = nameInput.value.trim().toLowerCase()
+			if (name === allowedName.toLowerCase()) {
+				toggleWrapper.classList.remove('hidden')
+			} else {
+				toggleWrapper.classList.add('hidden')
+			}
+		})
+
+		// Init: fetch config from GitHub
+		const loadConfig = async () => {
+			try {
+				const res = await fetch(CONFIG_GET_ENDPOINT)
+				config = await res.json()
+			} catch {
+				config = { enableFetch: false, ttl: 1800000 }
+			}
+			toggleCheckbox.checked = config.enableFetch
+			ttlInput.value = config.ttl / 60000
+		}
+
+		toggleCheckbox.addEventListener('change', (e) => {
+			config.enableFetch = e.target.checked
+		})
+
+		ttlInput.addEventListener('input', () => {
+			config.ttl = parseInt(ttlInput.value || '30') * 60000
+		})
+
+		manualFetchBtn.addEventListener('click', async () => {
+			const res = await fetch(DATA_ENDPOINT)
+			const data = await res.json()
+			localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }))
+			alert('Data handmatig opgehaald en opgeslagen!')
+			location.reload()
+		})
+
+		saveBtn.addEventListener('click', async () => {
+			try {
+				const res = await fetch(CONFIG_POST_ENDPOINT, {
+					method: 'POST',
+					headers: { 'Content-Type': 'text/plain' }, // ← avoids CORS preflight
+					body: JSON.stringify(config)
+				})
+
+				if (!res.ok) {
+					alert('❌ Config opslaan mislukt.')
+					return
+				}
+
+				const result = await res.json()
+				const commitUrl = result.commit?.html_url || 'https://github.com'
+				alert(`✅ Config opgeslagen!\n\nBekijk commit:\n${commitUrl}`)
+			} catch (err) {
+				alert('❌ Fout bij opslaan van config: ' + err.message)
+			}
+		})
+
+		await loadConfig()
+	</script>
+</nav>

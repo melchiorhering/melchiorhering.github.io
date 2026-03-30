@@ -1,0 +1,41 @@
+---
+import PartyHero from '@/sections/party/PartyHero.astro'
+import PartyLayout from '@/layouts/PartyLayout.astro'
+import PartyMap from '@/components/party/PartyMap.astro'
+import SpotifyBlock from '@/sections/party/SpotifyBlock.astro'
+
+// const meta = {
+// 	title: '🏅 Drink Olympics',
+// 	description:
+// 		'Hét verjaardagsfeest van het jaar staat voor de deur! Minke is net 28 geworden en Stijn doet gezellig mee — ook 28. Welkom bij de Drink Olympics: dé plek waar je alles vindt over de teams, spellen en scores voor deze legendarische dag vol competitie, drank en plezier.',
+// 	ogImage: '/images/beer-olympics.jpg',
+// 	'og:type': 'website',
+// 	'twitter:card': 'summary_large_image'
+// 	// Add any additional meta tags here
+// }
+
+const meta = {
+	title: '🍻 Minke & Stijn Bday Bash 🍰',
+	description:
+		'Jaja, daar zijn we weer; Stijn en Minke vieren WEDEROM samen de verjaardag; Stijn is al een tijdje 29 maar kon het niet vieren ivm het reizen en Minke word daadwerkelijk 29!',
+	ogImage: '/images/party-invite.png',
+	'og:type': 'website',
+	'twitter:card': 'summary_large_image'
+	// Add any additional meta tags here
+}
+---
+
+<!-- <PartyLayout {meta}>
+	<OlympicsNav />
+	<OlympicHero />
+	<LeaderboardTable />
+	<TeamRoster />
+	<GamesGrid />
+	<SpotifyBlock />
+	<OlympicsMap />
+</PartyLayout> -->
+<PartyLayout {meta}>
+	<PartyHero />
+	<SpotifyBlock />
+	<PartyMap />
+</PartyLayout>

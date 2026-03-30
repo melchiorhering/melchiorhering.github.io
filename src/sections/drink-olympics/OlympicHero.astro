@@ -1,0 +1,89 @@
+---
+// src/components/leaderboard/HeroPodium.astro
+---
+
+<section
+	id='hero-podium'
+	class='flex h-dvh flex-col items-center justify-center space-y-8 px-4 text-center'
+>
+	<!-- Title -->
+	<div>
+		<h1
+			class='text-3xl font-extrabold uppercase tracking-wide drop-shadow-md sm:text-6xl md:text-5xl'
+		>
+			Drink Olympics
+		</h1>
+		<p class='mt-2 text-lg sm:text-xl'>🍻 Drank. Spellen. Glorie. 🍻</p>
+	</div>
+
+	<!-- Hero Image -->
+	<div class='mx-auto my-2 w-44 rounded-full shadow-2xl ring-4 ring-yellow-500 md:w-64'>
+		<img src='/images/beer-olympics.jpg' alt='Drink Olympics Hero' class='rounded-full' />
+	</div>
+
+	<!-- Event Details -->
+	<div class='max-w-md space-y-2 px-2 text-sm sm:max-w-xl sm:text-base sm:text-lg'>
+		<p>
+			Welkom bij de <strong>Drink Olympics</strong> — het legendarische verjaardagsfeestje van
+			<strong>Minke</strong> & <strong>Stijn</strong>! Trommel je team op, trek iets comfortabels
+			aan en bereid je voor op een middag vol drank, spellen en gezelligheid. 🍻
+		</p>
+
+		<div class='grid grid-cols-1 gap-2 sm:grid-cols-2'>
+			<div
+				class='flex flex-col items-center justify-center rounded-xl bg-gray-800 px-6 py-1 shadow md:py-3'
+			>
+				<span class='text-xs uppercase text-gray-400 sm:text-sm'>Datum & Tijd</span>
+				<span class='mt-1 text-base font-semibold text-white sm:text-lg'
+					>Zaterdag 10 mei – 14:00</span
+				>
+			</div>
+
+			<div
+				class='flex flex-col items-center justify-center rounded-xl bg-gray-800 px-6 py-1 shadow'
+			>
+				<span class='text-xs uppercase text-gray-400 sm:text-sm'>Locatie</span>
+				<a
+					href='#locatie'
+					class='mt-1 text-base font-semibold text-yellow-400 hover:text-yellow-300 hover:underline sm:text-lg'
+				>
+					Het Westerpark
+				</a>
+			</div>
+		</div>
+
+		<!-- Weather Forecast -->
+		<div
+			id='weather'
+			class='flex items-center justify-center rounded-xl bg-gray-800 px-4 py-3 text-sm text-white shadow sm:px-6 sm:text-base'
+		>
+			🌤️ Weersverwachting wordt geladen...
+		</div>
+	</div>
+</section>
+
+<!-- Weather Script -->
+<script is:inline type='module'>
+	const weatherBox = document.getElementById('weather')
+
+	try {
+		const res = await fetch(
+			'https://api.open-meteo.com/v1/forecast?latitude=52.3872&longitude=4.8723&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&timezone=auto&start_date=2025-05-10&end_date=2025-05-10'
+		)
+		const data = await res.json()
+		const day = data?.daily
+
+		if (day) {
+			const max = day.temperature_2m_max[0]
+			const min = day.temperature_2m_min[0]
+			const rain = day.precipitation_sum[0]
+			const summary = rain > 0 ? `${rain} mm regen` : 'droog weer'
+
+			weatherBox.innerHTML = `🌤️ <strong>Weer op 10 mei:</strong>&nbsp;${min}°C – ${max}°C, ${summary} verwacht.`
+		} else {
+			weatherBox.innerHTML = '🌤️ Geen weerdata beschikbaar.'
+		}
+	} catch (error) {
+		weatherBox.innerHTML = '⚠️ Weersinformatie kon niet worden geladen.'
+	}
+</script>
