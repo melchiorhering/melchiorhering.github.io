@@ -1,49 +1,73 @@
-<section class='flex min-h-screen items-center justify-center'>
+---
+// src/components/party/PartyJoinForm.astro
+---
+
+<section
+	class='relative flex min-h-screen items-center justify-center overflow-x-hidden bg-[#0a0a0a] p-0 text-white sm:p-8 lg:p-12'
+>
 	<div
-		class='mx-auto w-full max-w-md rounded-xl bg-white px-6 py-12 text-center shadow-xl dark:bg-gray-900'
+		class='pointer-events-none absolute left-[-10%] top-20 h-64 w-64 rounded-full bg-yellow-500/10 blur-[100px] sm:left-10 sm:blur-[120px]'
 	>
-		<!-- Hero Image -->
-		<div
-			class='mx-auto mb-6 w-40 rounded-full shadow-2xl ring-4 ring-yellow-500 transition hover:scale-105 md:w-56'
-		>
-			<a href={`${import.meta.env.BASE_URL}party`}>
-				<img
-					src={`${import.meta.env.BASE_URL}images/party-invite.png`}
-					alt='Party Gastenlijst'
-					class='h-auto w-full rounded-full object-cover'
-				/>
-			</a>
+	</div>
+	<div
+		class='pointer-events-none absolute bottom-10 right-[-10%] h-64 w-64 rounded-full bg-blue-500/10 blur-[100px] sm:right-10 sm:blur-[120px]'
+	>
+	</div>
+
+	<div
+		class='animate-fade-in relative z-10 mx-auto flex min-h-screen w-full flex-col justify-center bg-gray-900/60 px-6 py-12 text-center backdrop-blur-xl sm:min-h-0 sm:max-w-lg sm:rounded-[2.5rem] sm:px-12 sm:py-20 sm:shadow-2xl sm:ring-1 sm:ring-white/10'
+	>
+		<div class='animate-float mx-auto mb-8 w-48 sm:mb-12 sm:w-56'>
+			<div class='relative'>
+				<div class='absolute inset-0 animate-pulse rounded-full bg-yellow-500/20 blur-2xl'></div>
+				<a href={`${import.meta.env.BASE_URL}party`}>
+					<img
+						src='/images/party-invite.png'
+						alt='Party Invite Hero'
+						class='relative h-auto w-full rounded-full border-4 border-yellow-500/50 object-cover shadow-[0_0_40px_rgba(234,179,8,0.3)] transition-transform duration-500 hover:scale-[1.03] hover:border-yellow-400'
+					/>
+				</a>
+			</div>
 		</div>
 
-		<h2 class='mb-2 text-3xl font-extrabold text-gray-800 dark:text-white'>Voeg je naam toe!</h2>
-		<p class='mb-6 text-gray-600 dark:text-gray-300'>
-			Kom je gezellig <strong>langs</strong>? Laat dan hieronder je naam achter! 🍻
+		<h2 class='mb-3 text-4xl font-black uppercase tracking-tight text-white sm:mb-6 sm:text-5xl'>
+			Ben je erbij?
+		</h2>
+		<p class='mb-10 text-base font-medium leading-relaxed text-gray-300 sm:mb-12 sm:text-lg'>
+			Kom je gezellig <strong>langs</strong>? Laat dan hieronder je naam achter, dan weten we op
+			hoeveel mensen we moeten rekenen! 🍻
 		</p>
 
-		<form id='nameForm' class='flex flex-col gap-4' aria-label='Naam toevoegen'>
-			<input
-				type='text'
-				name='name'
-				required
-				placeholder='Jouw naam'
-				class='rounded-md border border-gray-300 bg-gray-100 px-4 py-3 text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
-				aria-label='Naam invoerveld'
-			/>
+		<form id='nameForm' class='flex flex-col gap-5 sm:gap-8' aria-label='Naam toevoegen'>
+			<div class='relative'>
+				<input
+					type='text'
+					name='name'
+					required
+					placeholder='Jouw naam...'
+					class='w-full rounded-2xl border-2 border-white/10 bg-white/5 p-5 text-lg text-white placeholder-gray-500 backdrop-blur-sm transition-all focus:border-yellow-500 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-500 sm:p-5 sm:text-xl'
+					aria-label='Naam invoerveld'
+					autocomplete='off'
+				/>
+			</div>
+
 			<button
 				type='submit'
-				class='rounded-md bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
+				class='group relative w-full overflow-hidden rounded-2xl bg-yellow-500 p-5 text-lg font-black uppercase tracking-wider text-black shadow-[0_0_20px_rgba(234,179,8,0.3)] transition-all hover:scale-[1.02] hover:bg-yellow-400 hover:shadow-[0_0_40px_rgba(234,179,8,0.5)] disabled:cursor-not-allowed disabled:opacity-50 sm:p-5 sm:text-xl'
 			>
-				Verstuur
+				<span class='relative z-10'>Ik ben erbij! 🎉</span>
 			</button>
-			<p id='responseMsg' class='mt-2 text-sm font-medium'></p>
+
+			<p id='responseMsg' class='mt-2 h-8 text-base font-bold transition-colors sm:text-lg'></p>
 		</form>
 
 		<script is:inline type='module'>
 			const form = document.getElementById('nameForm')
 			const msg = document.getElementById('responseMsg')
-			// PASTE YOUR NEW DEPLOYMENT URL HERE
+
+			// VERGEET NIET JE NIEUWE DEPLOYMENT URL HIERONDER TE CHECKEN!
 			const endpoint =
-				'https://script.google.com/macros/s/AKfycbwnU948aNDTkyve8KsX9wGmfg2XyMf-4_Y9S5OgSWPCVfaWj2w-XKHKLEy2LgWuA3VG/exec'
+				'https://script.google.com/macros/s/AKfycby-mH6NrHysiQB96q2BczXVW_Wu_hqm9aH5gkdgGSoNW5pe4SQz8rddf4nrri_JSl6OSA/exec'
 
 			form.addEventListener('submit', async (e) => {
 				e.preventDefault()
@@ -54,12 +78,11 @@
 				if (!name) return
 
 				button.disabled = true
-				msg.textContent = 'Bezig met versturen...'
-				msg.className = 'mt-2 text-sm font-medium text-gray-500'
+				button.innerHTML = '<span class="relative z-10">Bezig... ⏳</span>'
+				msg.textContent = ''
+				msg.className = 'mt-2 h-8 text-base font-bold text-gray-400 sm:text-lg'
 
 				try {
-					// Using 'no-cors' mode is the most reliable way to hit Google Scripts
-					// from a static site like GitHub Pages.
 					await fetch(endpoint, {
 						method: 'POST',
 						mode: 'no-cors',
@@ -67,19 +90,49 @@
 						body: new URLSearchParams({ name })
 					})
 
-					// Because of 'no-cors', we can't read 'text.includes("Success")'
-					// So we show the success message if the fetch doesn't 'catch' an error.
 					msg.textContent = '✅ Toegevoegd! 🍻'
-					msg.className = 'mt-2 text-sm font-medium text-green-600'
+					msg.className =
+						'mt-2 h-8 text-base font-bold text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.6)] sm:text-lg'
 					form.reset()
 				} catch (err) {
 					console.error(err)
-					msg.textContent = '❌ Er ging iets mis. Probeer opnieuw.'
-					msg.className = 'mt-2 text-sm font-medium text-red-600'
+					msg.textContent = '❌ Oeps, er ging iets mis. Probeer het opnieuw.'
+					msg.className = 'mt-2 h-8 text-base font-bold text-red-400 sm:text-lg'
 				} finally {
 					button.disabled = false
+					setTimeout(() => {
+						button.innerHTML = '<span class="relative z-10">Ik ben erbij! 🎉</span>'
+					}, 2000)
 				}
 			})
 		</script>
 	</div>
 </section>
+
+<style>
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0px) rotate(0deg);
+		}
+		50% {
+			transform: translateY(-10px) rotate(2deg);
+		}
+	}
+	.animate-float {
+		animation: float 6s ease-in-out infinite;
+	}
+	.animate-fade-in {
+		animation: fadeIn 0.8s ease-out forwards;
+	}
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>

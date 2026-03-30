@@ -1,135 +1,18 @@
 ---
-// src/components/party/PartyJoinForm.astro
+import PartyLayout from '@/layouts/PartyLayout.astro'
+import PartyJoinForm from '@/components/party/PartyJoinForm.astro'
+
+const meta = {
+	title: '🍻 Minke & Stijn Bday Bash 🍰',
+	description:
+		'Lieve vrienden/familie, omdat Stijn in December in stilte 29 is geworden en Minke op 8 Mei daadwerkelijk 29 wordt; mag Stijn voor een tweede keer op rij dit samen met Minke vieren op een zonnige lentedag. Dit jaar MINDER uitegebreid dan vorige jaar. Maar wel met veel gezelligheid, laat even weten of je erbij bent!',
+	ogImage: '/images/party-invite.png',
+	'og:type': 'website',
+	'twitter:card': 'summary_large_image'
+	// Add any additional meta tags here
+}
 ---
 
-<section
-	class='fixed inset-0 z-50 flex flex-col items-center justify-center overflow-y-auto overflow-x-hidden bg-[#0a0a0a] text-white'
->
-	<div
-		class='pointer-events-none absolute left-[-10%] top-20 h-64 w-64 rounded-full bg-yellow-500/10 blur-[100px] sm:left-10 sm:blur-[120px]'
-	>
-	</div>
-	<div
-		class='pointer-events-none absolute bottom-10 right-[-10%] h-64 w-64 rounded-full bg-blue-500/10 blur-[100px] sm:right-10 sm:blur-[120px]'
-	>
-	</div>
-
-	<div
-		class='animate-fade-in relative z-10 flex min-h-screen w-full flex-col justify-center bg-gray-900/60 p-6 backdrop-blur-xl sm:min-h-0 sm:max-w-4xl sm:rounded-[2.5rem] sm:p-12 sm:shadow-2xl sm:ring-1 sm:ring-white/10'
-	>
-		<div class='animate-float mx-auto mb-10 w-[100%] max-w-[18rem] sm:mb-12 sm:max-w-none'>
-			<div class='relative'>
-				<div class='absolute inset-0 animate-pulse rounded-full bg-yellow-500/20 blur-2xl'></div>
-				<a href={`${import.meta.env.BASE_URL}party`}>
-					<img
-						src='/images/party-invite.png'
-						alt='Party Invite Hero'
-						class='relative h-auto w-full rounded-full border-[5px] border-yellow-500/50 object-cover shadow-[0_0_50px_rgba(234,179,8,0.4)] transition-transform duration-500 hover:scale-[1.03] hover:border-yellow-400'
-					/>
-				</a>
-			</div>
-		</div>
-
-		<div class='mx-auto w-full text-center'>
-			<h2 class='mb-4 text-5xl font-black uppercase tracking-tight text-white'>Ben je erbij?</h2>
-			<p class='mb-10 text-lg font-medium leading-relaxed text-gray-300 sm:text-xl'>
-				Laat hieronder je naam achter, dan weten we op hoeveel mensen we moeten rekenen!
-			</p>
-
-			<form id='nameForm' class='flex flex-col gap-5 sm:gap-6' aria-label='Naam toevoegen'>
-				<div class='relative'>
-					<input
-						type='text'
-						name='name'
-						required
-						placeholder='Je naam...'
-						class='w-full rounded-2xl border-2 border-white/10 bg-white/5 p-5 text-xl text-white placeholder-gray-500 backdrop-blur-sm transition-all focus:border-yellow-500 focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-yellow-500 sm:p-6'
-						aria-label='Naam invoerveld'
-						autocomplete='off'
-					/>
-				</div>
-
-				<button
-					type='submit'
-					class='group relative w-full overflow-hidden rounded-2xl bg-yellow-500 p-5 text-xl font-black uppercase tracking-wider text-black shadow-[0_0_30px_rgba(234,179,8,0.3)] transition-all hover:scale-[1.02] hover:bg-yellow-400 hover:shadow-[0_0_40px_rgba(234,179,8,0.5)] disabled:cursor-not-allowed disabled:opacity-50 sm:p-6'
-				>
-					<span class='relative z-10'>Ik ben erbij!</span>
-				</button>
-
-				<p id='responseMsg' class='mt-2 h-8 text-base font-bold transition-colors sm:text-lg'></p>
-			</form>
-		</div>
-
-		<script is:inline type='module'>
-			const form = document.getElementById('nameForm')
-			const msg = document.getElementById('responseMsg')
-			const endpoint =
-				'https://script.google.com/macros/s/AKfycbyHnc9M8GxpkynFoMFXP6aiGEPm5xMN3JHNo_8CeqDcgbhkWOQnGMqsgi_-k1UOPP71/exec'
-
-			form.addEventListener('submit', async (e) => {
-				e.preventDefault()
-				const button = form.querySelector('button')
-				const formData = new FormData(form)
-				const name = formData.get('name')?.toString().trim()
-
-				if (!name) return
-
-				button.disabled = true
-				button.innerHTML = '<span class="relative z-10">Bezig...</span>'
-				msg.textContent = ''
-				msg.className = 'mt-2 h-8 text-base font-bold text-gray-400 sm:text-lg'
-
-				try {
-					await fetch(endpoint, {
-						method: 'POST',
-						mode: 'no-cors',
-						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-						body: new URLSearchParams({ name })
-					})
-
-					msg.textContent = 'Lekker! Je staat op de lijst.'
-					msg.className =
-						'mt-2 h-8 text-base font-bold text-green-400 drop-shadow-[0_0_8px_rgba(74,222,128,0.6)] sm:text-lg'
-					form.reset()
-				} catch (err) {
-					console.error(err)
-					msg.textContent = '❌ Oeps, er ging iets mis. Probeer het opnieuw.'
-					msg.className = 'mt-2 h-8 text-base font-bold text-red-400 sm:text-lg'
-				} finally {
-					button.disabled = false
-					setTimeout(() => {
-						button.innerHTML = '<span class="relative z-10">Ik ben erbij!</span>'
-					}, 2000)
-				}
-			})
-		</script>
-	</div>
-</section>
-
-<style>
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0px) rotate(0deg);
-		}
-		50% {
-			transform: translateY(-10px) rotate(2deg);
-		}
-	}
-	.animate-float {
-		animation: float 6s ease-in-out infinite;
-	}
-	.animate-fade-in {
-		animation: fadeIn 0.8s ease-out forwards;
-	}
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-</style>
+<PartyLayout {meta}>
+	<PartyJoinForm />
+</PartyLayout>
