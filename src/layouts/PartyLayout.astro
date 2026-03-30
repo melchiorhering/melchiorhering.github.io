@@ -2,7 +2,6 @@
 import type { SiteMeta } from '@/types'
 
 import BaseHead from '@/components/BaseHead.astro'
-// ThemeProvider hebben we hier niet meer nodig, we forceren Dark Mode!
 import Footer from '@/components/layout/Footer.astro'
 import Container from '@/components/Container.astro'
 import { siteConfig } from '@/site-config'
@@ -12,23 +11,33 @@ interface Props {
 }
 
 const { meta } = Astro.props
+
+// 1. FIX: Maak een absolute URL van de afbeelding voor WhatsApp/Socials
+// Astro plakt automatisch jouw domeinnaam voor de /images/ link.
+const absoluteOgImage = new URL(
+	meta.ogImage || '/images/party-invite.png',
+	Astro.site || Astro.url.origin
+).href
 ---
 
 <html lang={siteConfig.lang} class='dark bg-[#0a0a0a]'>
 	<head>
 		<meta charset='utf-8' />
-
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
 		<BaseHead meta={meta} />
+
 		<meta property='og:type' content='website' />
 		<meta property='og:title' content={meta.title} />
 		<meta property='og:description' content={meta.description} />
-		<meta property='og:image' content={meta.ogImage} />
+
+		<meta property='og:image' content={absoluteOgImage} />
+
 		<meta name='twitter:card' content='summary_large_image' />
 		<meta name='twitter:title' content={meta.title} />
 		<meta name='twitter:description' content={meta.description} />
-		<meta name='twitter:image' content={meta.ogImage} />
+
+		<meta name='twitter:image' content={absoluteOgImage} />
 	</head>
 
 	<body class='flex justify-center bg-[#0a0a0a] text-white'>
