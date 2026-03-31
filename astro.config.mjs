@@ -12,7 +12,18 @@ export default defineConfig({
 	site: 'https://stijnhering.nl',
 	// site: 'https://melchiorhering.github.io',
 	// 'https://stijnhering.nl' for now using Github Pages
-	integrations: [sitemap(), icon(), tailwind(), react()],
+	integrations: [
+		sitemap(),
+		icon({
+			include: {
+				tabler: ['*'], // This enables the tabler set
+				logos: ['*'] // Keep your existing logos set enabled
+			}
+		}),
+		,
+		tailwind(),
+		react()
+	],
 	prefetch: true,
 	output: 'static'
 })

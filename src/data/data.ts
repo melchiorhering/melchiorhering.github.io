@@ -9,96 +9,9 @@ import githubIcon from '@/icons/github.svg'
 import postnlLogo from '@/assets/postnl-logo.png'
 import amsterdamLogo from '@/assets/amsterdam-flag.png'
 
-export const labels: Labels[] = [
-	{
-		title: 'PostNL',
-		icon: postnlLogo, // Ensure this is a string containing SVG path data
-		website: 'https://www.postnl.nl/'
-	},
-	{
-		title: 'Amsterdam',
-		icon: amsterdamLogo
-	},
-	{
-		title: 'LinkedIn',
-		icon: linkedinIcon,
-		website: 'https://www.linkedin.com/in/stijn-hering-contact/'
-	},
-	{
-		title: 'GitHub',
-		icon: githubIcon,
-		website: 'https://github.com/melchiorhering'
-	}
-]
-
-export const about: string =
-	'I’m an engineer with a background in Data Science, Data Engineering, and Software Development. I work across the stack, with deep expertise in Python and TypeScript, and experience in SQL and Rust. I build scalable solutions that combine data pipelines, machine learning, and modern web applications. I’ve led projects involving predictive modeling, ETL workflows, and generative AI using tools like HuggingFace, ChatGPT, Claude, and SageMaker. I also design cloud-native systems using AWS, Azure, and infrastructure-as-code with CDK. My focus is on turning data into impact — creating intuitive applications with frameworks like FastAPI, Streamlit, React, Astro, and Django.'
-
-export const experience = [
-	{
-		company: 'TenneT TSO',
-		role: 'Data Engineer',
-		period: 'May 2025 – Present',
-		logo: '/src/assets/tennet-logo.jpg',
-		achievements: [
-			'Working on a data migration project, moving from on prem solution to a cloud platform.',
-			'Building a data pipeline to ingest and process data from and to various sources.',
-			'Working with Azure, Azure Databricks, PySpark, and Azure Data Factory.'
-		]
-	},
-	{
-		company: 'Team Rockstars IT',
-		role: 'Data Engineer | ML Engineer | AI Engineer | Software Engineer',
-		period: 'May 2025 – Present',
-		logo: '/src/assets/teamrockstars-logo.webp',
-		achievements: [
-			'Working on multiple projects for different clients, focusing on data engineering, machine learning and AI solutions.'
-		]
-	},
-	{
-		company: 'PostNL',
-		role: 'Data Scientist | Software Engineer',
-		period: 'Feb 2024 – May 2025',
-		logo: '/src/assets/postnl-logo.png',
-		achievements: [
-			'Led the development of the internal Data Science Portal using AWS CDK and CI/CD pipelines — now hosting 40+ Data Scientists and 30+ production apps.',
-			'Created the initial PostLit Python package for integrating Streamlit dashboards into the PostNL ecosystem.',
-			'Developed PostNLChat, an internal ChatGPT-like interface, and built a GenAI workflow that automates call summaries for the sales team.'
-		]
-	},
-	{
-		company: 'PostNL',
-		role: 'Data Scientist | Data Engineer',
-		period: 'Jun 2022 – Feb 2024 ',
-		logo: '/src/assets/postnl-logo.png',
-		achievements: [
-			'Delivered insights via dashboards and reports to support data-driven decisions.',
-			'Guided stakeholders on data architecture and integration strategy.',
-			'Maintained and extended ETL pipelines and managed data lake ingestion in AWS.',
-			'Improved operational efficiency by embedding data-driven workflows.'
-		]
-	},
-	{
-		company: 'Aurai',
-		role: 'Junior Data Engineer',
-		period: 'Dec 2022 - Nov 2023',
-		logo: '/src/assets/aurai-logo.png',
-		achievements: [
-			'Completed traineeship and transitioned into consultancy, applying data engineering principles to real-world client problems.'
-		]
-	}
-]
-
-// Fetch dynamic Medium posts and merge with static posts
-export const allBlogPosts: Promise<BlogPost[]> = (async () => {
-	const username = 'stijn.hering' // Medium username
-	const mediumPosts = await fetchMediumPosts(username)
-	return [...mediumPosts] // Merge with static posts
-})()
-
 export const heroData = {
 	description: {
-		text: 'I’m a versatile Data/ML Engineer skilled in Python, TypeScript, ML/AI, the Web, Cloud, Databases, and DevOps. I build scalable, user-friendly solutions using modern technologies and a fast-learning mindset.',
+		text: 'I’m a versatile Data/ML Engineer and habitual tinkerer who builds scalable, user-friendly solutions from the infrastructure up. Driven by a fast-learning mindset, I bridge the gap between DevOps and Intelligence—leveraging a deep stack of Python, TypeScript, Kubernetes, and Cloud architecture to orchestrate production-ready ML/AI systems and autonomous Agents.',
 		class: 'text-gray-600 dark:text-white'
 	},
 	buttons: [
@@ -195,12 +108,29 @@ export const toolsData = [
 		iconName: 'logos:docker-icon'
 	},
 	{
+		name: 'Kubernetes',
+		iconName: 'devicon:kubernetes'
+	},
+	{
+		name: 'Pulumi',
+		iconName: 'logos:pulumi-icon'
+	},
+	{
+		name: 'Terraform',
+		iconName: 'logos:terraform-icon'
+	},
+	{
 		name: 'AWS',
 		iconName: 'logos:aws'
 	},
 	{
 		name: 'Azure',
 		iconName: 'logos:azure-icon'
+	},
+	{
+		name: 'Databricks',
+		iconName: 'simple-icons:databricks',
+		colorClass: 'text-[#FF3621]' // Databricks Brand Color
 	},
 	{
 		name: 'Hono',
@@ -217,6 +147,10 @@ export const toolsData = [
 	{
 		name: 'VSCode',
 		iconName: 'devicon:vscode'
+	},
+	{
+		name: 'Zed',
+		iconName: 'devicon:zed'
 	},
 	{
 		name: 'Git',
@@ -267,3 +201,108 @@ export const toolsData = [
 		iconName: 'logos:postgresql'
 	}
 ]
+
+export const labels: Labels[] = [
+	{
+		title: 'PostNL',
+		icon: postnlLogo, // Ensure this is a string containing SVG path data
+		website: 'https://www.postnl.nl/'
+	},
+	{
+		title: 'Amsterdam',
+		icon: amsterdamLogo
+	},
+	{
+		title: 'LinkedIn',
+		icon: linkedinIcon,
+		website: 'https://www.linkedin.com/in/stijn-hering-contact/'
+	},
+	{
+		title: 'GitHub',
+		icon: githubIcon,
+		website: 'https://github.com/melchiorhering'
+	}
+]
+
+export const about: string =
+	"I’m a Data/ML/AI Engineer who thrives in the 'grassroots' stage of a project—building order from chaos when the path forward isn't yet defined. With a foundation spanning Data, AI, DevOps, and Full-Stack, I specialize in architecting end-to-end systems that turn raw data into production-ready impact. I’m a firm believer in Infrastructure as Code (IaC), whether I’m orchestrating Kubernetes clusters or deploying cloud-native pipelines on AWS and Azure. From tinkering with autonomous AI Agents to bridging the gap between complex backend logic and intuitive interfaces, I use a modern stack of Python, TypeScript, and Rust to build scalable solutions that solve real-world problems."
+
+export const experience = [
+	{
+		company: 'Team Rockstars IT',
+		role: 'Data, ML & AI Engineer',
+		period: 'May 2025 – Present',
+		logo: '/src/assets/teamrockstars-logo.webp',
+		borderColorClass: 'border-yellow-400 dark:border-yellow-500',
+		achievements: [
+			'Employed as a consultant focusing on data engineering, machine learning, and AI solutions for enterprise clients.'
+		],
+		clients: [
+			{
+				company: 'Rabobank',
+				role: 'Data Scientist | AI Engineer',
+				period: 'Apr 2026 – Present',
+				logo: '/src/assets/rabobank-logo.png',
+				achievements: [
+					'Part of the Agentic team.',
+					'Building agentic workflows and setups to automate complex internal processes.'
+				]
+			},
+			{
+				company: 'TenneT TSO',
+				role: 'Data Engineer | ML Engineer',
+				period: 'May 2025 – Dec 2025',
+				logo: '/src/assets/tennet-logo.jpg',
+				achievements: [
+					'Worked on a critical data migration project, moving from an on-premise solution to an Azure cloud data platform.',
+					'Built robust data pipelines to ingest and process data across various external and internal sources.',
+					'Leveraged Azure, Azure Databricks, PySpark, and Azure Data Factory.'
+				]
+			}
+		]
+	},
+	{
+		company: 'PostNL',
+		role: 'Data Scientist | Software Engineer | AI Engineer',
+		period: 'Feb 2024 – May 2025',
+		logo: '/src/assets/postnl-logo.png',
+		borderColorClass: 'border-[#f06601] dark:border-[#f06601]',
+		achievements: [
+			'Transitioned to internal employee.',
+			'Led the development of the internal Data Science Portal using AWS CDK and CI/CD pipelines — now hosting 40+ Data Scientists and 30+ production apps.',
+			'Created the initial PostLit Python package for integrating Streamlit dashboards into the PostNL ecosystem.',
+			'Developed PostNLChat, an internal ChatGPT-like interface, and built a GenAI workflow that automates call summaries for the sales team.'
+		]
+	},
+	{
+		company: 'Aurai',
+		role: 'Data Engineer',
+		period: 'Dec 2022 – Feb 2024',
+		logo: '/src/assets/aurai-logo.png',
+		borderColorClass: 'border-black dark:border-white',
+		achievements: [
+			'Completed a rigorous traineeship and transitioned into consultancy, applying data engineering principles to real-world client problems.'
+		],
+		clients: [
+			{
+				company: 'PostNL',
+				role: 'Data Scientist | Data Engineer',
+				period: 'Jun 2022 – Feb 2024',
+				logo: '/src/assets/postnl-logo.png',
+				achievements: [
+					'Delivered insights via dashboards and reports to support data-driven decisions.',
+					'Guided stakeholders on data architecture and integration strategy.',
+					'Maintained and extended ETL pipelines and managed data lake ingestion in AWS.',
+					'Improved operational efficiency by embedding data-driven workflows.'
+				]
+			}
+		]
+	}
+]
+
+// Fetch dynamic Medium posts and merge with static posts
+export const allBlogPosts: Promise<BlogPost[]> = (async () => {
+	const username = 'stijn.hering' // Medium username
+	const mediumPosts = await fetchMediumPosts(username)
+	return [...mediumPosts] // Merge with static posts
+})()

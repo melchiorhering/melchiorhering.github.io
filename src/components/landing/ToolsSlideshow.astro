@@ -4,15 +4,14 @@ import type { Tool } from '@/types'
 
 interface Props {
 	tools: Tool[]
-	speed?: number // Duration in seconds, default will be 45
+	speed?: number
 }
 
 const { tools, speed = 45 } = Astro.props
-// Only duplicate once for two sets of items
 const slideItems = [...tools, ...tools]
 ---
 
-<div class='relative py-24'>
+<div class='relative py-8'>
 	{/* Background decorative elements */}
 	<div class='absolute left-0 top-0 -z-10 h-full w-full'>
 		<div
@@ -51,7 +50,9 @@ const slideItems = [...tools, ...tools]
 							<div class='absolute -inset-2 opacity-0 transition-opacity' />
 							<Icon
 								name={tool.iconName}
-								class='relative h-12 w-12 text-gray-600 transition-all group-hover:scale-110 group-hover:text-sky-600 dark:text-gray-400 dark:group-hover:text-sky-400'
+								class={`relative h-12 w-12 transition-all group-hover:scale-110 group-hover:text-sky-600 dark:group-hover:text-sky-400 ${
+									tool.colorClass ? tool.colorClass : 'text-gray-600 dark:text-gray-400'
+								}`}
 							/>
 						</div>
 						<span class='whitespace-nowrap font-mono text-lg font-bold text-gray-600 transition-colors group-hover:text-sky-600 dark:text-gray-400 dark:group-hover:text-sky-400'>

@@ -41,5 +41,6 @@ export type BlogPost = {
 
 export interface Tool {
 	name: string
-	iconName: string // Changed from logoUrl to iconName
+	iconName: string
+	colorClass?: string // Add this line
 }

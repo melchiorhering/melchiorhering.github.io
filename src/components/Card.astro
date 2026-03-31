@@ -15,19 +15,23 @@ const {
 	imageClass
 } = Astro.props
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpeg,jpg,png,gif,webp,svg}')
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	'/src/assets/*.{jpeg,jpg,png,gif,webp,svg}'
+)
 
 if (imagePath) {
 	if (!images[imagePath])
-		throw new Error(`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,webp,svg}"`)
+		throw new Error(
+			`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,webp,svg}"`
+		)
 }
 ---
 
 <Tag
 	class={cn(
-		className,
 		'relative rounded-2xl border border-border bg-primary-foreground px-5 py-3',
-		href && 'transition-all hover:border-foreground/25 hover:shadow-md'
+		href && 'transition-all hover:border-foreground/25 hover:shadow-md',
+		className
 	)}
 	href={href}
 >
