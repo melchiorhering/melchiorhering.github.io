@@ -1,4 +1,4 @@
-import type { Labels, BlogPost } from '@/types'
+import type { Labels, BlogPost, Tool, Job } from '@/types'
 import { fetchMediumPosts } from '../utils/blog'
 
 // Icons
@@ -74,7 +74,7 @@ export const heroData = {
 	]
 }
 
-export const toolsData = [
+export const toolsData: Tool[] = [
 	{
 		name: 'Python',
 		iconName: 'logos:python'
@@ -227,7 +227,7 @@ export const labels: Labels[] = [
 export const about: string =
 	"I’m a Data/ML/AI Engineer who thrives in the 'grassroots' stage of a project—building order from chaos when the path forward isn't yet defined. With a foundation spanning Data, AI, DevOps, and Full-Stack, I specialize in architecting end-to-end systems that turn raw data into production-ready impact. I’m a firm believer in Infrastructure as Code (IaC), whether I’m orchestrating Kubernetes clusters or deploying cloud-native pipelines on AWS and Azure. From tinkering with autonomous AI Agents to bridging the gap between complex backend logic and intuitive interfaces, I use a modern stack of Python, TypeScript, and Rust to build scalable solutions that solve real-world problems."
 
-export const experience = [
+export const experience: Job[] = [
 	{
 		company: 'Team Rockstars IT',
 		role: 'Data, ML & AI Engineer',

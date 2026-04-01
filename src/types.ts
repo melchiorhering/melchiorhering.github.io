@@ -44,3 +44,21 @@ export interface Tool {
 	iconName: string
 	colorClass?: string // Add this line
 }
+
+interface Client {
+	company: string
+	role: string
+	period: string
+	logo?: string
+	achievements: string[]
+}
+
+export interface Job {
+	company: string
+	role: string
+	period: string
+	logo?: string
+	borderColorClass?: string
+	achievements: string[]
+	clients?: Client[]
+}

@@ -1,78 +1,11 @@
 ---
 import Section from '@/components/Section.astro'
-import Card from '@/components/Card.astro'
+import ExperienceCard from '@/components/ExperienceCard.astro'
 import { experience } from '@/data/data'
-import { Image } from 'astro:assets'
-import type { ImageMetadata } from 'astro'
-
-// We need this glob here to resolve the dynamic paths for the client logos
-const images = import.meta.glob<{ default: ImageMetadata }>(
-	'/src/assets/*.{jpeg,jpg,png,gif,webp,svg}'
-)
 ---
 
 <Section title='Experience'>
 	<div class='flex flex-col gap-y-6'>
-		{
-			experience.map((job) => (
-				<Card
-					heading={job.company}
-					subheading={job.role}
-					date={job.period}
-					imagePath={job.logo}
-					altText={`${job.company} logo`}
-					imageClass='h-12 w-auto right-5'
-					class={job.borderColorClass ? `border-[1.5px] shadow-sm ${job.borderColorClass}` : ''}
-				>
-					{/* Main Company Achievements */}
-					<ul class='ml-4 list-disc text-muted-foreground'>
-						{job.achievements.map((achievement) => (
-							<li set:html={achievement} />
-						))}
-					</ul>
-
-					{/* Nested Client Projects */}
-					{job.clients && job.clients.length > 0 && (
-						<div class='ml-2 mt-6 flex flex-col gap-y-8 border-l-[2px] border-border/60 pl-6'>
-							{job.clients.map((client) => (
-								<div class='relative flex flex-col gap-y-2.5'>
-									{/* Timeline Dot */}
-									<span class='absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full bg-muted-foreground ring-4 ring-primary-foreground dark:bg-muted-foreground/80 dark:ring-primary-foreground' />
-
-									{/* Client Header (Flex Layout) */}
-									<div class='flex items-start justify-between gap-x-4'>
-										<div class='flex flex-col gap-y-0.5'>
-											<h3 class='text-base font-semibold'>{client.company}</h3>
-											<h4 class='text-sm text-muted-foreground'>
-												{client.role} <span class='mx-1'>•</span> {client.period}
-											</h4>
-										</div>
-
-										{/* Client Logo Render */}
-										{client.logo && images[client.logo] && (
-											<div class='shrink-0 pt-1'>
-												<Image
-													src={images[client.logo]()}
-													alt={`${client.company} logo`}
-													class='h-7 w-auto object-contain'
-													loading='lazy'
-												/>
-											</div>
-										)}
-									</div>
-
-									{/* Client Achievements */}
-									<ul class='ml-4 mt-1 list-disc text-muted-foreground'>
-										{client.achievements.map((clientAchievement) => (
-											<li set:html={clientAchievement} />
-										))}
-									</ul>
-								</div>
-							))}
-						</div>
-					)}
-				</Card>
-			))
-		}
+		{experience.map((job) => <ExperienceCard job={job} />)}
 	</div>
 </Section>
