@@ -24,10 +24,13 @@ const displayImage = project.imagePath || defaultImage
 	class='flex h-full flex-col'
 	imageClass='relative h-48 w-full object-cover rounded-xl mb-4 shadow-sm'
 >
-	{/* 2. Unified Footer Block: mt-auto pushes the entire tech stack AND links to the bottom */}
-	<div class='mt-auto flex flex-col gap-5 pt-6'>
+	{/* The flex-col and flex-1 allows this block to stretch all the way to the bottom */}
+	<div class='flex flex-1 flex-col pt-2'>
+		{/* THE MAGIC SPRING: This empty div eats all remaining vertical whitespace! */}
+		<div class='flex-1'></div>
+
 		{/* Tech Stack Pills */}
-		<div class='flex flex-wrap gap-2'>
+		<div class='mb-5 mt-6 flex flex-wrap gap-2'>
 			{
 				project.techStack.map((tech) => (
 					<span class='inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-muted/80 px-2.5 py-1 text-xs font-medium text-muted-foreground'>
@@ -40,7 +43,6 @@ const displayImage = project.imagePath || defaultImage
 
 		{/* Project Links Footer */}
 		<div class='flex items-center gap-4 border-t border-border/50 pt-4'>
-			{/* Repository Link */}
 			{
 				project.repoUrl && (
 					<a
@@ -58,7 +60,6 @@ const displayImage = project.imagePath || defaultImage
 				)
 			}
 
-			{/* Live Demo Link */}
 			{
 				project.liveUrl && (
 					<a
