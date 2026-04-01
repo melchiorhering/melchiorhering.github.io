@@ -1,25 +1,21 @@
 ---
-// 1. Framework & Core Components
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
 import { cn } from '@/utils'
 
-// 2. Custom Components
 import Container from '@/components/Container.astro'
 import Polaroid from '@/components/landing/Polaroid.astro'
 import TypeWriteComponent from '@/components/react/TypeWriteComponent'
 
-// 3. Data
 import { heroData } from '@/data/data'
 
-// 4. Assets
 import profilePictureTransparent from '@/assets/cartoon-profile-cutout.webp'
 import travelPicture from '@/assets/travel-jordan.jpg'
 import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 ---
 
 {/* Hero Wrapper with Overflow Hidden for the Gradient */}
-<div class='relative flex min-h-screen flex-col overflow-hidden'>
+<div class='relative flex min-h-screen flex-col'>
 	{/* The animated gradient from your app.css */}
 	<div class='gradient pointer-events-none absolute inset-0 opacity-40 dark:opacity-20'></div>
 
@@ -78,7 +74,7 @@ import AmsterdamFlag from '@/assets/amsterdam-flag.png'
 
 			<div
 				id='info-travel'
-				class='pointer-events-none absolute -right-36 bottom-4 z-40 w-64 opacity-0 transition-opacity duration-300'
+				class='pointer-events-none absolute -bottom-2 -right-36 z-40 w-64 opacity-0 transition-opacity duration-300'
 			>
 				<div
 					class='space-y-2 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xl'
