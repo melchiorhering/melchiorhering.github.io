@@ -37,7 +37,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>(
 			<div
 				class={cn(
 					'ml-2 mt-6 flex flex-col gap-y-8 border-l-[2px] pl-6',
-					job.borderColorClass ? job.borderColorClass : 'border-border/60'
+					// UPDATED FALLBACK HERE
+					job.borderColorClass ? job.borderColorClass : 'border-black dark:border-white'
 				)}
 			>
 				{job.clients.map((client, index) => (

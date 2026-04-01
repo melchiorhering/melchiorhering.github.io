@@ -1,0 +1,80 @@
+---
+import Card from '@/components/Card.astro'
+import { Icon } from 'astro-icon/components'
+import type { PortfolioProject } from '@/types'
+
+interface Props {
+	project: PortfolioProject
+}
+
+const { project } = Astro.props
+
+// 1. Define the default fallback image
+// You can swap this URL for a local path like '/src/assets/default-project-bg.webp'
+const defaultImage =
+	'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F8721%2F8721406.png&f=1&nofb=1&ipt=26f594d7a7d21013e18231226ec0ca34f15523ff0bb6e5ffe29de254a4af4a62'
+const displayImage = project.imagePath || defaultImage
+---
+
+<Card
+	heading={project.name}
+	subheading={project.description}
+	imagePath={displayImage}
+	altText={`${project.name} preview`}
+	class='flex h-full flex-col'
+	imageClass='relative h-48 w-full object-cover rounded-xl mb-4 shadow-sm'
+>
+	{/* 2. Unified Footer Block: mt-auto pushes the entire tech stack AND links to the bottom */}
+	<div class='mt-auto flex flex-col gap-5 pt-6'>
+		{/* Tech Stack Pills */}
+		<div class='flex flex-wrap gap-2'>
+			{
+				project.techStack.map((tech) => (
+					<span class='inline-flex items-center gap-1.5 rounded-md border border-border/50 bg-muted/80 px-2.5 py-1 text-xs font-medium text-muted-foreground'>
+						{tech.iconName && <Icon name={tech.iconName} class='h-3.5 w-3.5' />}
+						{tech.name}
+					</span>
+				))
+			}
+		</div>
+
+		{/* Project Links Footer */}
+		<div class='flex items-center gap-4 border-t border-border/50 pt-4'>
+			{/* Repository Link */}
+			{
+				project.repoUrl && (
+					<a
+						href={project.repoUrl}
+						target='_blank'
+						rel='noopener noreferrer'
+						class='group flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground'
+					>
+						<Icon
+							name='logos:github-icon'
+							class='h-4 w-4 opacity-80 transition-opacity group-hover:opacity-100 dark:invert'
+						/>
+						<span>Source Code</span>
+					</a>
+				)
+			}
+
+			{/* Live Demo Link */}
+			{
+				project.liveUrl && (
+					<a
+						href={project.liveUrl}
+						target='_blank'
+						rel='noopener noreferrer'
+						class='group flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-sky-600 dark:hover:text-sky-400'
+					>
+						<Icon
+							name='url-link'
+							class='h-4 w-4 opacity-80 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5'
+						/>
+						<span>Live Demo</span>
+					</a>
+				)
+			}
+		</div>
+	</div>
+</Card>

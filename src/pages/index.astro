@@ -1,29 +1,38 @@
 ---
 import PageLayout from '@/layouts/BaseLayout.astro'
-import Hero from '@/components/landing/Hero.astro'
-import AboutSection from '@/sections/AboutSection.astro'
-import BlogSection from '@/sections/BlogSection.astro'
-import ExperienceSection from '@/sections/ExperienceSection.astro'
-import { allBlogPosts, toolsData } from '@/data/data'
+import Hero from '@/sections/HeroSection.astro'
+import About from '@/sections/AboutSection.astro'
+import Blog from '@/sections/BlogSection.astro'
+import Eductation from '@/sections/EducationSection.astro'
+import Experience from '@/sections/ExperienceSection.astro'
+import Projects from '@/sections/ProjectsSection.astro'
 import ToolsSlideshow from '@/components/landing/ToolsSlideshow.astro'
 import Container from '@/components/Container.astro'
 
+import { allBlogPosts, toolsData } from '@/data/data'
 const blogPosts = await allBlogPosts
 const meta = {
 	description:
-		"Welcome to Stijn Hering's personal website, showcasing expertise in data science, data engineering, and software development.",
+		"Stijn Hering's personal website, showcasing expertise in data science, data engineering, and software developmen, here you can find my resume and work expierence",
 	title: 'Info'
 }
 ---
 
 <PageLayout meta={meta}>
+	{/* Hero handles its own layout/containers */}
 	<Hero />
+
+	{/* Slideshow is likely intended to be full-width, so it sits outside the container */}
 	<ToolsSlideshow tools={toolsData} speed={30} />
-	<Container class='py-12'>
+
+	{/* Wrap all standard sections in the Container for perfect horizontal padding */}
+	<Container class='py-8'>
 		<div class='flex flex-col gap-y-12'>
-			<AboutSection />
-			<BlogSection posts={blogPosts} />
-			<ExperienceSection />
+			<About />
+			<Projects />
+			<Experience />
+			<Eductation />
+			<Blog posts={blogPosts} />
 		</div>
 	</Container>
 </PageLayout>

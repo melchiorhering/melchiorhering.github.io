@@ -1,0 +1,12 @@
+---
+import Section from '@/components/Section.astro'
+import PortfolioProjectCard from '@/components/landing/PortfolioProjectCard.astro'
+import { projectsData } from '@/data/data'
+---
+
+<Section title='Projects'>
+	{/* Grid layout: 1 column on mobile, 2 columns on medium screens and up */}
+	<div class='grid grid-cols-1 gap-6 md:grid-cols-2'>
+		{projectsData.map((project) => <PortfolioProjectCard project={project} />)}
+	</div>
+</Section>

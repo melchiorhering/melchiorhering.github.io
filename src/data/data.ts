@@ -1,4 +1,4 @@
-import type { Labels, BlogPost, Tool, Job } from '@/types'
+import type { Labels, BlogPost, Tool, Job, Education, PortfolioProject } from '@/types'
 import { fetchMediumPosts } from '../utils/blog'
 
 // Icons
@@ -227,6 +227,38 @@ export const labels: Labels[] = [
 export const about: string =
 	"I’m a Data/ML/AI Engineer who thrives in the 'grassroots' stage of a project—building order from chaos when the path forward isn't yet defined. With a foundation spanning Data, AI, DevOps, and Full-Stack, I specialize in architecting end-to-end systems that turn raw data into production-ready impact. I’m a firm believer in Infrastructure as Code (IaC), whether I’m orchestrating Kubernetes clusters or deploying cloud-native pipelines on AWS and Azure. From tinkering with autonomous AI Agents to bridging the gap between complex backend logic and intuitive interfaces, I use a modern stack of Python, TypeScript, and Rust to build scalable solutions that solve real-world problems."
 
+export const projectsData: PortfolioProject[] = [
+	{
+		name: 'GUI OS AI Agent Benchmarking',
+		description:
+			'Developed an AI Agent benchmarking framework leveraging Hugging Face’s smolagents to evaluate agent performance within a secure, sandboxed GUI OS environment.',
+		techStack: [
+			{ name: 'Python', iconName: 'logos:python' },
+			{ name: 'Docker', iconName: 'logos:docker-icon' },
+			{ name: 'HuggingFace', iconName: 'logos:hugging-face-icon' },
+			{ name: 'Linux', iconName: 'logos:linux-tux' },
+			{ name: 'QEMU' },
+			{ name: 'SSH' },
+			{ name: 'Jupyter', iconName: 'devicon:jupyter-wordmark' }
+		],
+		repoUrl: 'https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking',
+		imagePath:
+			'https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking/blob/main/media/overview-framework.png?raw=true'
+	},
+	{
+		name: 'Open Data Platform',
+		description:
+			'A cloud-agnostic open data platform architected on Kubernetes. It leverages Pulumi and Python as Infrastructure-as-Code (IaC) to dynamically provision nodes and storage, ensuring seamless deployments across any VPS or cloud provider.',
+		techStack: [
+			{ name: 'Python', iconName: 'logos:python' },
+			{ name: 'Kubernetes', iconName: 'devicon:kubernetes' },
+			{ name: 'Pulumi', iconName: 'logos:pulumi-icon' },
+			{ name: 'GitHub Actions', iconName: 'logos:github-actions' }
+		],
+		repoUrl: 'https://github.com/melchiorhering/open-data-platform'
+	}
+]
+
 export const experience: Job[] = [
 	{
 		company: 'Team Rockstars IT',
@@ -263,7 +295,7 @@ export const experience: Job[] = [
 	},
 	{
 		company: 'PostNL',
-		role: 'Data Scientist | Software Engineer | AI Engineer',
+		role: 'Data Scientist | Software & AI - Engineer',
 		period: 'Feb 2024 – May 2025',
 		logo: '/src/assets/postnl-logo.png',
 		borderColorClass: 'border-[#f06601] dark:border-[#f06601]',
@@ -276,12 +308,12 @@ export const experience: Job[] = [
 	},
 	{
 		company: 'Aurai',
-		role: 'Data Engineer',
-		period: 'Dec 2022 – Feb 2024',
+		role: 'Data Engineer Consultant',
+		period: 'Feb 2022 – Feb 2024',
 		logo: '/src/assets/aurai-logo.png',
 		borderColorClass: 'border-black dark:border-white',
 		achievements: [
-			'Completed a rigorous traineeship and transitioned into consultancy, applying data engineering principles to real-world client problems.'
+			'Joined Aurai to specialize in Data Engineering, starting with an intensive traineeship before transitioning to client-facing consultancy.'
 		],
 		clients: [
 			{
@@ -294,6 +326,62 @@ export const experience: Job[] = [
 					'Guided stakeholders on data architecture and integration strategy.',
 					'Maintained and extended ETL pipelines and managed data lake ingestion in AWS.',
 					'Improved operational efficiency by embedding data-driven workflows.'
+				]
+			},
+			{
+				company: 'Data Engineering Traineeship',
+				role: 'Trainee',
+				period: 'Feb 2022 – Jun 2022',
+				logo: '/src/assets/aurai-logo.png',
+				achievements: [
+					'Completed a rigorous, intensive bootcamp focused on Data Engineering principles and modern data stacks.',
+					'Gained hands-on experience with cloud infrastructure, ETL/ELT pipelines, and advanced Python.',
+					'Successfully transitioned into a full-time consultancy role.'
+				]
+			}
+		]
+	}
+]
+
+export const educationData: Education[] = [
+	{
+		institution: 'Universiteit van Amsterdam',
+		degree: 'MSc. Informationstudies: Data Science', // Replace with your actual Master's
+		period: '2023 – 2025',
+		logo: '/src/assets/uva-logo.jpg',
+		achievements: [
+			'Specialized in Data & Machine Learning Engineering and Data Science, AI Agents',
+			'Completed my master while working'
+		],
+		projects: [
+			{
+				name: 'Master Thesis',
+				role: 'Researcher',
+				period: 'Feb 2025 – Jul 2025',
+				url: 'https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking',
+				achievements: [
+					'Created a AI Agent benchmarking framework for agents that perform tasks in a full GUI OS sandbox',
+					'Open sourced the benchmarking framework here'
+				]
+			}
+		]
+	},
+	{
+		institution: 'Universiteit van Amsterdam',
+		degree: 'BSc. Informatiekunde',
+		period: '2018 – 2021',
+		logo: '/src/assets/uva-logo.jpg',
+		borderColorClass: 'border-black dark:border-white',
+		achievements: [
+			'Core focus on data structures, algorithms, software engineering principles and data science work'
+		],
+		projects: [
+			{
+				name: 'Minor Artificial Intelligence',
+				role: 'Minor',
+				period: 'Dec 2020 – Mei 2021',
+				achievements: [
+					'Completed coursework in statistical learning, calculus, linear algebra, ML/AI topics,'
 				]
 			}
 		]

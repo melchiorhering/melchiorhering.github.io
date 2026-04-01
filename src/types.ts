@@ -62,3 +62,31 @@ export interface Job {
 	achievements: string[]
 	clients?: Client[]
 }
+
+export interface EducationProject {
+	name: string
+	role?: string
+	period?: string
+	logo?: string
+	url?: string
+	achievements: string[]
+}
+
+export interface Education {
+	institution: string
+	degree: string
+	period: string
+	logo?: string
+	borderColorClass?: string
+	achievements: string[]
+	projects?: EducationProject[]
+}
+
+export interface PortfolioProject {
+	name: string
+	description: string
+	techStack: { name: string; iconName?: string }[]
+	repoUrl?: string
+	liveUrl?: string
+	imagePath?: string
+}
