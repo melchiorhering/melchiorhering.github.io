@@ -1,0 +1,92 @@
+export type SiteConfig = {
+	author: string
+	title: string
+	description: string
+	lang: string
+	ogLocale: string
+	date: {
+		locale: string | string[] | undefined
+		options: Intl.DateTimeFormatOptions
+	}
+}
+
+export type PaginationLink = {
+	url: string
+	text?: string
+	srLabel?: string
+}
+
+export type SiteMeta = {
+	title: string
+	description?: string
+	ogImage?: string | undefined
+	[key: string]: string | undefined // Allow dynamic meta tags
+}
+
+// Update type definition if necessary
+export type Labels = {
+	title: string
+	icon: ImageMetadata // Ensure this is a string type for SVG path data
+	logo?: ImageMetadata
+	website?: string
+}
+
+// Define the structure for a blog post
+export type BlogPost = {
+	title: string
+	url: string
+	pubDate: string
+	imagePath: string
+}
+
+export interface Tool {
+	name: string
+	iconName: string
+	colorClass?: string // Add this line
+}
+
+interface Client {
+	company: string
+	role: string
+	period: string
+	logo?: string
+	achievements: string[]
+}
+
+export interface Job {
+	company: string
+	role: string
+	period: string
+	logo?: string
+	borderColorClass?: string
+	achievements: string[]
+	clients?: Client[]
+}
+
+export interface EducationProject {
+	name: string
+	role?: string
+	period?: string
+	logo?: string
+	url?: string
+	achievements: string[]
+}
+
+export interface Education {
+	institution: string
+	degree: string
+	period: string
+	logo?: string
+	borderColorClass?: string
+	achievements: string[]
+	projects?: EducationProject[]
+}
+
+export interface PortfolioProject {
+	name: string
+	description: string
+	techStack: { name: string; iconName?: string }[]
+	repoUrl?: string
+	liveUrl?: string
+	imagePath?: string
+}

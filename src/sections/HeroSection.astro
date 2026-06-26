@@ -1,0 +1,258 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { cn } from "@/utils";
+import Container from "@/components/Container.astro";
+import Polaroid from "@/components/landing/Polaroid.astro";
+import TypeWriteComponent from "@/components/react/TypeWriteComponent";
+
+import { heroData } from "@/data/data";
+import profilePictureTransparent from "@/assets/cartoon-profile-cutout.webp";
+import travelPicture from "@/assets/travel-jordan.jpg";
+import AmsterdamFlag from "@/assets/amsterdam-flag.png";
+---
+
+<div class="relative flex min-h-screen flex-col overflow-hidden">
+  <div
+    class="gradient pointer-events-none absolute inset-0 opacity-40 dark:opacity-20"
+  >
+  </div>
+
+  <Container
+    class="relative z-10 flex flex-col items-center justify-between md:flex-row md:gap-8 md:py-24"
+  >
+    {/* Text Section (Left Side) */}
+    <div
+      class="my-28 flex w-full flex-col items-center gap-4 px-2 md:my-0 md:w-1/2 md:items-start md:px-0"
+    >
+      <div class="h-30 min-h-31.25 w-full md:text-left">
+        <h1 class={heroData.heading.class}>
+          <TypeWriteComponent client:only="react" texts={heroData.texts} />
+        </h1>
+      </div>
+
+      <p class={cn(heroData.description.class, "text-left")}>
+        {heroData.description.text}
+      </p>
+
+      <div class="mt-2 flex w-full gap-4 py-4 md:w-5/6">
+        {
+          heroData.buttons.map((button, index) => (
+            <a
+              href={button.href}
+              class={cn(
+                "inline-flex flex-1 items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-md",
+                index === 0
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+              )}
+            >
+              {button.iconName && (
+                <Icon name={button.iconName} class="h-5 w-5" />
+              )}
+              {button.text}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    {/* Desktop Image Section (Right Side) */}
+    <div class="hidden w-full items-center justify-center md:flex md:w-1/2">
+      <div
+        id="image-gallery"
+        class="relative h-112.5 w-full max-w-112.5 lg:h-150 lg:max-w-150"
+      >
+        <div
+          class="absolute left-1/2 top-1/2 h-150 w-150 -translate-x-1/2 -translate-y-1/2 scale-[0.65] lg:scale-100"
+        >
+          <div
+            id="info-amsterdam"
+            class="pointer-events-none absolute -left-1/4 -top-9 z-40 w-64 opacity-0 transition-opacity duration-300"
+          >
+            <div
+              class="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xl"
+            >
+              <div class="flex w-full items-center justify-between">
+                <h3 class="font-bold text-sky-600 dark:text-sky-400">
+                  Amsterdam
+                </h3>
+                <Image
+                  src={AmsterdamFlag}
+                  alt="Flag of Amsterdam"
+                  class="w-6 object-contain"
+                />
+              </div>
+              <p class="mt-2 text-sm text-muted-foreground">Born and raised!</p>
+            </div>
+          </div>
+
+          <div
+            id="info-travel"
+            class="pointer-events-none absolute -bottom-2 -right-36 z-40 w-64 opacity-0 transition-opacity duration-300"
+          >
+            <div
+              class="space-y-2 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xl"
+            >
+              <h3 class="font-bold text-sky-600 dark:text-sky-400">
+                Exploring the world!
+              </h3>
+              <p class="text-sm text-muted-foreground">
+                My (tech)hobby basically lets me explore the world. Which is
+                great.
+              </p>
+              <div
+                class="flex items-center justify-center overflow-hidden rounded-md"
+              >
+                <img
+                  src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMGswaXhqMm8zNzZ3bGxkaGFiZ2Z6YXZoNTE2bDZ2M3lmcDFkbXlrYyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XrDT8BuYB3I2s/giphy.gif"
+                  alt="beach"
+                  class="w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="info-dev"
+            class="pointer-events-none absolute -bottom-10 left-1/2 z-50 w-80 opacity-0 transition-opacity duration-300"
+          >
+            <div
+              class="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xl"
+            >
+              <h3 class="font-bold text-sky-600 dark:text-sky-400">
+                Tech Enthusiast
+              </h3>
+              <p class="mt-2 text-sm text-muted-foreground">
+                Passionate about creating intuitive and efficient Data/AI/Web
+                applications, using all kinds of technologies.
+              </p>
+            </div>
+          </div>
+
+          <Polaroid
+            image="https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg"
+            alt="Amsterdam Westerkerk"
+            width={280}
+            height={280}
+            iconName="house"
+            class="absolute right-32 top-0 rotate-3 transition-transform duration-500 md:rotate-3 hover:md:rotate-0"
+            infoId="info-amsterdam"
+          />
+          <Polaroid
+            image={travelPicture}
+            alt="Travel; Camel in Jordan"
+            width={220}
+            iconName="airplane"
+            class="absolute -right-20 top-0 -rotate-3 transition-transform duration-500 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6"
+            infoId="info-travel"
+          />
+          <Polaroid
+            image={profilePictureTransparent}
+            alt="Disney Like Profile"
+            width={240}
+            iconName="person"
+            imageClass="bg-[url(/images/binary-background.webp)]"
+            class="absolute -bottom-12 -left-6 rotate-3 transition-transform duration-500 hover:-bottom-10 hover:rotate-0 md:rotate-6"
+            infoId="info-dev"
+          />
+
+          <div
+            class="absolute -right-40 top-0 h-20 w-20 animate-pulse rounded-full border-4 border-dashed border-sky-200/80 dark:border-sky-800/80"
+          >
+          </div>
+          <div
+            class="absolute -left-16 bottom-12 h-14 w-14 animate-pulse rounded-lg border-4 border-sky-200/80 dark:border-sky-800/80"
+          >
+          </div>
+          <div
+            class="absolute bottom-0 right-20 h-16 w-16 animate-pulse rounded-full border-4 border-sky-200/80 dark:border-sky-800/80"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+
+  {/* Mobile-only Polaroid Section */}
+  <div class="relative z-10 md:hidden">
+    <Container>
+      <div class="flex flex-col items-center gap-16 py-16">
+        <div class="w-[280px]">
+          <Polaroid
+            image="https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg"
+            alt="Amsterdam Westerkerk"
+            width={280}
+            height={280}
+            iconName="house"
+            class="-rotate-3 shadow-xl"
+          />
+        </div>
+        <div class="w-[280px]">
+          <Polaroid
+            image={travelPicture}
+            alt="Travel; Camel in Jordan"
+            width={280}
+            iconName="airplane"
+            class="rotate-3 shadow-xl"
+          />
+        </div>
+        <div class="w-[280px]">
+          <Polaroid
+            image={profilePictureTransparent}
+            alt="Disney Like Profile"
+            width={280}
+            iconName="person"
+            imageClass="bg-[url(/images/binary-background.webp)]"
+            class="-rotate-3 shadow-xl"
+          />
+        </div>
+      </div>
+    </Container>
+  </div>
+
+  {/* Styled Bouncing Scroll Indicator */}
+  <div
+    class="md:absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-bounce md:bottom-42"
+  >
+    <a
+      href="#about"
+      aria-label="Scroll down to About section"
+      class="group flex h-14 w-14 items-center justify-center rounded-full border border-sky-200/50 bg-background/50 text-muted-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-sky-400 hover:bg-background/80 hover:text-sky-500 hover:shadow-sky-500/20 dark:border-sky-800/50 dark:hover:border-sky-500 dark:hover:text-sky-400"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-6 w-6"
+      >
+        <path d="M12 5v14"></path>
+        <path d="m19 12-7 7-7-7"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script>
+  const gallery = document.getElementById("image-gallery");
+  const polaroids = gallery?.querySelectorAll(".polaroid");
+
+  polaroids?.forEach((polaroid) => {
+    if (polaroid instanceof HTMLElement) {
+      polaroid.addEventListener("mouseenter", () => {
+        polaroids.forEach((p) => {
+          if (p instanceof HTMLElement) {
+            p.style.zIndex = "10";
+          }
+        });
+        polaroid.style.zIndex = "30";
+      });
+    }
+  });
+</script>

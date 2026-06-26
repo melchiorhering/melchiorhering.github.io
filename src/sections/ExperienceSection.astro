@@ -1,0 +1,11 @@
+---
+import Section from '@/components/Section.astro'
+import ExperienceCard from '@/components/landing/ExperienceCard.astro'
+import { experience } from '@/data/data'
+---
+
+<Section title='Experience'>
+	<div class='flex flex-col gap-y-6'>
+		{experience.map((job) => <ExperienceCard job={job} />)}
+	</div>
+</Section>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  fullWidth?: boolean;
+}
+
+const { class: className, fullWidth = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    "w-full",
+    !fullWidth && "container mx-auto max-w-6xl px-6 sm:px-8 lg:px-10",
+    className,
+  ]}
+>
+  <slot />
+</div>

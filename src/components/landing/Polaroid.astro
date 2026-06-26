@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata | string;
+  alt: string;
+  width: number;
+  height?: number;
+  iconName: string;
+  class?: string;
+  imageClass?: string;
+  infoId?: string;
+}
+
+const {
+  image,
+  alt,
+  width,
+  height,
+  iconName,
+  class: className,
+  imageClass = "",
+  infoId,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    "polaroid mx-auto transition-all duration-500 ease-out",
+    className,
+  ]}
+  data-info-trigger={infoId}
+>
+  <div class="group relative overflow-visible">
+    <div
+      class="transform rounded bg-white p-2 pb-6 shadow-lg transition-all duration-500 ease-out hover:-translate-y-6 hover:rotate-0 hover:scale-105 hover:shadow-xl group-hover:shadow-sky-500/20 dark:bg-gray-100 md:p-3 md:pb-8"
+    >
+      <img
+        src={typeof image === "string" ? image : image.src}
+        alt={alt}
+        width={width}
+        height={height}
+        class:list={["rounded-sm", imageClass]}
+        loading="lazy"
+      />
+      <div
+        class="absolute -bottom-3 -right-3 transform rounded-full bg-white p-2.5 shadow-lg transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110 dark:bg-gray-800"
+      >
+        <Icon
+          name={iconName}
+          class="h-5 w-5 text-sky-600 transition-colors duration-300 group-hover:text-sky-400 dark:text-sky-300"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const triggers = document.querySelectorAll("[data-info-trigger]");
+  triggers.forEach((trigger) => {
+    const infoId = trigger.getAttribute("data-info-trigger");
+    if (!infoId) return;
+
+    const infoPanel = document.getElementById(infoId);
+    if (!infoPanel) return;
+
+    trigger.addEventListener("mouseenter", () => {
+      document.querySelectorAll('[id^="info-"]').forEach((panel) => {
+        panel.classList.add("opacity-0", "pointer-events-none");
+      });
+      infoPanel.classList.remove("opacity-0", "pointer-events-none");
+    });
+
+    trigger.addEventListener("mouseleave", () => {
+      infoPanel.classList.add("opacity-0", "pointer-events-none");
+    });
+  });
+</script>
