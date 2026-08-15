@@ -4,7 +4,7 @@ const webpageLogo = "/favicon/favicon.svg";
 ---
 
 <header
-  class="relative mx-auto flex w-full flex-wrap items-center justify-between py-4 sm:flex-nowrap sm:px-6 md:py-6"
+  class="relative mx-auto flex w-full flex-wrap items-center justify-between py-6 sm:flex-nowrap sm:px-6 md:py-8"
 >
   {/* Top Bar: Logo + Mobile Controls */}
   <div class="flex w-full items-center justify-between sm:w-auto">
@@ -75,14 +75,14 @@ const webpageLogo = "/favicon/favicon.svg";
   {/* Navigation Links - Absolute positioned on mobile to overlap content */}
   <nav
     id="nav-menu"
-    class="absolute left-0 top-full z-50 hidden w-full flex-col items-center gap-4 bg-background/95 px-4 py-6 shadow-lg backdrop-blur-md sm:static sm:flex sm:w-auto sm:flex-row sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
+    class="absolute left-0 top-full z-50 hidden w-full flex-col items-center gap-4 gap-x-6 bg-background/95 px-4 py-6 shadow-lg backdrop-blur-md sm:static sm:flex sm:w-auto sm:flex-row sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
     aria-label="global"
   >
     {
       menuLinks.map((link) => (
         <a
           href={link.path}
-          class="nav-link text-[1.05rem] font-medium transition-colors hover:text-foreground/75"
+          class="nav-link text-[1.05rem] font-medium transition-colors duration-300 bg-linear-to-r from-sky-600 to-sky-400 dark:from-sky-400 dark:to-sky-200 bg-clip-text text-foreground hover:text-transparent"
           aria-label={`Nav Menu Item: ${link.title}`}
         >
           {link.title}

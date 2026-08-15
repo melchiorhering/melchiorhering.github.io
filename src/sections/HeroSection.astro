@@ -12,20 +12,21 @@ import travelPicture from "@/assets/travel-jordan.jpg";
 import AmsterdamFlag from "@/assets/amsterdam-flag.png";
 ---
 
-<div class="relative flex min-h-screen flex-col overflow-hidden">
+<div class="relative flex flex-col overflow-x-hidden">
   <div
-    class="gradient pointer-events-none absolute inset-0 opacity-40 dark:opacity-20"
+    class="gradient pointer-events-none absolute inset-0 z-0 opacity-40 dark:opacity-20"
   >
   </div>
 
+  {/* Viewport 1: Hero Text & Desktop Images */}
   <Container
-    class="relative z-10 flex flex-col items-center justify-between md:flex-row md:gap-8 md:py-24"
+    class="relative z-10 flex min-h-svh flex-col items-center justify-center py-20 md:flex-row md:justify-between md:gap-8 md:py-12 md:min-h-screen"
   >
     {/* Text Section (Left Side) */}
     <div
-      class="my-28 flex w-full flex-col items-center gap-4 px-2 md:my-0 md:w-1/2 md:items-start md:px-0"
+      class="flex w-full flex-col items-center justify-center gap-4 px-2 md:w-1/2 md:-translate-y-12 md:items-start md:px-0 lg:-translate-y-16"
     >
-      <div class="h-30 min-h-31.25 w-full md:text-left">
+      <div class="h-30 min-h-31.25 w-full md:text-left pb-4">
         <h1 class={heroData.heading.class}>
           <TypeWriteComponent client:only="react" texts={heroData.texts} />
         </h1>
@@ -58,7 +59,9 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
     </div>
 
     {/* Desktop Image Section (Right Side) */}
-    <div class="hidden w-full items-center justify-center md:flex md:w-1/2">
+    <div
+      class="hidden w-full items-center justify-center md:flex md:w-1/2 md:-translate-y-12 lg:-translate-y-16"
+    >
       <div
         id="image-gallery"
         class="relative h-112.5 w-full max-w-112.5 lg:h-150 lg:max-w-150"
@@ -133,10 +136,10 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
           <Polaroid
             image="https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg"
             alt="Amsterdam Westerkerk"
-            width={280}
-            height={280}
+            width={260}
+            height={260}
             iconName="house"
-            class="absolute right-32 top-0 rotate-3 transition-transform duration-500 md:rotate-3 hover:md:rotate-0"
+            class="absolute right-32 top-0 rotate-3 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-8 hover:-translate-y-6 hover:rotate-0 md:rotate-3"
             infoId="info-amsterdam"
           />
           <Polaroid
@@ -144,16 +147,16 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
             alt="Travel; Camel in Jordan"
             width={220}
             iconName="airplane"
-            class="absolute -right-20 top-0 -rotate-3 transition-transform duration-500 hover:z-0 hover:translate-x-8 hover:rotate-0 md:rotate-6"
+            class="absolute -right-20 top-0 -rotate-3 transition-transform duration-500 hover:z-50 hover:scale-105 hover:-translate-y-8 hover:translate-x-16 hover:rotate-0 md:rotate-12"
             infoId="info-travel"
           />
           <Polaroid
             image={profilePictureTransparent}
             alt="Disney Like Profile"
-            width={240}
+            width={220}
             iconName="person"
             imageClass="bg-[url(/images/binary-background.webp)]"
-            class="absolute -bottom-12 -left-6 rotate-3 transition-transform duration-500 hover:-bottom-10 hover:rotate-0 md:rotate-6"
+            class="absolute -bottom-12 -left-6 rotate-3 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-6 hover:translate-y-4 hover:rotate-0 md:rotate-6"
             infoId="info-dev"
           />
 
@@ -172,13 +175,40 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
         </div>
       </div>
     </div>
+
+    {/* Styled Bouncing Scroll Indicator (Anchored to the first viewport) */}
+    <div
+      class="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-bounce md:bottom-12"
+    >
+      <a
+        href="#about"
+        aria-label="Scroll down to About section"
+        class="group flex h-14 w-14 items-center justify-center rounded-full border border-sky-200/50 bg-background/50 text-muted-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-sky-400 hover:bg-background/80 hover:text-sky-500 hover:shadow-sky-500/20 dark:border-sky-800/50 dark:hover:border-sky-500 dark:hover:text-sky-400"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-6 w-6"
+        >
+          <path d="M12 5v14"></path>
+          <path d="m19 12-7 7-7-7"></path>
+        </svg>
+      </a>
+    </div>
   </Container>
 
-  {/* Mobile-only Polaroid Section */}
-  <div class="relative z-10 md:hidden">
+  {/* Viewport 2: Mobile-only Polaroid Section */}
+  <div id="about" class="relative z-10 pb-16 md:hidden">
     <Container>
       <div class="flex flex-col items-center gap-16 py-16">
-        <div class="w-[280px]">
+        <div class="w-70">
           <Polaroid
             image="https://cdn.pixabay.com/photo/2021/11/10/07/17/canal-6783153_1280.jpg"
             alt="Amsterdam Westerkerk"
@@ -188,7 +218,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
             class="-rotate-3 shadow-xl"
           />
         </div>
-        <div class="w-[280px]">
+        <div class="w-70">
           <Polaroid
             image={travelPicture}
             alt="Travel; Camel in Jordan"
@@ -197,7 +227,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
             class="rotate-3 shadow-xl"
           />
         </div>
-        <div class="w-[280px]">
+        <div class="w-70">
           <Polaroid
             image={profilePictureTransparent}
             alt="Disney Like Profile"
@@ -209,33 +239,6 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
         </div>
       </div>
     </Container>
-  </div>
-
-  {/* Styled Bouncing Scroll Indicator */}
-  <div
-    class="md:absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-bounce md:bottom-42"
-  >
-    <a
-      href="#about"
-      aria-label="Scroll down to About section"
-      class="group flex h-14 w-14 items-center justify-center rounded-full border border-sky-200/50 bg-background/50 text-muted-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-sky-400 hover:bg-background/80 hover:text-sky-500 hover:shadow-sky-500/20 dark:border-sky-800/50 dark:hover:border-sky-500 dark:hover:text-sky-400"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="h-6 w-6"
-      >
-        <path d="M12 5v14"></path>
-        <path d="m19 12-7 7-7-7"></path>
-      </svg>
-    </a>
   </div>
 </div>
 

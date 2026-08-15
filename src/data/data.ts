@@ -242,6 +242,22 @@ export const about: string =
 
 export const projectsData: PortfolioProject[] = [
   {
+    name: "houtwerk.hering.services",
+    description:
+      "Created a landing page for the `houtwerk.hering.services`, the website carpenter/timmerman Daan. Created using Deno, Astro and hosted on https://www.statichost.eu/",
+    techStack: [
+      { name: "Typescript", iconName: "logos:typescript" },
+
+      { name: "Linux", iconName: "logos:linux-tux" },
+      { name: "Docker", iconName: "logos:docker-icon" },
+      { name: "GitHub Actions", iconName: "logos:github-actions" },
+    ],
+    repoUrl: "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking",
+    imagePath:
+      "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking/blob/main/media/overview-framework.png?raw=true",
+  },
+  // https://houtwerk.hering.services/
+  {
     name: "GUI OS AI Agent Benchmarking",
     description:
       "Developed an AI Agent benchmarking framework leveraging Hugging Face’s smolagents to evaluate agent performance within a secure, sandboxed GUI OS environment.",
