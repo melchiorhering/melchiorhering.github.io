@@ -242,6 +242,18 @@ export const about: string =
 
 export const projectsData: PortfolioProject[] = [
   {
+    name: "Open Data Platform",
+    description:
+      "A scalable, cloud-agnostic open data platform architected on Kubernetes. Leveraging Pulumi and Python for Infrastructure-as-Code (IaC), it dynamically provisions computing nodes and storage, ensuring automated, seamless deployments across any VPS or cloud computing provider.",
+    techStack: [
+      { name: "Python", iconName: "logos:python" },
+      { name: "Kubernetes", iconName: "devicon:kubernetes" },
+      { name: "Pulumi", iconName: "logos:pulumi-icon" },
+      { name: "GitHub Actions", iconName: "logos:github-actions" },
+    ],
+    repoUrl: "https://github.com/melchiorhering/open-data-platform",
+  },
+  {
     name: "houtwerk.hering.services",
     description:
       "Designed and developed a responsive, multi-language landing page for, Daan Hering, an Amsterdam & Utrecht based carpenter. It features an interactive price estimator and custom contact forms. Builtusing Astro and Deno, and automatically deployed via GitHub Actions to StaticHost.eu",
@@ -261,18 +273,6 @@ export const projectsData: PortfolioProject[] = [
       "https://github.com/melchiorhering/web/tree/main/bun/houtwerk.hering.services",
     liveUrl: "https://houtwerk.hering.services/",
     imagePath: "houtwerk-hering-services.png",
-  },
-  {
-    name: "Open Data Platform",
-    description:
-      "A scalable, cloud-agnostic open data platform architected on Kubernetes. Leveraging Pulumi and Python for Infrastructure-as-Code (IaC), it dynamically provisions computing nodes and storage, ensuring automated, seamless deployments across any VPS or cloud computing provider.",
-    techStack: [
-      { name: "Python", iconName: "logos:python" },
-      { name: "Kubernetes", iconName: "devicon:kubernetes" },
-      { name: "Pulumi", iconName: "logos:pulumi-icon" },
-      { name: "GitHub Actions", iconName: "logos:github-actions" },
-    ],
-    repoUrl: "https://github.com/melchiorhering/open-data-platform",
   },
   {
     name: "GUI OS AI Agent Benchmarking",
