@@ -1,6 +1,6 @@
 // Import all util functions
-export { cn } from "./tailwind";
-export { getFormattedDate } from "./date";
-export { elementHasClass, toggleClass, rootInDarkMode } from "./domElement";
+export { cn } from "./tailwind.ts";
+export { getFormattedDate } from "./date.ts";
+export { elementHasClass, toggleClass, rootInDarkMode } from "./domElement.ts";
 
-export { labels, about, allBlogPosts } from "../data/data";
+export { labels, about, allBlogPosts } from "../data/data.ts";

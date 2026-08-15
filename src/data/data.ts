@@ -6,7 +6,7 @@ import type {
   Education,
   PortfolioProject,
 } from "@/types";
-import { fetchMediumPosts } from "../utils/blog";
+import { fetchMediumPosts } from "../utils/blog.ts";
 
 // Icons
 import linkedinIcon from "@/icons/linkedin.svg";
@@ -18,8 +18,8 @@ import amsterdamLogo from "@/assets/amsterdam-flag.png";
 
 export const heroData = {
   description: {
-    text: "Data/AI/ML Engineer by trade. Builder and habitual tinkerer by heart. I thrive on a broad curiosity for new tech, constantly experimenting with new setups to build scalable, user-friendly solutions from the infrastructure up. With a deep stack spanning Python, TypeScript, Kubernetes, and Cloud architecture, I bridge DevOps and Intelligence to orchestrate production-ready technological systems!",
-    class: "text-gray-600 dark:text-white",
+    text: "Data/AI/ML Engineer by trade. Builder and habitual tinkerer by heart. I thrive on a broad curiosity for new tech, constantly experimenting with new setups to build scalable, user-friendly solutions from the infrastructure up. With a stack spanning Python, TypeScript, Kubernetes, and Cloud architecture, I bridge DevOps and Intelligence to orchestrate production-ready technological systems!",
+    class: "dark:text-white font-bold",
   },
   buttons: [
     {
@@ -244,23 +244,22 @@ export const projectsData: PortfolioProject[] = [
   {
     name: "houtwerk.hering.services",
     description:
-      "Created a landing page for the `houtwerk.hering.services`, the website carpenter/timmerman Daan. Created using Deno, Astro and hosted on https://www.statichost.eu/",
+      "Designed and developed a responsive, multi-language landing page for, Daan Hering, an Amsterdam & Utrecht based carpenter. It features an interactive price estimator and custom contact forms. Builtusing Astro and Deno, and automatically deployed via GitHub Actions to StaticHost.eu",
     techStack: [
       { name: "Typescript", iconName: "logos:typescript" },
-
       { name: "Linux", iconName: "logos:linux-tux" },
       { name: "Docker", iconName: "logos:docker-icon" },
       { name: "GitHub Actions", iconName: "logos:github-actions" },
     ],
-    repoUrl: "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking",
-    imagePath:
-      "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking/blob/main/media/overview-framework.png?raw=true",
+    repoUrl:
+      "https://github.com/melchiorhering/web/tree/main/bun/houtwerk.hering.services",
+    liveUrl: "https://houtwerk.hering.services/",
+    imagePath: "houtwerk-hering-services.png",
   },
-  // https://houtwerk.hering.services/
   {
     name: "GUI OS AI Agent Benchmarking",
     description:
-      "Developed an AI Agent benchmarking framework leveraging Hugging Face’s smolagents to evaluate agent performance within a secure, sandboxed GUI OS environment.",
+      "Developed a comprehensive AI benchmarking framework leveraging Hugging Face’s smolagents. It evaluates autonomous agent performance within a secure, QEMU-virtualized GUI OS environment, enabling the safe and reproducible testing of complex desktop interactions and system-level tasks.",
     techStack: [
       { name: "Python", iconName: "logos:python" },
       { name: "Docker", iconName: "logos:docker-icon" },
@@ -277,7 +276,7 @@ export const projectsData: PortfolioProject[] = [
   {
     name: "Open Data Platform",
     description:
-      "A cloud-agnostic open data platform architected on Kubernetes. It leverages Pulumi and Python as Infrastructure-as-Code (IaC) to dynamically provision nodes and storage, ensuring seamless deployments across any VPS or cloud provider.",
+      "A scalable, cloud-agnostic open data platform architected on Kubernetes. Leveraging Pulumi and Python for Infrastructure-as-Code (IaC), it dynamically provisions computing nodes and storage, ensuring automated, seamless deployments across any VPS or cloud computing provider.",
     techStack: [
       { name: "Python", iconName: "logos:python" },
       { name: "Kubernetes", iconName: "devicon:kubernetes" },
