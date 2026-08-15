@@ -263,6 +263,18 @@ export const projectsData: PortfolioProject[] = [
     imagePath: "houtwerk-hering-services.png",
   },
   {
+    name: "Open Data Platform",
+    description:
+      "A scalable, cloud-agnostic open data platform architected on Kubernetes. Leveraging Pulumi and Python for Infrastructure-as-Code (IaC), it dynamically provisions computing nodes and storage, ensuring automated, seamless deployments across any VPS or cloud computing provider.",
+    techStack: [
+      { name: "Python", iconName: "logos:python" },
+      { name: "Kubernetes", iconName: "devicon:kubernetes" },
+      { name: "Pulumi", iconName: "logos:pulumi-icon" },
+      { name: "GitHub Actions", iconName: "logos:github-actions" },
+    ],
+    repoUrl: "https://github.com/melchiorhering/open-data-platform",
+  },
+  {
     name: "GUI OS AI Agent Benchmarking",
     description:
       "Developed a comprehensive AI benchmarking framework leveraging Hugging Face’s smolagents. It evaluates autonomous agent performance within a secure, QEMU-virtualized GUI OS environment, enabling the safe and reproducible testing of complex desktop interactions and system-level tasks.",
@@ -278,18 +290,6 @@ export const projectsData: PortfolioProject[] = [
     repoUrl: "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking",
     imagePath:
       "https://github.com/melchiorhering/GUI-OS-AI-Agent-Benchmarking/blob/main/media/overview-framework.png?raw=true",
-  },
-  {
-    name: "Open Data Platform",
-    description:
-      "A scalable, cloud-agnostic open data platform architected on Kubernetes. Leveraging Pulumi and Python for Infrastructure-as-Code (IaC), it dynamically provisions computing nodes and storage, ensuring automated, seamless deployments across any VPS or cloud computing provider.",
-    techStack: [
-      { name: "Python", iconName: "logos:python" },
-      { name: "Kubernetes", iconName: "devicon:kubernetes" },
-      { name: "Pulumi", iconName: "logos:pulumi-icon" },
-      { name: "GitHub Actions", iconName: "logos:github-actions" },
-    ],
-    repoUrl: "https://github.com/melchiorhering/open-data-platform",
   },
 ];
 
