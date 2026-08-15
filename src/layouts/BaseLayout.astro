@@ -1,41 +1,41 @@
 ---
-import type { SiteMeta } from '@/types'
+import type { SiteMeta } from "@/types";
 
-import BaseHead from '@/components/BaseHead.astro'
-import Footer from '@/components/layout/Footer.astro'
-import Header from '@/components/layout/Header.astro'
-import ThemeProvider from '@/components/ThemeProvider.astro'
-import Container from '@/components/Container.astro'
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
+import ThemeProvider from "@/components/ThemeProvider.astro";
+import Container from "@/components/Container.astro";
 
-import { siteConfig } from '@/site-config'
+import { siteConfig } from "@/site-config";
 
 interface Props {
-	meta: SiteMeta
+  meta: SiteMeta;
 }
 
-const { meta } = Astro.props
+const { meta } = Astro.props;
 ---
 
 <html lang={siteConfig.lang}>
-	<head>
-		<BaseHead meta={meta} />
-	</head>
+  <head>
+    <BaseHead meta={meta} />
+  </head>
 
-	<body class='flex justify-center bg-background'>
-		<ThemeProvider />
-		<div class='w-full'>
-			<main
-				class='flex min-h-screen flex-col justify-between font-satoshi text-[0.92rem] font-medium leading-relaxed'
-			>
-				<Container>
-					<Header />
-				</Container>
+  <body class="flex justify-center bg-background">
+    <ThemeProvider />
+    <div class="w-full">
+      <main
+        class="flex min-h-screen flex-col justify-between font-satoshi text-[0.92rem] font-medium leading-relaxed"
+      >
+        <Container>
+          <Header />
+        </Container>
 
-				<slot />
-				<Container>
-					<Footer />
-				</Container>
-			</main>
-		</div>
-	</body>
+        <slot />
+        <Container>
+          <Footer />
+        </Container>
+      </main>
+    </div>
+  </body>
 </html>
