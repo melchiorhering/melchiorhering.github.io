@@ -247,9 +247,15 @@ export const projectsData: PortfolioProject[] = [
       "Designed and developed a responsive, multi-language landing page for, Daan Hering, an Amsterdam & Utrecht based carpenter. It features an interactive price estimator and custom contact forms. Builtusing Astro and Deno, and automatically deployed via GitHub Actions to StaticHost.eu",
     techStack: [
       { name: "Typescript", iconName: "logos:typescript" },
+      { name: "Astro", iconName: "logos:astro-icon" },
+      { name: "Bun", iconName: "logos:bun" },
       { name: "Linux", iconName: "logos:linux-tux" },
       { name: "Docker", iconName: "logos:docker-icon" },
       { name: "GitHub Actions", iconName: "logos:github-actions" },
+      {
+        name: "Statichost.eu",
+        iconName: "emojione:flag-for-european-union",
+      },
     ],
     repoUrl:
       "https://github.com/melchiorhering/web/tree/main/bun/houtwerk.hering.services",
