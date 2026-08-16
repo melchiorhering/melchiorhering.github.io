@@ -37,7 +37,7 @@ export const heroData = {
   ],
   heading: {
     class:
-      "font-mono text-[34px] md:text-5xl font-semibold text-gray-800 dark:text-white",
+      "font-mono text-[34px] md:text-5xl font-bold text-gray-800 dark:text-white",
   },
   texts: [
     {
@@ -47,19 +47,19 @@ export const heroData = {
       delay: 70,
     },
     {
-      text: "I do some Data Science...",
-      class:
-        "text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-sky-400 dark:from-sky-400 dark:to-sky-600",
-      delay: 70,
-    },
-    {
-      text: "Also some Data Engineering...",
+      text: "A jack of all trades...",
       class:
         "text-transparent bg-clip-text bg-gradient-to-br from-sky-500 to-sky-700 dark:from-sky-300 dark:to-sky-500",
       delay: 70,
     },
     {
-      text: "And Software Engineering...",
+      text: "I engineer apps and platforms...",
+      class:
+        "text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-sky-400 dark:from-sky-400 dark:to-sky-600",
+      delay: 70,
+    },
+    {
+      text: "Spanning data, web, agentic and cloud...",
       class:
         "text-transparent bg-clip-text bg-gradient-to-r from-sky-700 to-sky-500 dark:from-sky-500 dark:to-sky-300",
       delay: 70,

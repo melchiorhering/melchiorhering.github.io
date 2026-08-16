@@ -10,6 +10,8 @@ import { heroData } from "@/data/data";
 import profilePictureTransparent from "@/assets/cartoon-profile-cutout.webp";
 import travelPicture from "@/assets/travel-jordan.jpg";
 import AmsterdamFlag from "@/assets/amsterdam-flag.png";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <div class="relative flex flex-col overflow-x-hidden">
@@ -20,13 +22,13 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
 
   {/* Viewport 1: Hero Text & Desktop Images */}
   <Container
-    class="relative z-10 flex min-h-svh flex-col items-center justify-center py-20 md:flex-row md:justify-between md:gap-8 md:py-12 md:min-h-screen"
+    class="relative z-10 flex flex-col items-center justify-center md:flex-row md:justify-between h-screen"
   >
     {/* Text Section (Left Side) */}
     <div
-      class="flex w-full flex-col items-center justify-center gap-4 px-2 md:w-1/2 md:-translate-y-12 md:items-start md:px-0 lg:-translate-y-16"
+      class="flex w-full flex-col items-center justify-center gap-2 md:w-1/2 md:-translate-y-2 md:items-start md:px-0 lg:-translate-y-10"
     >
-      <div class="h-30 min-h-31.25 w-full md:text-left pb-4">
+      <div class="min-h-32 mb-2 w-full md:text-left">
         <h1 class={heroData.heading.class}>
           <TypeWriteComponent client:only="react" texts={heroData.texts} />
         </h1>
@@ -36,7 +38,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
         {heroData.description.text}
       </p>
 
-      <div class="mt-2 flex w-full gap-4 py-4 md:w-5/6">
+      <div class="flex w-full gap-4 py-4 md:w-5/6">
         {
           heroData.buttons.map((button, index) => (
             <a
@@ -118,7 +120,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
 
           <div
             id="info-dev"
-            class="pointer-events-none absolute -bottom-10 left-1/2 z-50 w-80 opacity-0 transition-opacity duration-300"
+            class="pointer-events-none absolute -bottom-10 -right-1/6 z-50 w-80 opacity-0 transition-opacity duration-300"
           >
             <div
               class="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xl"
@@ -139,7 +141,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
             width={260}
             height={260}
             iconName="house"
-            class="absolute right-32 top-0 rotate-3 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-8 hover:-translate-y-6 hover:rotate-0 md:rotate-3"
+            class="absolute right-32 top-0 rotate-2 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-8 hover:-translate-y-6 hover:-rotate-4 md:rotate-3"
             infoId="info-amsterdam"
           />
           <Polaroid
@@ -156,7 +158,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
             width={220}
             iconName="person"
             imageClass="bg-[url(/images/binary-background.webp)]"
-            class="absolute -bottom-12 -left-6 rotate-3 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-6 hover:translate-y-8 hover:rotate-0 md:rotate-6"
+            class="absolute -bottom-10 rotate-3 left-20 transition-transform duration-500 hover:z-50 hover:scale-110 hover:-translate-x-6 hover:translate-y-4 hover:rotate-0 md:rotate-6"
             infoId="info-dev"
           />
 
@@ -181,7 +183,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
       class="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 animate-bounce md:bottom-12"
     >
       <a
-        href="#about"
+        href="#projects"
         aria-label="Scroll down to About section"
         class="group flex h-14 w-14 items-center justify-center rounded-full border border-sky-200/50 bg-background/50 text-muted-foreground shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-sky-400 hover:bg-background/80 hover:text-sky-500 hover:shadow-sky-500/20 dark:border-sky-800/50 dark:hover:border-sky-500 dark:hover:text-sky-400"
       >
@@ -230,7 +232,7 @@ import AmsterdamFlag from "@/assets/amsterdam-flag.png";
         <div class="w-70">
           <Polaroid
             image={profilePictureTransparent}
-            alt="Disney Like Profile"
+            alt="Profile Picture"
             width={280}
             iconName="person"
             imageClass="bg-[url(/images/binary-background.webp)]"

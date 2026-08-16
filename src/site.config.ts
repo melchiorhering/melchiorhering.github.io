@@ -8,7 +8,7 @@ export const siteConfig: SiteConfig = {
   title: "Stijn Hering",
   // Meta property used as the default description meta property
   description:
-    "Personal webpage Stijn Hering, includes some information about me, my work, projects I did and my blog posts",
+    "Personal landing/web-page of Stijn Hering; an tech engineer with experience in data, ai/agentic, platforms and cloud. This page includes some information about me, my work, projects I did and my blog posts",
   // HTML lang property, found in src/layouts/Base.astro L:18
   lang: "en-GB",
   // Meta property, found in src/components/BaseHead.astro L:42
