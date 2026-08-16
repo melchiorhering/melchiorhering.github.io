@@ -10,8 +10,6 @@ import { heroData } from "@/data/data";
 import profilePictureTransparent from "@/assets/cartoon-profile-cutout.webp";
 import travelPicture from "@/assets/travel-jordan.jpg";
 import AmsterdamFlag from "@/assets/amsterdam-flag.png";
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <div class="relative flex flex-col overflow-x-hidden">
@@ -28,7 +26,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <div
       class="flex w-full flex-col items-center justify-center gap-2 md:w-1/2 md:-translate-y-2 md:items-start md:px-0 lg:-translate-y-10"
     >
-      <div class="min-h-32 mb-2 w-full md:text-left">
+      <div class="min-h-34 mb-2 w-full md:text-left">
         <h1 class={heroData.heading.class}>
           <TypeWriteComponent client:only="react" texts={heroData.texts} />
         </h1>
