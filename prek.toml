@@ -1,0 +1,44 @@
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "mixed-line-ending" },
+  { id = "check-yaml" },
+  { id = "check-toml" },
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-added-large-files" },
+  { id = "detect-private-key" },
+]
+
+# Shell script linting (ShellCheck) & formatting (shfmt)
+[[repos]]
+repo = "https://github.com/koalaman/shellcheck-precommit"
+rev = "v0.11.0"
+hooks = [
+  { id = "shellcheck" },
+]
+
+[[repos]]
+repo = "https://github.com/scop/pre-commit-shfmt"
+rev = "v3.14.1-1"
+hooks = [
+  { id = "shfmt", args = ["-w", "-s", "-i", "2"] },
+]
+
+# Local Bun-powered checks for TypeScript / JavaScript
+[[repos]]
+repo = "local"
+hooks = [
+  # Gitmoji Commit Message Linter
+  { id = "commitlint-gitmoji", name = "Check Gitmoji format", entry = "bun commitlint --edit", language = "system", stages = ["commit-msg"] },
+
+  # 1. Format code
+  { id = "biome-format", name = "biome format", entry = "bunx --bun @biomejs/biome format --write --no-errors-on-unmatched", language = "system", files = "\\.(ts|tsx|js|jsx|json)$" },
+
+  # 2. Lint & apply safe fixes
+  { id = "biome-lint", name = "biome lint", entry = "bunx --bun @biomejs/biome lint --write --no-errors-on-unmatched", language = "system", files = "\\.(ts|tsx|js|jsx|json)$" },
+
+  # 3. Type checking
+  { id = "tsc", name = "typecheck", entry = "bun x tsc --noEmit", language = "system", files = "\\.(ts|tsx)$", pass_filenames = false },
+]
