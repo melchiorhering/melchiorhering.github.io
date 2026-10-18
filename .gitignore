@@ -14,6 +14,7 @@
 /bin/
 /node_modules/
 .husky/
+dist
 
 
 # ========================
