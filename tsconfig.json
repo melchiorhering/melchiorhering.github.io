@@ -1,23 +1,40 @@
 {
-	"extends": "astro/tsconfigs/strict",
-	"compilerOptions": {
-		"strictNullChecks": true,
-		"allowJs": true,
-		"lib": ["es2022", "dom", "dom.iterable"],
-		"paths": {
-			"@/icons/*": ["./src/icons/*"],
-			"@/assets/*": ["./src/assets/*"],
-			"@/components/*": ["./src/components/*"],
-			"@/layouts/*": ["./src/layouts/*"],
-			"@/utils": ["./src/utils/index.ts"],
-			"@/types": ["./src/types.ts"],
-			"@/site-config": ["./src/site.config.ts"],
-			"@/data/*": ["./src/data/*"],
-			"@/sections/*": ["./src/sections/*"]
-		},
-		"jsx": "react-jsx",
-		"jsxImportSource": "react"
-	},
-	"include": [".astro/types.d.ts", "**/*"],
-	"exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "lib": ["ES2023", "DOM"],
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "skipLibCheck": true,
+
+    "paths": {
+      "@/icons/*": ["./src/icons/*"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/utils": ["./src/utils/index.ts"],
+      "@/types": ["./src/types.ts"],
+      "@/site-config": ["./src/site.config.ts"],
+      "@/data/*": ["./src/data/*"],
+      "@/sections/*": ["./src/sections/*"]
+    },
+    /* React */
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }

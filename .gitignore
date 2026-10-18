@@ -39,6 +39,5 @@ dist
 # ========================
 # IDEs (Optional but recommended)
 # ========================
-.vscode/
 .idea/
 *.swp
