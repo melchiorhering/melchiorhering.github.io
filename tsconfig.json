@@ -7,6 +7,19 @@
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
 
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+
     "paths": {
       "@/icons/*": ["./src/icons/*"],
       "@/assets/*": ["./src/assets/*"],
@@ -20,20 +33,7 @@
     },
     /* React */
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "jsxImportSource": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
